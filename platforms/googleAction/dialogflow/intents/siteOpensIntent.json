@@ -1,0 +1,17 @@
+{
+	"name": "siteOpensIntent",
+	"auto": true,
+	"webhookUsed": true,
+	"responses": [
+		{
+			"parameters": [
+				{
+					"isList": false,
+					"name": "sitename",
+					"value": "$sitename",
+					"dataType": "@siteType"
+				}
+			]
+		}
+	]
+}

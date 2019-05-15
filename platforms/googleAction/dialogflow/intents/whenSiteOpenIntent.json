@@ -1,0 +1,23 @@
+{
+	"name": "whenSiteOpenIntent",
+	"auto": true,
+	"webhookUsed": true,
+	"responses": [
+		{
+			"parameters": [
+				{
+					"isList": false,
+					"name": "sitename",
+					"value": "$sitename",
+					"dataType": "@siteType"
+				},
+				{
+					"isList": false,
+					"name": "whenDate",
+					"value": "$whenDate",
+					"dataType": "@sys.date"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,26 @@
+[
+	{
+		"value": "Albany",
+		"synonyms": [
+			"Albany",
+			"Albany Library"
+		]
+	},
+	{
+		"value": "Avondale",
+		"synonyms": [
+			"Avondale",
+			"Avondale Library",
+			"Avon dale"
+		]
+	},
+	{
+		"value": "Leys Institue Library",
+		"synonyms": [
+			"Leys Institue Library",
+			"Leys Institute",
+			"Ponsonby Library",
+			"Leys Institue Library Ponsonby"
+		]
+	}
+]

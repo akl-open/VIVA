@@ -1,0 +1,253 @@
+'use strict';
+
+// ------------------------------------------------------------------
+// APP INITIALIZATION
+// ------------------------------------------------------------------
+
+const { App } = require('jovo-framework');
+const { Alexa } = require('jovo-platform-alexa');
+const { GoogleAssistant } = require('jovo-platform-googleassistant');
+const { JovoDebugger } = require('jovo-plugin-debugger');
+const { FileDb } = require('jovo-db-filedb');
+const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
+
+const app = new App();
+
+app.use(
+    new Alexa(),
+    new GoogleAssistant(),
+    new JovoDebugger(),
+    new FileDb(),
+    new GoogleSheetsCMS()
+);
+
+
+// ------------------------------------------------------------------
+// APP LOGIC
+// ------------------------------------------------------------------
+
+app.setHandler({
+    LAUNCH() {
+        return this.toIntent('greetingIntent');
+    },
+
+	greetingIntent() {
+		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
+	},
+
+	infoBookReturnsIntent() {
+		this.ask(this.t('info.returns'), this.t('anythingelse.speech'));
+	},
+
+	infoLostCardIntent() {
+		this.ask(this.t('info.lostcard'), this.t('anythingelse.speech'));
+	},
+
+	infoJusticeIntent() {
+		this.ask(this.t('info.justicepeace'), this.t('anythingelse.speech'));
+	},
+
+	infoCabHoursIntent() {
+		this.ask(this.t('info.cabhours'), this.t('anythingelse.speech'));
+	},
+
+	infoPrintingIntent() {
+		this.ask(this.t('info.printing'), this.t('anythingelse.speech'));
+	},
+
+	infoItemBorrowLimitIntent() {
+		this.ask(this.t('info.itemborrowlimit'), this.t('anythingelse.speech'));
+	},
+
+	infoThreeDPrintIntent() {
+		this.ask(this.t('info.3dprint'), this.t('anythingelse.speech'));
+	},
+
+	infoLyndaDotComIntent() {
+		this.ask(this.t('info.lyndadotcom'), this.t('anythingelse.speech'));
+	},
+
+	siteOpensIntent() {
+	// we assume that they mean now rather than tomorrow or they would have said so
+	// this should be redundant; if there is no date specified whenSiteOpenIntent() should be able to handle
+	// either by checking for undef'd and sending a new date to openHoursHelper, or a default set in the skill/action
+
+	// this.tell(this.$inputs.sitename.key + ' is open at blah');
+
+		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
+
+		try {
+			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+			var dayRequest = new Date();
+console.log('from sites open ', speech);
+			speech = openHoursHelper(dayRequest, siteobj);
+		}
+		catch (e) {
+			console.log (e);
+			speech = 'Well, looks like I couldn\'t find that libary, can you try again please?';
+		}
+
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	},
+
+
+	/*
+	if sitename.key missing "is the library open" <implies now>
+		-> todo library picker - check if site is extended close, then mention that and suggest a near by site?
+	for now we assume that the site is asked for, or is central library
+
+	if whenDate.key undef'd "open time albany library" <implied now>
+		-> giveTime(sitename, now())
+	else
+		set the session var to now() and do the case
+
+	*/
+	whenSiteOpenIntent() {
+		let speech = 'Hmm, ' + this.$inputs.sitename.key + ' doesn\'t ring a bell';
+
+		try {
+			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
+console.log('site requested: ' + this.$inputs.sitename.key + '----------------------');
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+			var dayRequest = parseISOString(this.$inputs.whenDate.key);
+
+			speech = openHoursHelper(dayRequest, siteobj);
+		}
+		// reprompt
+		catch (e) {
+console.log('whenSiteOpenIntent had something go wrong \n', e, '--------------------------------------------');
+		}
+
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	},
+
+
+	helpIntent() {
+		let helpSpeech = 'Here I would offer some useful help speech\
+				maybe try whatever you said slower or something';
+		this.ask(this.t(helpSpeech));
+	},
+
+	cancelIntent() {
+		let cancelSpeech = 'ok, cancelling that';
+		this.ask(this.t(cancelSpeech));
+	},
+
+	// leaving here for future state things
+	failBackIntent() {
+		return this.toIntent('helpIntent');
+		//this.ask(this.t(speech));
+	},
+
+	stopIntent() {
+		let speech = 'Ok, talk to you later.';
+		this.tell(this.t(speech));
+	}
+});
+
+
+
+
+
+// s is an ISO date string
+// returns new date set to the content of the string
+function parseISOString(s) {
+	//console.log(s, b);
+	var b = s.split(/\D+/);
+
+	if (b.length = 3)
+		return new Date(Date.UTC(b[0], --b[1], b[2]));
+	else
+		return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+}
+
+// siteHours is a JSON array, one site open close times lifted from googledoc
+// day is a Date, the day the hours are requested for
+// returns speech, string containing what needs to be said.
+function openHoursHelper(dayRequest, siteobj) {
+
+	var returnSpeech = 'openHoursHelper speech not assigned';
+
+	//check site isn't on 'extended close'
+	if (siteobj.extendedclose === '') {
+		// check site isn't listed as 'Closed' on that day, otherwise report whatever the time is
+
+		switch (dayRequest.getDay()) {
+		  case 0:
+			if (siteobj.sundayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Sunday.';
+			}
+			else {
+			    returnSpeech = "On Sunday " + siteobj.site + " opens at " + siteobj.sundayopen + " and closes at " + siteobj.sundayclose;
+			}
+		    break;
+		  case 1:
+			if (siteobj.mondayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Monday.';
+			}
+			else {
+				returnSpeech = "On Monday " + siteobj.site + " opens at " + siteobj.mondayopen + " and closes at " + siteobj.mondayclose;
+			}
+		    break;
+		  case 2:
+			if (siteobj.tuesdayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Tuesday.';
+			}
+			else {
+			    returnSpeech = "On Tuesday " + siteobj.site + " opens at " + siteobj.tuesdayopen + " and closes at " + siteobj.tuesdayclose;
+			}
+		    break;
+		  case 3:
+			if (siteobj.wednesdayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Wednesday.';
+			}
+			else {
+			    returnSpeech = "On Wednesday " + siteobj.site + " opens at " + siteobj.wednesdayopen + " and closes at " + siteobj.wednesdayclose;
+			}
+		    break;
+		  case 4:
+			if (siteobj.thursdayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Thursday.';
+			}
+			else {
+			    returnSpeech = "On Thursday " + siteobj.site + " opens at " + siteobj.thursdayopen + " and closes at " + siteobj.thursdayclose;
+			}
+		    break;
+		  case 5:
+			if (siteobj.fridayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Friday.';
+			}
+			else {
+			    returnSpeech = "On Friday " + siteobj.site + " opens at " + siteobj.fridayopen + " and closes at " + siteobj.fridayclose;
+			}
+		    break;
+		  case 6:
+			if (siteobj.saturdayopen.match(/[Cc]lose/)) {
+				returnSpeech = siteobj.site + ' is closed all day Saturday.';
+			}
+			else {
+			    returnSpeech = "On Saturday " + siteobj.site + " opens at " + siteobj.saturdayopen + " and closes at " + siteobj.saturdayclose;
+			}
+		}
+	}
+
+	// site is extended closed
+	// to do add a site picker option to find nearby to the site
+	// to do add a reason colomn
+	else {
+		this.returnSpeech = siteobj.site + " is closed from " + siteobj.extendedclose + " and opens again on " + siteobj.extendedopen;
+	}
+
+	// Seems something in the backend doesn't automatically escape out colons... or something.
+	//returnSpeech.replace(/:/g, ".");
+	//doesn't appear to be doing anything, would be good to make work
+
+	//console.log("helper is trying to return returnSpeech ", returnSpeech.toString() + '------------------------');
+	return returnSpeech;
+}
+
+
+
+
+module.exports.app = app;

@@ -1,0 +1,260 @@
+{
+	"invocation": "viva auckland",
+	"intents": [
+		{
+			"name": "infoBookReturnsIntent",
+			"phrases": [
+				"Where can I return my library books",
+				"Hand in books",
+				"Give my books back",
+				"return dvd's",
+				"return cd",
+				"check in my childrens books",
+				"take back my books",
+				"return books"
+			]
+		}, {
+			"name": "infoCabHoursIntent",
+			"phrases": [
+				"Is there a C A B at the library",
+				"Is there a citizens advice bureau at the library",
+				"Where is there a citizens advice bureau",
+				"Is there a cab at the library"
+			]
+		}, {
+			"name": "infoCardLostIntent",
+			"phrases": [
+				"I lost my card",
+				"I lost my library card",
+				"I need a new card",
+				"How can I replace my library card",
+				"cancel my library card",
+				"lost card",
+				"where can I get a new card"
+				
+			]
+		}, {
+			"name": "infoCardOldIntent",
+			"phrases": [
+				"I haven’t used my library card in a while, is it still valid",
+				"Is my library still valid",
+				"Can I still use my old library card",
+				"Is my old library card still working",
+				"old card",
+				"old barcode"
+			]
+		}, {
+			"name": "infoFreeWiFi",
+			"phrases": [
+				"Is there free Wi Fi I can use in the library",
+				"How do I use free Wi Fi in libraries",
+				"Does the library offer a free Wi Fi",
+				"Can I use a free Wi Fi in libraries",
+				"Can I bring my own laptop to the library",
+				"Can I connect to the internet at the library"
+			]
+		}, {
+			"name": "infoFreeComputers",
+			"phrases": [
+				"Can I use the computer for free",
+				"Is it free to use the computer",
+				"Are there free PCs at my library",
+				"Is there a free PC I can use in libraries",
+				"Does my library offer a free computer",
+				"Are there free computers I can use in the library"
+			]			
+		}, {
+			"name": "infoItemBorrowLimitIntent",
+			"phrases": [
+				"How many items can I borrow",
+				"What is the maximum items I can borrow",
+				"How many books can I have",
+				"How many dvds can I borrow",
+				"borrowing limit",
+				"borrow limit",
+				"lending limit",
+				"How many books can I have at one time"
+			]
+		}, {
+			"name": "infoJusticeIntent",
+			"phrases": [
+				"is there a justice of the peace at the libary",
+				"Where can I find a justice of the peace",
+				"Is there a j p at the library",
+				"Where can I find a j p"
+			]
+		}, {
+			"name": "infoLyndaDotComIntent",
+			"phrases": [
+				"Use lynda.com",
+				"lynda dot com",
+				"lynda.com",
+				"can I use lynda dot com",
+				"how do I register for lynda dot com",
+				"register for lynda dot com",
+				"Does the library have Lynda.com",
+				"Can I use Lynda.com at my library",
+				"How do I use Lynda.com",
+				"How do I register to use Lynda.com"
+			]
+		}, {
+			"name": "infoMeetingRoomsIntent",
+			"phrases": [
+				"Is there a meeting room I can use at the library",
+				"I need to set up a meeting at the library",
+				"Can I use a meeting room at Central library",
+				"I want to book a meeting room",
+				"How do I book a room for a meeting",
+				"Who do I talk to about getting a meeting room booked",
+				"Are there available meeting rooms I can hire",
+				"Can I hire a meeting room",
+				"Is there a room for hire in libraries",
+				"Is there a bookable meeting room",
+				"Can I book a meeting room"
+			]
+		}, {
+			"name": "infoPrintingIntent",
+			"phrases": [
+				"Can I print",
+				"Can I print at the library",
+				"Can I print a document",
+				"I need to print something",
+				"where can I print a document",
+				"a four printout",
+				"a three printing"
+			]
+		}, {
+			"name": "infoPrintingCostIntent",
+				"phrases": [
+					"What does it cost to print",
+					"print cost",
+					"a four print out charge",
+					"what is the price difference between a three and a four printouts",
+					"charges for printing",
+					"what am I charged for printing at the library",
+					"How much does printing a document cost",
+					"Are there printing charges",
+					"What are the fees for printing a document",
+					"Is there an associated cost for printing a document"
+				]
+		}, {
+			"name": "infoPrintThreeDIntent",
+			"phrases": [
+				"Can I print in three d",
+				"Does the library have a three d printer",
+				"three d printing",
+				"three d print",
+				"three d printer"
+			]
+		}, {
+			"name": "infoUpdateDetails",
+			"phrases": [
+				"I need to update my account details",
+				"I moved house and need to change my address",
+				"Update account",
+				"Change details",
+				"My address is old I need to update it",
+				"How can I change my address",
+				"How can I update my details for my library account",
+				"How do I go about updating my library account details",
+				"Can I update my library account online",
+				"What do I need to do to update my library account details"
+			]
+		}, {
+			"name": "siteOpensIntent",
+			"phrases": [
+				"when does {sitename} library open",
+				"open time {sitename} library",
+				"open time {sitename}",
+				"{sitename} open hours",
+				"{sitename}"
+			],
+			"inputs": [{
+					"name": "sitename",
+					"type": "siteType"
+				}
+			]
+		}, {
+			"name": "whenSiteOpenIntent",
+				"phrases": [
+					"is {sitename} open {whenDate}",
+					"what time is {sitename} open {whenDate}",
+					"tell me if {sitename} is open {whenDate}",
+					"what are {sitename} hours {whenDate}",
+					"On {whenDate} is {sitename} open",
+					"can I borrow books from {sitename} {whenDate}",
+					"{sitename} {whenDate}",
+					"{sitename} library {whenDate}"
+				],
+			"inputs": [{
+					"name": "sitename",
+					"type": "siteType"
+				}, {
+					"name": "whenDate",
+					"type": {
+						"alexa": "AMAZON.DATE",
+						"dialogflow": "@sys.date"
+					}
+				}
+			]
+		}
+	],
+	"inputTypes": [{
+			"name": "siteType",
+			"values": [{
+					"value": "Albany",
+					"synonyms": [
+						"Albany Library"
+					]
+				}, {
+					"value": "Avondale",
+					"synonyms": [
+						"Avondale Library",
+						"Avon dale"
+					]
+				}, {
+					"value": "Leys Institue Library",
+					"synonyms": [
+						"Leys Institute",
+						"Ponsonby Library",
+						"Leys Institue Library Ponsonby"
+					]
+				}
+			]
+		}
+	],
+	"alexa": {
+		"interactionModel": {
+			"languageModel": {
+				"intents": [{
+						"name": "AMAZON.CancelIntent",
+						"samples": []
+					}, {
+						"name": "AMAZON.HelpIntent",
+						"samples": []
+					}, {
+						"name": "AMAZON.StopIntent",
+						"samples": []
+					}
+				]
+			}
+		}
+	},
+	"dialogflow": {
+		"intents": [{
+				"name": "Default Fallback Intent",
+				"auto": true,
+				"webhookUsed": true,
+				"fallbackIntent": true
+			}, {
+				"name": "Default Welcome Intent",
+				"auto": true,
+				"webhookUsed": true,
+				"events": [{
+						"name": "WELCOME"
+					}
+				]
+			}
+		]
+	}
+}
