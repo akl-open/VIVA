@@ -7,9 +7,9 @@
     "jovo-cms-googlesheets": "^2.2.4",
     "jovo-db-filedb": "^2.2.3",
     "jovo-framework": "^2.2.5",
-    "jovo-platform-alexa": "^2.2.6",
+    "jovo-platform-alexa": "^2.2.7",
     "jovo-platform-googleassistant": "^2.2.5",
-    "jovo-plugin-debugger": "^2.2.3"
+    "jovo-plugin-debugger": "^2.2.4"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

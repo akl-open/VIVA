@@ -31,7 +31,6 @@
 				"cancel my library card",
 				"lost card",
 				"where can I get a new card"
-				
 			]
 		}, {
 			"name": "infoCardOldIntent",
@@ -62,7 +61,7 @@
 				"Is there a free PC I can use in libraries",
 				"Does my library offer a free computer",
 				"Are there free computers I can use in the library"
-			]			
+			]
 		}, {
 			"name": "infoItemBorrowLimitIntent",
 			"phrases": [
@@ -125,18 +124,18 @@
 			]
 		}, {
 			"name": "infoPrintingCostIntent",
-				"phrases": [
-					"What does it cost to print",
-					"print cost",
-					"a four print out charge",
-					"what is the price difference between a three and a four printouts",
-					"charges for printing",
-					"what am I charged for printing at the library",
-					"How much does printing a document cost",
-					"Are there printing charges",
-					"What are the fees for printing a document",
-					"Is there an associated cost for printing a document"
-				]
+			"phrases": [
+				"What does it cost to print",
+				"print cost",
+				"a four print out charge",
+				"what is the price difference between a three and a four printouts",
+				"charges for printing",
+				"what am I charged for printing at the library",
+				"How much does printing a document cost",
+				"Are there printing charges",
+				"What are the fees for printing a document",
+				"Is there an associated cost for printing a document"
+			]
 		}, {
 			"name": "infoPrintThreeDIntent",
 			"phrases": [
@@ -213,7 +212,7 @@
 						"Avon dale"
 					]
 				}, {
-					"value": "Leys Institue Library",
+					"value": "Ponsonby",
 					"synonyms": [
 						"Leys Institute",
 						"Ponsonby Library",

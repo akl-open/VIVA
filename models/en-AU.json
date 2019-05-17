@@ -31,12 +31,11 @@
 				"cancel my library card",
 				"lost card",
 				"where can I get a new card"
-				
 			]
 		}, {
 			"name": "infoCardOldIntent",
 			"phrases": [
-				"I haven’t used my library card in a while, is it still valid",
+				"I havent used my library card in a while is it still valid",
 				"Is my library still valid",
 				"Can I still use my old library card",
 				"Is my old library card still working",
@@ -48,8 +47,8 @@
 			"phrases": [
 				"Is there free Wi Fi I can use in the library",
 				"How do I use free Wi Fi in libraries",
-				"Does the library offer a free Wi Fi",
-				"Can I use a free Wi Fi in libraries",
+				"Does the library offer free Wi Fi",
+				"Can I use free Wi Fi in libraries",
 				"Can I bring my own laptop to the library",
 				"Can I connect to the internet at the library"
 			]
@@ -62,7 +61,7 @@
 				"Is there a free PC I can use in libraries",
 				"Does my library offer a free computer",
 				"Are there free computers I can use in the library"
-			]			
+			]
 		}, {
 			"name": "infoItemBorrowLimitIntent",
 			"phrases": [
@@ -125,18 +124,18 @@
 			]
 		}, {
 			"name": "infoPrintingCostIntent",
-				"phrases": [
-					"What does it cost to print",
-					"print cost",
-					"a four print out charge",
-					"what is the price difference between a three and a four printouts",
-					"charges for printing",
-					"what am I charged for printing at the library",
-					"How much does printing a document cost",
-					"Are there printing charges",
-					"What are the fees for printing a document",
-					"Is there an associated cost for printing a document"
-				]
+			"phrases": [
+				"What does it cost to print",
+				"print cost",
+				"a four print out charge",
+				"what is the price difference between a three and a four printouts",
+				"charges for printing",
+				"what am I charged for printing at the library",
+				"How much does printing a document cost",
+				"Are there printing charges",
+				"What are the fees for printing a document",
+				"Is there an associated cost for printing a document"
+			]
 		}, {
 			"name": "infoPrintThreeDIntent",
 			"phrases": [
@@ -213,7 +212,7 @@
 						"Avon dale"
 					]
 				}, {
-					"value": "Leys Institue Library",
+					"value": "Ponsonby",
 					"synonyms": [
 						"Leys Institute",
 						"Ponsonby Library",
@@ -242,7 +241,7 @@
 	},
 	"dialogflow": {
 		"intents": [{
-				"name": "Default Fallback Intent",
+				"name": "fallBackIntent",
 				"auto": true,
 				"webhookUsed": true,
 				"fallbackIntent": true

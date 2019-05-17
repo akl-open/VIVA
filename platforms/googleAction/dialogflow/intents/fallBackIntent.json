@@ -1,0 +1,6 @@
+{
+	"name": "fallBackIntent",
+	"auto": true,
+	"webhookUsed": true,
+	"fallbackIntent": true
+}

@@ -3,3 +3,5 @@ db/
 bundle/
 bundle.zip
 .env
+.tar
+.tar.gz

@@ -28,7 +28,7 @@
 						{
 							"id": null,
 							"name": {
-								"value": "Leys Institue Library",
+								"value": "Ponsonby",
 								"synonyms": [
 									"Leys Institute",
 									"Ponsonby Library",
@@ -77,7 +77,7 @@
 				{
 					"name": "infoCardOldIntent",
 					"samples": [
-						"I haven’t used my library card in a while, is it still valid",
+						"I havent used my library card in a while is it still valid",
 						"Is my library still valid",
 						"Can I still use my old library card",
 						"Is my old library card still working",
@@ -90,8 +90,8 @@
 					"samples": [
 						"Is there free Wi Fi I can use in the library",
 						"How do I use free Wi Fi in libraries",
-						"Does the library offer a free Wi Fi",
-						"Can I use a free Wi Fi in libraries",
+						"Does the library offer free Wi Fi",
+						"Can I use free Wi Fi in libraries",
 						"Can I bring my own laptop to the library",
 						"Can I connect to the internet at the library"
 					]
