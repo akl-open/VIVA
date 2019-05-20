@@ -2,7 +2,7 @@
 	"invocation": "viva auckland",
 	"intents": [
 		{
-			"name": "defaultHelpIntent",
+			"name": "Default Fallback Intent",
 			"alexa": {
 				"name": "AMAZON.HelpIntent"
 			},
