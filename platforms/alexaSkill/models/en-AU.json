@@ -41,6 +41,15 @@
 			],
 			"intents": [
 				{
+					"name": "AMAZON.HelpIntent",
+					"samples": [
+						"help",
+						"help me",
+						"can you help me",
+						"what can i do"
+					]
+				},
+				{
 					"name": "infoBookReturnsIntent",
 					"samples": [
 						"Where can I return my library books",
