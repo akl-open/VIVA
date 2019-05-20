@@ -2,6 +2,17 @@
 	"invocation": "viva auckland",
 	"intents": [
 		{
+			"name": "Default Fallback Intent",
+			"alexa": {
+				"name": "AMAZON.HelpIntent"
+			},
+			"phrases": [
+				"help",
+				"help me",
+				"can you help me",
+				"what can i do"
+			]
+		}, {
 			"name": "infoBookReturnsIntent",
 			"phrases": [
 				"Where can I return my library books",
@@ -262,7 +273,7 @@
 	},
 	"dialogflow": {
 		"intents": [{
-				"name": "fallBackIntent",
+				"name": "Default Fallback Intent",
 				"auto": true,
 				"webhookUsed": true,
 				"fallbackIntent": true
