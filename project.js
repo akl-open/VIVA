@@ -5,6 +5,13 @@
 module.exports = {
     alexaSkill: {
        nlu: 'alexa',
+    //    manifest:{
+    //        permissions:[
+    //            {
+    //                name: 'alexa::devices:all:geolocation:read'
+    //            }
+    //        ]
+    //    }
     },
     googleAction: {
        nlu: 'dialogflow',

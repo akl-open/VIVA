@@ -171,6 +171,14 @@
 				"What do I need to do to update my library account details"
 			]
 		}, {
+			"name": "nearestLibraryIntent",
+			"phrases": [
+				"what is my nearest libray",
+				"what library is closest to me",
+				"What is my local library",
+				"how do i get to my local library"
+			]
+		},{
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",

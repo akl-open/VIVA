@@ -99,17 +99,17 @@ app.setHandler({
 	// this.tell(this.$inputs.sitename.key + ' is open at blah');
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
-console.log('from sites open start ', speech);
+		console.log('from sites open start ', speech);
 
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
-console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
-console.log('siteOpensIntent site found in googledoc ', siteobj);
+			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
+			console.log('siteOpensIntent site found in googledoc ', siteobj);
 
 			var dayRequest = new Date();
 			
-console.log('from sites open ', speech);
+			console.log('from sites open ', speech);
 			speech = openHoursHelper(dayRequest, siteobj);
 		}
 		catch (e) {
@@ -137,8 +137,10 @@ console.log('from sites open ', speech);
 
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
+
 console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
 //console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key).toString());
+
 
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
@@ -147,13 +149,57 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 		}
 		// reprompt
 		catch (e) {
-console.log('whenSiteOpenIntent had something go wrong \n', e, '--------------------------------------------');
+			console.log('whenSiteOpenIntent had something go wrong \n', e, '--------------------------------------------');
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
+	nearestLibraryIntent(){
+		let speech = "Sure, what surburb do you in?"
+		//this.ask(this.t(speech))
 
+
+		this.followUpState('locationState')
+			.ask(speech, this.t('anythingelse.speech'));
+
+	},
+
+	locationState: {
+
+		suburbIntent() {
+			 // Do something
+		},
+},
+
+// 	async nearestLibraryIntent() {
+
+// 	if(device == Alexa){
+//     try {
+// 			const address = await this.$alexaSkill.$user.getDeviceAddress();
+
+// 			console.log(address);
+
+// 			} catch(error) {
+// 					if (error.code === 'NO_USER_PERMISSION') {
+// 							this.$alexaSkill.showAskForAddressCard()
+// 									.tell(`Please grant access to your address in the Alexa app.`);
+// 					}
+// 			}
+// 	}
+// 	else if(device == google){
+
+// 	}
+// },
+	
+
+// default intents start here
+	helpIntent() {
+		console.log('helpIntent invoked');
+		let helpSpeech = 'Here I would offer some useful help speech\
+				maybe try whatever you said slower or something';
+		this.ask(this.t(helpSpeech));
+	},
 
 
 // default intents start here
@@ -226,7 +272,7 @@ function openHoursHelper(dayRequest, siteobj) {
 
 	var returnSpeech = 'openHoursHelper speech not assigned';
 
-console.log('openHoursHelper ', siteobj, dayRequest);
+	console.log('openHoursHelper ', siteobj, dayRequest);
 	if (siteobj !== undefined) {
 		//check site isn't on 'extended close'
 		if (siteobj.extendedclose === '') {
