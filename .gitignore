@@ -1,7 +1,7 @@
 node_modules/
 db/
 bundle/
-bundle.zip
+*.zip
 .env
 .tar
 .tar.gz

@@ -137,8 +137,10 @@ app.setHandler({
 
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
-			console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
-			console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key));
+
+console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
+//console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key).toString());
+
 
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
@@ -156,6 +158,7 @@ app.setHandler({
 	nearestLibraryIntent(){
 		let speech = "Sure, what surburb do you in?"
 		//this.ask(this.t(speech))
+
 
 		this.followUpState('locationState')
 			.ask(speech, this.t('anythingelse.speech'));
@@ -198,17 +201,31 @@ app.setHandler({
 		this.ask(this.t(helpSpeech));
 	},
 
+
+// default intents start here
 	cancelIntent() {
 		console.log('cancelIntent invoked');
 		let cancelSpeech = 'ok, cancelling that';
 		this.ask(this.t(cancelSpeech));
 	},
 
-	// leaving here for future state things
+	defaultHelpIntent() {
+		console.log('helpIntent invoked');
+		let helpSpeech = 'Hmm, could you maybe try whatever you said slower or something';
+		this.ask(this.t(helpSpeech));
+	},
+
+
+	END() {
+		console.log('endInvoked');
+		let speech = 'Ok, talk to you later.';
+		this.tell(this.t(speech));
+	},
+	
 	fallBackIntent() {
 		console.log('fallBackIntent invoked');
-		return this.toIntent('helpIntent');
-		//this.ask(this.t(speech));
+		let speech = 'Hmm, could you maybe try whatever you said slower or something';
+		this.ask(this.t(speech));
 	},
 
 	stopIntent() {
@@ -216,20 +233,23 @@ app.setHandler({
 		return this.toIntent('END');
 	},
 
-	END() {
-		console.log('endInvoked');
-		let speech = 'Ok, talk to you later.';
-		this.tell(this.t(speech));
-	}
-
+	Unhandled() {
+		console.log('globaly unhandled intent invoked');
+		this.ask(this.t('Oh dear, can you try saying that a little differently'));
+	},
+	
 });
 
 
 
 
-
-// s is an ISO date string
-// returns new date set to the content of the string
+/*
+	parseISOString
+		takes ISO Date formatted string yyyy-MM-ddThh:mm:ssZ or yyyy-MM-dd
+		converts to a json date object
+	@param s is an ISO formatted date string
+	@return new date set to the content of the string
+*/
 function parseISOString(s) {
 	var b = s.split(/\D+/);
 console.log('parseISOString from to ', s, b);
