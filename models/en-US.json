@@ -201,8 +201,8 @@
 				"i live near {suburbN}"
 			],
 			"inputs": [{
-					"name": "suburbN",
-					"type": "suburb"
+					"name": "sitename",
+					"type": "siteType"
 				}
 			]
 		}, {

@@ -5,3 +5,5 @@ bundle/
 .env
 .tar
 .tar.gz
+platforms .*
+package-lock.json
