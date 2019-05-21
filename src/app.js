@@ -168,7 +168,17 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	locationState: {
 
 		suburbIntent() {
-			 // Do something
+			 // var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+			 try{
+					var columnName = "NearbySuburbs:WithMacrons"
+					var suburb = this.$cms.siteLocationInfo.find(o => o.columnName === this.$inputs.sitename.key)
+					
+				}
+			 catch (e) {
+				console.log('whenSiteOpenIntent had something go wrong \n', e, '--------------------------------------------');
+			}
+	
+			this.ask(this.t(speech), this.t('anythingelse.speech'));
 		},
 },
 
