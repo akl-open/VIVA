@@ -100,12 +100,12 @@ app.setHandler({
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
 		console.log('from sites open start ', speech);
-
+		
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
-			console.log('siteOpensIntent site found in googledoc ', siteobj);
+			console.log('siteOpensIntent site found in googledoc: ', siteobj);
 
 			var dayRequest = new Date();
 			
