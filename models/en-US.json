@@ -195,14 +195,14 @@
 		}, {
 			"name": "suburbIntent",
 			"phrases": [
-				"i live in {suburbN}",
-				"{suburbN}",
-				"my suburb is {suburbN}",
-				"i live near {suburbN}"
+				"i live in {sitename}",
+				"{sitename}",
+				"my suburb is {sitename}",
+				"i live near {sitename}"
 			],
 			"inputs": [{
-					"name": "suburbN",
-					"type": "suburb"
+					"name": "sitename",
+					"type": "siteType"
 				}
 			]
 		}, {

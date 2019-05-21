@@ -156,7 +156,7 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	},
 
 	nearestLibraryIntent(){
-		let speech = "Sure, what surburb do you in?"
+		let speech = "Sure, what surburb are you in?";
 		//this.ask(this.t(speech))
 
 
@@ -168,39 +168,31 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	locationState: {
 
 		suburbIntent() {
-			 // var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+
 			 try{
-					var columnName = "NearbySuburbs:WithMacrons"
-					var suburb = this.$cms.siteLocationInfo.find(o => o.columnName === this.$inputs.sitename.key)
+					var libraryList = this.$cms.bob;
+					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
+					
+					console.log("suburb intent: library "+ library + " input: "+ this.$inputs.sitename.key);
+					
+					if(library != ""){
+						
+						let speech = "Your nearest library is " + library;
+
+						this.ask(speech, this.t('anythingelse.speech'));
+					}
+					else{
+
+						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
+					}
 					
 				}
 			 catch (e) {
-				console.log('whenSiteOpenIntent had something go wrong \n', e, '--------------------------------------------');
+				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------');
 			}
 	
-			this.ask(this.t(speech), this.t('anythingelse.speech'));
 		},
 },
-
-// 	async nearestLibraryIntent() {
-
-// 	if(device == Alexa){
-//     try {
-// 			const address = await this.$alexaSkill.$user.getDeviceAddress();
-
-// 			console.log(address);
-
-// 			} catch(error) {
-// 					if (error.code === 'NO_USER_PERMISSION') {
-// 							this.$alexaSkill.showAskForAddressCard()
-// 									.tell(`Please grant access to your address in the Alexa app.`);
-// 					}
-// 			}
-// 	}
-// 	else if(device == google){
-
-// 	}
-// },
 	
 
 // default intents start here
@@ -367,6 +359,16 @@ function openHoursHelper(dayRequest, siteobj) {
 }
 
 
-
+function getNearestLibrary(obj, input) {
+  var result;
+	for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+			if(key == input){
+				result = obj[key];
+			}				
+    }
+	}
+  return result;
+}
 
 module.exports.app = app;
