@@ -5,7 +5,7 @@ bundle/
 .env
 .tar
 .tar.gz
-platforms .*
+platforms/
 package-lock.json
 platforms/googleAction/dialogflow/intents/
 
