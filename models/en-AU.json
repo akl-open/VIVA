@@ -145,7 +145,7 @@
 				"where can I print a document",
 				"a four printout",
 				"a three printing",
-				"is there printing avalible in the library"
+				"is there printing available in the library"
 			]
 		}, {
 			"name": "infoPrintingCostIntent",
@@ -171,8 +171,7 @@
 				"Does the library have a three d printer",
 				"three d printing",
 				"three d print",
-				"three d printer",
-				"3D print"
+				"three d printer"
 			]
 		}, {
 			"name": "infoUpdateDetails",
@@ -185,7 +184,7 @@
 				"How can I change my address",
 				"How can I update my details for my library account",
 				"How do I go about updating my library account details",
-				"Can I update my library account online",
+				"Can I update my library account on line",
 				"What do I need to do to update my library account details"
 			]
 		}, {
