@@ -7,3 +7,10 @@ bundle/
 .tar.gz
 platforms .*
 package-lock.json
+platforms/googleAction/dialogflow/intents/
+
+platforms/googleAction/dialogflow/entities/siteType_entries_en-us\.json
+
+platforms/googleAction/dialogflow/entities/siteType\.json
+
+platforms/alexaSkill/models/en-US\.json

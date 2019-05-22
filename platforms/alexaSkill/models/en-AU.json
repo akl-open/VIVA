@@ -690,6 +690,15 @@
 					]
 				},
 				{
+					"name": "nearestLibraryIntent",
+					"samples": [
+						"what is my nearest libray",
+						"what library is closest to me",
+						"What is my local library",
+						"how do i get to my local library"
+					]
+				},
+				{
 					"name": "siteOpensIntent",
 					"samples": [
 						"when does {sitename} library open",
@@ -697,6 +706,21 @@
 						"open time {sitename}",
 						"{sitename} open hours",
 						"{sitename}"
+					],
+					"slots": [
+						{
+							"name": "sitename",
+							"type": "siteType"
+						}
+					]
+				},
+				{
+					"name": "suburbIntent",
+					"samples": [
+						"i live in {sitename}",
+						"{sitename}",
+						"my suburb is {sitename}",
+						"i live near {sitename}"
 					],
 					"slots": [
 						{
@@ -730,6 +754,10 @@
 				},
 				{
 					"name": "AMAZON.CancelIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.HelpIntent",
 					"samples": []
 				},
 				{

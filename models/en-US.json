@@ -2,7 +2,7 @@
 	"invocation": "auckland test",
 	"intents": [
 		{
-			"name": "Default Fallback Intent",
+			"name": "defaultHelpIntent",
 			"alexa": {
 				"name": "AMAZON.HelpIntent"
 			},

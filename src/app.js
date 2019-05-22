@@ -173,7 +173,7 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 					var libraryList = this.$cms.bob;
 					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
 					
-					console.log("suburb intent: library "+ library + " input: "+ this.$inputs.sitename.key);
+					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
 					
 					if(library != ""){
 						
@@ -358,7 +358,9 @@ function openHoursHelper(dayRequest, siteobj) {
 	return returnSpeech;
 }
 
-
+//used to get the list of nearest libraries from a key value pair object
+//@param obj:
+//@param input:
 function getNearestLibrary(obj, input) {
   var result;
 	for (var key in obj) {
