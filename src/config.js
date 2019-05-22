@@ -31,13 +31,14 @@ module.exports = {
 					name: 'responses',
 					type: 'Responses',
 					position: 2,
-				}, {
-					name: 'siteLocationInfo',
-					type: 'ObjectArray',
-					range: 'A:O'
+				},{
+					name: 'bob',
+					type: 'KeyValue',
+					position: 5,
 				},
 				
-			]
+			],
+			caching: false, 
 		}
 	}
 };
