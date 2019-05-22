@@ -26,13 +26,19 @@ module.exports = {
 					name: 'OPENCLOSE',
 					type: 'ObjectArray',
 					position: 1,
-					range: 'A:O',
+					range: 'A:T',
 				}, {
 					name: 'responses',
 					type: 'Responses',
 					position: 2,
+				},{
+					name: 'bob',
+					type: 'KeyValue',
+					position: 5,
 				},
-			]
+				
+			],
+			caching: false, 
 		}
 	}
 };

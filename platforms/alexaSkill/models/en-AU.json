@@ -1,7 +1,7 @@
 {
 	"interactionModel": {
 		"languageModel": {
-			"invocationName": "viva auckland",
+			"invocationName": "auckland test",
 			"types": [
 				{
 					"name": "siteType",
@@ -28,11 +28,479 @@
 						{
 							"id": null,
 							"name": {
+								"value": "Birkenhead",
+								"synonyms": [
+									"Birkenhead Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Blockhouse Bay",
+								"synonyms": [
+									"Blockhouse Bay Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Botany",
+								"synonyms": [
+									"Botany Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Central",
+								"synonyms": [
+									"Central Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Clendon",
+								"synonyms": [
+									"Clendon Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Devonport",
+								"synonyms": [
+									"Devonport Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "East Coast Bays",
+								"synonyms": [
+									"East Coast Bays Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Epsom",
+								"synonyms": [
+									"Epsom Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Glen Eden",
+								"synonyms": [
+									"Glen Eden Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Glen Innes",
+								"synonyms": [
+									"Glen Innes Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Glenfield",
+								"synonyms": [
+									"Glenfield Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Great Barrier",
+								"synonyms": [
+									"Great Barrier Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Grey Lynn",
+								"synonyms": [
+									"Grey Lynn Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Helensville",
+								"synonyms": [
+									"Helensville Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Highland Park",
+								"synonyms": [
+									"Highland Park Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Howick",
+								"synonyms": [
+									"Howick Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Kumeu",
+								"synonyms": [
+									"Kumeu Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mahurangi East",
+								"synonyms": [
+									"Mahurangi East Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mangere Bridge",
+								"synonyms": [
+									"Mangere Bridge Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mangere East",
+								"synonyms": [
+									"Mangere East Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mangere Town",
+								"synonyms": [
+									"Mangere Town Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Manukau",
+								"synonyms": [
+									"Manukau Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Manurewa",
+								"synonyms": [
+									"Manurewa Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Massey",
+								"synonyms": [
+									"Massey Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mt Albert",
+								"synonyms": [
+									"Mt Albert Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Mt Roskill",
+								"synonyms": [
+									"Mt RoskillLibrary"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "New Lynn",
+								"synonyms": [
+									"New Lynn Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Northcote",
+								"synonyms": [
+									"Northcote Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Onehunga",
+								"synonyms": [
+									"Onehunga Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Orewa",
+								"synonyms": [
+									"Orewa Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Otahuhu",
+								"synonyms": [
+									"Otahuhu Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Otara",
+								"synonyms": [
+									"Otara Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Pakuranga",
+								"synonyms": [
+									"Pakuranga Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Panmure",
+								"synonyms": [
+									"Panmure Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Papatoetoe",
+								"synonyms": [
+									"Papatoetoe Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Papakura",
+								"synonyms": [
+									"Papakura Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Parnell",
+								"synonyms": [
+									"Parnell Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
 								"value": "Ponsonby",
 								"synonyms": [
 									"Leys Institute",
 									"Ponsonby Library",
 									"Leys Institue Library Ponsonby"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Pt Chevalier",
+								"synonyms": [
+									"Pt Chevalier Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Pukekohe",
+								"synonyms": [
+									"Pukekohe Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Ranui",
+								"synonyms": [
+									"Ranui Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Remuera",
+								"synonyms": [
+									"Remuera Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "St Heliers",
+								"synonyms": [
+									"St Heliers Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Takapuna",
+								"synonyms": [
+									"Takapuna Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Te Atatu Peninsula",
+								"synonyms": [
+									"Te Atatu Peninsula Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Titirangi",
+								"synonyms": [
+									"Titirangi Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Tupu",
+								"synonyms": [
+									"Tupu Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Waiheke",
+								"synonyms": [
+									"Waiheke Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Waitakere Central",
+								"synonyms": [
+									"Waitakere Central Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Waiuku",
+								"synonyms": [
+									"Waiuku Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Warkworth",
+								"synonyms": [
+									"Warkworth Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Wellsford",
+								"synonyms": [
+									"Wellsford Library"
+								]
+							}
+						},
+						{
+							"id": null,
+							"name": {
+								"value": "Whangaparaoa",
+								"synonyms": [
+									"Whangaparaoa Library"
 								]
 							}
 						}
@@ -222,6 +690,15 @@
 					]
 				},
 				{
+					"name": "nearestLibraryIntent",
+					"samples": [
+						"what is my nearest libray",
+						"what library is closest to me",
+						"What is my local library",
+						"how do i get to my local library"
+					]
+				},
+				{
 					"name": "siteOpensIntent",
 					"samples": [
 						"when does {sitename} library open",
@@ -229,6 +706,21 @@
 						"open time {sitename}",
 						"{sitename} open hours",
 						"{sitename}"
+					],
+					"slots": [
+						{
+							"name": "sitename",
+							"type": "siteType"
+						}
+					]
+				},
+				{
+					"name": "suburbIntent",
+					"samples": [
+						"i live in {sitename}",
+						"{sitename}",
+						"my suburb is {sitename}",
+						"i live near {sitename}"
 					],
 					"slots": [
 						{
