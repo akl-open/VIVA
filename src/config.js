@@ -26,7 +26,7 @@ module.exports = {
 					name: 'OPENCLOSE',
 					type: 'ObjectArray',
 					position: 1,
-					range: 'A:S',
+					range: 'A:T',
 				}, {
 					name: 'responses',
 					type: 'Responses',
