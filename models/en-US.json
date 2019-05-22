@@ -47,11 +47,12 @@
 			"name": "infoCardOldIntent",
 			"phrases": [
 				"I havent used my library card in a while is it still valid",
-				"Is my library still valid",
+				"Is my library card still valid",
 				"Can I still use my old library card",
 				"Is my old library card still working",
 				"old card",
-				"old barcode"
+				"old barcode",
+				"I have an old library card how do I get a new one"
 			]
 		}, {
 			"name": "infoFreeWiFi",
@@ -61,7 +62,13 @@
 				"Does the library offer free Wi Fi",
 				"Can I use free Wi Fi in libraries",
 				"Can I bring my own laptop to the library",
-				"Can I connect to the internet at the library"
+				"Can I connect to the internet at the library",
+				"Do I need to pay for wifi",
+				"Is wireless internet avaliable",
+				"Can I bring my own device",
+				"Does the library have wefe",
+				"Does the library have wifi"
+				
 			]
 		}, {
 			"name": "infoFreeComputers",
@@ -83,7 +90,9 @@
 				"borrowing limit",
 				"borrow limit",
 				"lending limit",
-				"How many books can I have at one time"
+				"How many books can I have at one time",
+				"What are the borrowing limits",
+				"what is the borrwoing limit"
 			]
 		}, {
 			"name": "infoJusticeIntent",
@@ -91,7 +100,10 @@
 				"is there a justice of the peace at the libary",
 				"Where can I find a justice of the peace",
 				"Is there a j p at the library",
-				"Where can I find a j p"
+				"Where can I find a j p",
+				"is there a JP serice",
+				"is tere a JP in today",
+				"When will the JP be in the library"
 			]
 		}, {
 			"name": "infoLyndaDotComIntent",
@@ -105,7 +117,8 @@
 				"Does the library have Lynda.com",
 				"Can I use Lynda.com at my library",
 				"How do I use Lynda.com",
-				"How do I register to use Lynda.com"
+				"How do I register to use Lynda.com",
+				"Do I need to pay for Lynda.com"
 			]
 		}, {
 			"name": "infoMeetingRoomsIntent",
@@ -131,7 +144,8 @@
 				"I need to print something",
 				"where can I print a document",
 				"a four printout",
-				"a three printing"
+				"a three printing",
+				"is there printing avalible in the library"
 			]
 		}, {
 			"name": "infoPrintingCostIntent",
@@ -145,7 +159,10 @@
 				"How much does printing a document cost",
 				"Are there printing charges",
 				"What are the fees for printing a document",
-				"Is there an associated cost for printing a document"
+				"Is there an associated cost for printing a document",
+				"Do I need to pay for printing",
+				"how much does it cost to print something",
+				"What it costs to print at libraries"
 			]
 		}, {
 			"name": "infoPrintThreeDIntent",
@@ -154,7 +171,8 @@
 				"Does the library have a three d printer",
 				"three d printing",
 				"three d print",
-				"three d printer"
+				"three d printer",
+				"3D print"
 			]
 		}, {
 			"name": "infoUpdateDetails",
@@ -184,8 +202,8 @@
 				"when does {sitename} library open",
 				"open time {sitename} library",
 				"open time {sitename}",
-				"{sitename} open hours",
-				"{sitename}"
+				"{sitename} open hours"
+				
 			],
 			"inputs": [{
 					"name": "sitename",
