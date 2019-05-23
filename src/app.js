@@ -359,10 +359,10 @@ function openHoursHelper(dayRequest, siteobj) {
 }
 
 //used to get the list of nearest libraries from a key value pair object
-//@param obj:
-//@param input:
+//@param obj: An object of jey value pairs that is a copy of the Google sheet
+//@param input: The suburb name as the keyword input by the user 
 function getNearestLibrary(obj, input) {
-  var result;
+  var result = "";
 	for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
 			if(key == input){
