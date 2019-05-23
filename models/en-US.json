@@ -136,6 +136,15 @@
 				"Can I book a meeting room"
 			]
 		}, {
+			"name": "infoNewMemberIntent",
+			"phrases": [
+				"how do I get a library card",
+				"How do I get my child a library card",
+				"How do i become a member",
+				"join the library",
+				"how to become a member"
+			]
+		},{
 			"name": "infoPrintingIntent",
 			"phrases": [
 				"Can I print",

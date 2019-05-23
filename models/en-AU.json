@@ -196,6 +196,15 @@
 				"how do i get to my local library"
 			]
 		}, {
+			"name": "newMemberIntent",
+			"phrases": [
+				"how do I get a library card",
+				"How do I get my child a library card",
+				"How do i become a member",
+				"join the library",
+				"how to become a member"
+			]
+		},{
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
