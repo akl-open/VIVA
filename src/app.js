@@ -75,6 +75,10 @@ app.setHandler({
 		this.ask(this.t('info.meetingrooms'), this.t('anythingelse.speech'));
 	},
 
+	infoNewMemberIntent(){
+		this.ask(this.t('info.newmember'), this.t('anythingelse.speech'));
+	},
+
 	infoPrintingIntent() {
 		this.ask(this.t('info.printing'), this.t('anythingelse.speech'));
 	},
@@ -139,7 +143,7 @@ app.setHandler({
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 
 console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
-//console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key).toString());
+//console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key);
 
 
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
@@ -157,7 +161,6 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 
 	nearestLibraryIntent(){
 		let speech = "Sure, what surburb are you in?";
-		//this.ask(this.t(speech))
 
 
 		this.followUpState('locationState')
@@ -193,6 +196,8 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	
 		},
 },
+
+
 	
 
 // default intents start here
@@ -359,10 +364,10 @@ function openHoursHelper(dayRequest, siteobj) {
 }
 
 //used to get the list of nearest libraries from a key value pair object
-//@param obj:
-//@param input:
+//@param obj: An object of jey value pairs that is a copy of the Google sheet
+//@param input: The suburb name as the keyword input by the user 
 function getNearestLibrary(obj, input) {
-  var result;
+  var result = "";
 	for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
 			if(key == input){
