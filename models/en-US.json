@@ -136,15 +136,6 @@
 				"Can I book a meeting room"
 			]
 		}, {
-			"name": "infoNewMemberIntent",
-			"phrases": [
-				"how do I get a library card",
-				"How do I get my child a library card",
-				"How do i become a member",
-				"join the library",
-				"how to become a member"
-			]
-		},{
 			"name": "infoPrintingIntent",
 			"phrases": [
 				"Can I print",
@@ -205,13 +196,33 @@
 				"how do i get to my local library"
 			]
 		}, {
+			"name": "newMemberIntent",
+			"phrases": [
+				"how do I get a library card",
+				"How do I get my child a library card",
+				"How do i become a member",
+				"join the library",
+				"how to become a member"
+			]
+		},{
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
 				"open time {sitename} library",
 				"open time {sitename}",
-				"{sitename} open hours"
-				
+				"{sitename} open hours",
+				"open hours {sitename}",
+				"when is {sitename} open",
+				"what time does {sitename} open",
+				"whats the earlies {sitename} opens",
+				"open times {sitename}",
+				"when do the doors at {sitename} open",
+				"when is {sitename} closed",
+				"is {sitename} closed",
+				"when can I get in to {sitename}",
+				"is {sitename} open",
+				"has {sitename} opened",
+				"has {sitename} closed"
 			],
 			"inputs": [{
 					"name": "sitename",
@@ -548,9 +559,6 @@
 			"languageModel": {
 				"intents": [{
 						"name": "AMAZON.CancelIntent",
-						"samples": []
-					}, {
-						"name": "AMAZON.HelpIntent",
 						"samples": []
 					}, {
 						"name": "AMAZON.StopIntent",
