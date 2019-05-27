@@ -6,9 +6,9 @@ module.exports = {
 	logging: true,
 
 	intentMap: {
-		'AMAZON.FallbackInent': 'failbackIntent',
+		'AMAZON.FallbackIntent': 'fallBackIntent',
 		'AMAZON.CancelIntent': 'cancelIntent',
-		'AMAZON.HelpIntent': 'helpIntent',
+		'AMAZON.HelpIntent': 'defaultHelpIntent',
 		'AMAZON.StopIntent': 'stopIntent',
 	},
 
