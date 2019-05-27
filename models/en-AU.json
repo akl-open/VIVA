@@ -561,6 +561,9 @@
 						"name": "AMAZON.CancelIntent",
 						"samples": []
 					}, {
+						"name": "AMAZON.FallbackIntent",
+						"samples": []
+					}, {
 						"name": "AMAZON.StopIntent",
 						"samples": []
 					}
