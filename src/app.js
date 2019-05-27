@@ -92,7 +92,7 @@ app.setHandler({
 	},
 
 	infoUpdateDetails() {
-		this.ask(this.t('info.updatedetails'));
+		this.ask(this.t('info.updatedetails'), this.t('anythingelse.speech'));
 	},
 
 	siteOpensIntent() {
