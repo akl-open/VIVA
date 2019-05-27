@@ -100,12 +100,12 @@ app.setHandler({
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
 		console.log('from sites open start ', speech);
-
+		
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
-			console.log('siteOpensIntent site found in googledoc ', siteobj);
+			console.log('siteOpensIntent site found in googledoc: ', siteobj);
 
 			var dayRequest = new Date();
 			
@@ -154,7 +154,7 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	},
 
 	nearestLibraryIntent(){
-		let speech = "Sure, what surburb do you in?"
+		let speech = "Sure, what surburb are you in?";
 		//this.ask(this.t(speech))
 
 		this.followUpState('locationState')
@@ -165,29 +165,31 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	locationState: {
 
 		suburbIntent() {
-			 // Do something
+
+			 try{
+					var libraryList = this.$cms.bob;
+					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
+					
+					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
+					
+					if(library != ""){
+						
+						let speech = "Your nearest library is " + library;
+
+						this.ask(speech, this.t('anythingelse.speech'));
+					}
+					else{
+
+						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
+					}
+					
+				}
+			 catch (e) {
+				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------');
+			}
+	
 		},
 },
-
-// 	async nearestLibraryIntent() {
-
-// 	if(device == Alexa){
-//     try {
-// 			const address = await this.$alexaSkill.$user.getDeviceAddress();
-
-// 			console.log(address);
-
-// 			} catch(error) {
-// 					if (error.code === 'NO_USER_PERMISSION') {
-// 							this.$alexaSkill.showAskForAddressCard()
-// 									.tell(`Please grant access to your address in the Alexa app.`);
-// 					}
-// 			}
-// 	}
-// 	else if(device == google){
-
-// 	}
-// },
 	
 
 // default intents start here
@@ -353,7 +355,19 @@ function openHoursHelper(dayRequest, siteobj) {
 	return returnSpeech;
 }
 
-
-
+//used to get the list of nearest libraries from a key value pair object
+//@param obj:
+//@param input:
+function getNearestLibrary(obj, input) {
+  var result;
+	for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+			if(key == input){
+				result = obj[key];
+			}				
+    }
+	}
+  return result;
+}
 
 module.exports.app = app;
