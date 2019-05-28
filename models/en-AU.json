@@ -86,14 +86,20 @@
 		}, {
 			"name": "infoKidsEvents",
 			"phrases": [
-				
+				"What events are avaliable at the library",
+				"What events are avaliable for kids under 5",
+				"What events are avaliable for children under 5",
+				"Childrens events at the library",
+				"what is there to do at the library for children"				
 			]
 		},{
 			"name": "infoKidsEventBooking",
 			"phrases": [
 				"do I need to make a booking",
 				"how much does it cost",
-				""
+				"How much do the events cost",
+				"do I need to book in advance",
+				"how much in advance do I need to book"
 			]
 		},{
 			"name": "infoFreeWiFi",

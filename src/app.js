@@ -60,7 +60,7 @@ app.setHandler({
 	},
 
 	infoKidsEventBooking() {
-		this.ask(this.t('info.freewifi'), this.t('anythingelse.speech'));
+		this.ask(this.t('infoKidsEventBooking'), this.t('anythingelse.speech'));
 	},
 
 	infoFreeWiFi() {
