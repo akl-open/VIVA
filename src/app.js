@@ -184,19 +184,15 @@ app.setHandler({
 					if(library != ""){
 					
 						let speech = "Your nearest library is " + library;
-						this.removeState();						
-
 					}
 					else{
 							this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
-							this.removeState();
 					}
 					
 				}
 			 catch (e) {
 				
-				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------');
-				this.removeState();
+				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------')
 			}
 	
 		},

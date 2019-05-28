@@ -221,7 +221,7 @@
 				"how do i get to my local library"
 			]
 		}, {
-			"name": "newMemberIntent",
+			"name": "infoNewMemberIntent",
 			"phrases": [
 				"how do I get a library card",
 				"How do I get my child a library card",
