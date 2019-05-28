@@ -35,6 +35,21 @@ module.exports = {
 					name: 'suburbSearch',
 					type: 'KeyValue',
 					position: 4,
+				},{
+					name: 'WiggleAndRhyme',
+					type: 'ObjectArray',
+					position: 5,
+					range: 'A:I',
+				},{
+					name: 'RhymeTime',
+					type: 'ObjectArray',
+					position: 6,
+					range: 'A:I',
+				},{
+					name: 'StoryTime',
+					type: 'ObjectArray',
+					position: 7,
+					range: 'A:I',
 				},
 				
 			],

@@ -84,6 +84,18 @@
 				"I have an old library card how do I get a new one"
 			]
 		}, {
+			"name": "infoKidsEvents",
+			"phrases": [
+				
+			]
+		},{
+			"name": "infoKidsEventBooking",
+			"phrases": [
+				"do I need to make a booking",
+				"how much does it cost",
+				""
+			]
+		},{
 			"name": "infoFreeWiFi",
 			"phrases": [
 				"Is there free Wi Fi I can use in the library",
@@ -231,7 +243,8 @@
 				"How do I get my child a library card",
 				"How do i become a member",
 				"join the library",
-				"how to become a member"
+				"how to become a member",
+				"How do I join the library"
 			]
 		},{
 			"name": "siteOpensIntent",

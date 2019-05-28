@@ -55,6 +55,14 @@ app.setHandler({
 		this.ask(this.t('info.oldlibrarycard'), this.t('anythingelse.speech'));
 	},
 
+	infoKidsEvents() {
+		this.ask(this.t('info.kidsEvents'), this.t('anythingelse.speech'));
+	},
+
+	infoKidsEventBooking() {
+		this.ask(this.t('info.freewifi'), this.t('anythingelse.speech'));
+	},
+
 	infoFreeWiFi() {
 		this.ask(this.t('info.freewifi'), this.t('anythingelse.speech'));
 	},
@@ -186,6 +194,7 @@ app.setHandler({
 						let speech = "Your nearest library is " + library;
 
 						this.ask(speech, this.t('anythingelse.speech'));
+						
 					}
 					else{
 
