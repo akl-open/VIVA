@@ -182,16 +182,13 @@ app.setHandler({
 					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
 					
 					if(library != ""){
-						
-						let speech = "Your nearest library is " + library;
-
 						this.removeState();
+						let speech = "Your nearest library is " + library;						
 
 					}
 					else{
-
-						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
 						this.removeState();
+						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
 					}
 					
 				}
