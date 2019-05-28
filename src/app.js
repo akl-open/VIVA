@@ -35,6 +35,10 @@ app.setHandler({
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
+	infoAccountDetailsIntent() {
+		this.ask(this.t('info.accountdetails'), this.t('anythingelse.speech'));
+	},
+	
 	infoBookReturnsIntent() {
 		this.ask(this.t('info.returns'), this.t('anythingelse.speech'));
 	},
@@ -117,8 +121,8 @@ app.setHandler({
 			speech = openHoursHelper(dayRequest, siteobj);
 		}
 		catch (e) {
-			console.log (e, 'siteOpenIntent');
-			speech = 'Well, looks like I couldn\'t find that library, can you try again please?';
+			console.log ('siteOpenIntent', e);
+			speech = 'Well, looks like I could not find that library, can you try again please?';
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
@@ -142,8 +146,7 @@ app.setHandler({
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 
-console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
-//console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key);
+			console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
 
 
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
@@ -160,7 +163,7 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 	},
 
 	nearestLibraryIntent(){
-		let speech = "Sure, what surburb are you in?";
+		let speech = "Sure, what suburb are you in?";
 
 
 		this.followUpState('locationState')
@@ -186,7 +189,7 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 					}
 					else{
 
-						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
+						this.ask("Sorry I cant find a nearby library is there anything else I can help you with?");
 					}
 					
 				}
@@ -195,19 +198,9 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 			}
 	
 		},
-},
-
-
-	
-
-// default intents start here
-	helpIntent() {
-		console.log('helpIntent invoked');
-		let helpSpeech = 'Here I would offer some useful help speech\
-				maybe try whatever you said slower or something';
-		this.ask(this.t(helpSpeech));
 	},
 
+	
 
 // default intents start here
 	cancelIntent() {
@@ -218,10 +211,8 @@ console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + 
 
 	defaultHelpIntent() {
 		console.log('helpIntent invoked');
-		let helpSpeech = 'Hmm, could you maybe try whatever you said slower or something';
-		this.ask(this.t(helpSpeech));
+		this.ask(this.t('info.help'), this.t('anythingelse.speech'));
 	},
-
 
 	END() {
 		console.log('endInvoked');
@@ -352,7 +343,7 @@ function openHoursHelper(dayRequest, siteobj) {
 		}
 	}
 	else {
-		returnSpeech = "I'm not sure that site exists";
+		returnSpeech = "I'm not sure that site exists, can you try again please";
 		console.log("openHoursHelper site is undefined ", siteobj);
 	}
 	// Seems something in the backend doesn't automatically escape out colons... or something.

@@ -13,6 +13,35 @@
 				"what can i do"
 			]
 		}, {
+			"name": "infoAccountDetailsIntent",
+			"phrases": [
+				"what books do I have out",
+				"when are my books due back",
+				"when is my next book due",
+				"how many books do I have out",
+				"can I borrow any more books",
+				"can I put a hold on a book",
+				"what books do I have on hold",
+				"can I check more books out",
+				"books on loan",
+				"borrowed books",
+				"borrowed items",
+				"issued items",
+				"books due",
+				"are any of my books overdue",
+				"book list",
+				"tell me what books I have out",
+				"tell me what I have out",
+				"what is almost due back",
+				"renew my books",
+				"extend my books",
+				"keep my books longer",
+				"what books are ready for me to pick up",
+				"what books are ready to pick up",
+				"what is ready to pick up",
+				"remind me when my books are due"
+			]
+		}, {
 			"name": "infoBookReturnsIntent",
 			"phrases": [
 				"Where can I return my library books",
@@ -301,12 +330,18 @@
 			}, {
 				"value": "Central",
 				"synonyms": [
-					"Central Library"
+					"Auckland",
+					"CBD",
+					"Auckland Central Library",
+					"Central Library",
+					"Lorne Street Library"
 				]			
 			}, {
 				"value": "Clendon",
 				"synonyms": [
-					"Clendon Library"
+					"Clendon Library",
+					"Te Matariki",
+					"Te Matariki Clendon Library"
 				]			
 			}, {
 				"value": "Devonport",
@@ -331,7 +366,8 @@
 			}, {
 				"value": "Glen Innes",
 				"synonyms": [
-					"Glen Innes Library"
+					"Glen Innes Library",
+					"G I"
 				]
 			}, {
 				"value": "Glenfield",
@@ -391,7 +427,8 @@
 			}, {
 				"value": "Manukau",
 				"synonyms": [
-					"Manukau Library"
+					"Manukau Library",
+					"Manukau research center"
 				]
 			}, {
 				"value": "Manurewa",
@@ -399,19 +436,17 @@
 					"Manurewa Library"
 				]
 			}, {
-				"value": "Massey",
-				"synonyms": [
-					"Massey Library"
-				]
-			}, {
 				"value": "Mt Albert",
 				"synonyms": [
-					"Mt Albert Library"
+					"Mt Albert Library",
+					"St Lukes",
+					"St Lukes Library"
 				]
 			}, {
 				"value": "Mt Roskill",
 				"synonyms": [
-					"Mt RoskillLibrary"
+					"Mt Roskill Library",
+					"Roskill library"
 				]
 			}, {
 				"value": "New Lynn",
@@ -472,6 +507,7 @@
 				"value": "Ponsonby",
 				"synonyms": [
 					"Leys Institute",
+					"Leys Institute Library",
 					"Ponsonby Library",
 					"Leys Institue Library Ponsonby"
 				]
@@ -511,6 +547,13 @@
 					"Te Atatu Peninsula Library"
 				]
 			}, {
+				"value": "Te Manawa",
+				"synonyms": [
+					"Massey",
+					"Massey Library",
+					"Te Manawa Library"
+				]
+			}, {
 				"value": "Titirangi",
 				"synonyms": [
 					"Titirangi Library"
@@ -523,11 +566,14 @@
 			}, {
 				"value": "Waiheke",
 				"synonyms": [
-					"Waiheke Library"
+					"Waiheke Library",
+					"Waiheke Island"
 				]
 			}, {
 				"value": "Waitakere Central",
 				"synonyms": [
+					"Henderson",
+					"Henderson Library",
 					"Waitakere Central Library"
 				]
 			}, {
