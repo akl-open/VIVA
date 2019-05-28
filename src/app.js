@@ -184,6 +184,7 @@ app.setHandler({
 					if(library != ""){
 					
 						let speech = "Your nearest library is " + library;
+						this.ask(speech, this.t('anythingelse.speech'));
 					}
 					else{
 							this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
