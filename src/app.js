@@ -182,20 +182,21 @@ app.setHandler({
 					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
 					
 					if(library != ""){
-						this.removeState();
-						let speech = "Your nearest library is " + library;						
+					
+						let speech = "Your nearest library is " + library;
+						this.removeState();						
 
 					}
 					else{
-						this.removeState();
-
-						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
+							this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
+							this.removeState();
 					}
 					
 				}
 			 catch (e) {
-				this.removeState();
+				
 				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------');
+				this.removeState();
 			}
 	
 		},
