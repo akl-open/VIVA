@@ -32,9 +32,9 @@ module.exports = {
 					type: 'Responses',
 					position: 2,
 				},{
-					name: 'bob',
+					name: 'suburbSearch',
 					type: 'KeyValue',
-					position: 5,
+					position: 4,
 				},
 				
 			],
