@@ -176,7 +176,7 @@ app.setHandler({
 		suburbIntent() {
 
 			 try{
-					var libraryList = this.$cms.bob;
+					var libraryList = this.$cms.suburbSearch;
 					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
 					
 					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
