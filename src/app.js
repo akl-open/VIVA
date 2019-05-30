@@ -98,6 +98,10 @@ app.setHandler({
 	infoUpdateDetails() {
 		this.ask(this.t('info.updatedetails'), this.t('anythingelse.speech'));
 	},
+	
+	infoWhenOpenNoSite() {
+		this.ask(this.t('Please ask again with a library name eg Botany Library'), this.t('anythingelse.speech'));
+	},
 
 	siteOpensIntent() {
 	// we assume that they mean now rather than tomorrow or they would have said so
@@ -107,11 +111,11 @@ app.setHandler({
 	// this.tell(this.$inputs.sitename.key + ' is open at blah');
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
-		console.log('from sites open start ', speech);
+		console.log('from sites open start ', speech, this.$data);
 		
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
-			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
 			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
 			console.log('siteOpensIntent site found in googledoc: ', siteobj);
 
@@ -119,7 +123,7 @@ app.setHandler({
 			
 			console.log('from sites open ', speech);
 			speech = openHoursHelper(dayRequest, siteobj);
-		}
+	}
 		catch (e) {
 			console.log ('siteOpenIntent', e);
 			speech = 'Well, looks like I could not find that library, can you try again please?';
@@ -141,15 +145,15 @@ app.setHandler({
 
 	*/
 	whenSiteOpenIntent() {
-		let speech = 'Hmm, ' + this.$inputs.sitename.key + ' doesn\'t ring a bell';
+		let speech = 'Hmm, that doesn\'t ring a bell';
 
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 
-			console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
+			console.log('whenSiteOpenIntent site requested: ', this.$inputs, ' ----------------------');
 
 
-			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
 
 			speech = openHoursHelper(dayRequest, siteobj);
