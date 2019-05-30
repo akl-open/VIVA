@@ -249,6 +249,18 @@
 				"What do I need to do to update my library account details"
 			]
 		}, {
+			"name": "libraryIntent",
+			"phrases": [
+				"My library is {sitename}",
+				"{sitename} library",
+				"i live near {sitename}"
+			],
+			"inputs": [{
+					"name": "sitename",
+					"type": "siteType"
+				}
+			]
+		},{
 			"name": "nearestLibraryIntent",
 			"phrases": [
 				"what is my nearest libray",

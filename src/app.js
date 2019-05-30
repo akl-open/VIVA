@@ -32,7 +32,16 @@ app.setHandler({
 		},
 		
 	eventsAtLibraryIntent(){
+		var input = this.$inputs.sitename.key;
+		if(input == ""){
+			let speech = "Sure, what library would you like me to check";
 
+			this.followUpState('libraryState')
+				.ask(speech, this.t('anythingelse.speech'));
+		}
+		
+		libraryEventsList(input)
+		this.ask("nothing On. this is a test", this.t('anythingelse.speech'));
 
 	},
 
@@ -214,6 +223,35 @@ app.setHandler({
 		},
 	},
 
+	libraryState: {
+
+		libraryIntent() {
+
+			 try{
+					var lib = libraryEventsList(this.$inputs.sitename.key)
+					
+					console.log("library intent: "+ lib + " input: "+ this.$inputs.sitename.key);
+					
+					if(lib != undefined){
+						
+						//let speech = "Your nearest library is " + lib;
+
+						//this.ask(speech, this.t('anythingelse.speech'));
+						
+					}
+					else{
+
+						this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
+					}
+					
+				}
+			 catch (e) {
+				console.log('library intent had something go wrong \n', e, '--------------------------------------------');
+			}
+	
+		},
+	},
+
 	
 
 // default intents start here
@@ -383,13 +421,18 @@ function getNearestLibrary(obj, input) {
   return result;
 }
 
-libraryEventsList(library){
+//used to get a list of events at the requested library
+//@param obj: An object of jey value pairs that is a copy of the Google sheet
+	function libraryEventsList(library)	{
+		var result = "";
 
-	var wAndR = this.$cms.OPENCLOSE.find(o => o.site === library);
-	var rhymetime = this.$cms.OPENCLOSE.find(o => o.site === library);
-	var storytime = this.$cms.OPENCLOSE.find(o => o.site === library);
+		//var wAndR = this.$cms.WiggleAndRhyme.find(o => o.id === library);
+		//var rhymetime = this.$cms.RhymeTime.find(o => o.id === library);
+		//var storytime = this.$cms.StoryTime.find(o => o.id === library);
 
-
-}
+		//console.log("wriggleAndRhyme: "+wAndR)
+		console.log("TEST ******* "+library);
+		return result
+	}
 
 module.exports.app = app;
