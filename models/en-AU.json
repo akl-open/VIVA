@@ -33,13 +33,9 @@
 				"when are my books due back",
 				"when is my next book due",
 				"how many books do I have out",
-				"can I borrow any more books",
 				"can I put a hold on a book",
 				"what books do I have on hold",
-				"can I check more books out",
 				"books on loan",
-				"borrowed books",
-				"borrowed items",
 				"issued items",
 				"books due",
 				"are any of my books overdue",
@@ -125,7 +121,7 @@
 				"Can I bring my own laptop to the library",
 				"Can I connect to the internet at the library",
 				"Do I need to pay for wifi",
-				"Is wireless internet avaliable",
+				"Is wireless internet available",
 				"Can I bring my own device",
 				"Does the library have wefe",
 				"Does the library have wifi"
@@ -153,7 +149,7 @@
 				"lending limit",
 				"How many books can I have at one time",
 				"What are the borrowing limits",
-				"what is the borrwoing limit"
+				"what is the borrowing limit"
 			]
 		}, {
 			"name": "infoJusticeIntent",
@@ -162,8 +158,8 @@
 				"Where can I find a justice of the peace",
 				"Is there a j p at the library",
 				"Where can I find a j p",
-				"is there a JP serice",
-				"is tere a JP in today",
+				"is there a JP service",
+				"is there a JP in today",
 				"When will the JP be in the library"
 			]
 		}, {
@@ -254,22 +250,31 @@
 				"My library is {sitename}",
 				"{sitename} library",
 				"i live near {sitename}"
-			],
 			"inputs": [{
+			],
 					"name": "sitename",
 					"type": "siteType"
 				}
 			]
 		},{
+			"name": "infoWhenOpenNoSite",
+			"phrases": [
+				"when is the library open",
+				"hours for the library",
+				"open hours library",
+				"what time is the library open",
+				"is the library open"
+			]
+		}, {
 			"name": "nearestLibraryIntent",
 			"phrases": [
-				"what is my nearest libray",
+				"what is my nearest library",
 				"what library is closest to me",
 				"What is my local library",
 				"how do i get to my local library"
 			]
 		}, {
-			"name": "newMemberIntent",
+			"name": "infoNewMemberIntent",
 			"phrases": [
 				"how do I get a library card",
 				"How do I get my child a library card",
@@ -347,34 +352,40 @@
 			"automatedExpansion": true
 		},
 		"values": [{
-				"value": "Albany",
+				"value": "1",
 				"synonyms": [
+					"Albany",
 					"Albany Library"
 				]
 			}, {
-				"value": "Avondale",
+				"value": "2",
 				"synonyms": [
+					"Avondale",
 					"Avondale Library",
 					"Avon dale"
 				]
 			}, {
-				"value": "Birkenhead",
+				"value": "3",
 				"synonyms": [
+					"Birkenhead",
 					"Birkenhead Library"
 				]
 			}, {
-				"value": "Blockhouse Bay",
+				"value": "4",
 				"synonyms": [
+					"Blockhouse Bay",
 					"Blockhouse Bay Library"
 				]
 			}, {
-				"value": "Botany",
+				"value": "5",
 				"synonyms": [
+					"Botany",
 					"Botany Library"
 				]
 			}, {
-				"value": "Central",
+				"value": "6",
 				"synonyms": [
+					"Central",
 					"Auckland",
 					"CBD",
 					"Auckland Central Library",
@@ -382,263 +393,312 @@
 					"Lorne Street Library"
 				]			
 			}, {
-				"value": "Clendon",
+				"value": "7",
 				"synonyms": [
+					"Clendon",
 					"Clendon Library",
 					"Te Matariki",
 					"Te Matariki Clendon Library"
 				]			
 			}, {
-				"value": "Devonport",
+				"value": "8",
 				"synonyms": [
+					"Devonport",
 					"Devonport Library"
 				]			
 			}, {
-				"value": "East Coast Bays",
+				"value": "9",
 				"synonyms": [
+					"East Coast Bays",
 					"East Coast Bays Library"
 				]			
 			}, {
-				"value": "Epsom",
+				"value": "10",
 				"synonyms": [
+					"Epsom",
 					"Epsom Library"
 				]
 			}, {
-				"value": "Glen Eden",
+				"value": "11",
 				"synonyms": [
+					"Glen Eden",
 					"Glen Eden Library"
 				]
 			}, {
-				"value": "Glen Innes",
+				"value": "12",
 				"synonyms": [
+					"Glen Innes",
 					"Glen Innes Library",
 					"G I"
 				]
 			}, {
-				"value": "Glenfield",
+				"value": "13",
 				"synonyms": [
+					"Glenfield",
 					"Glenfield Library"
 				]
 			}, {
-				"value": "Great Barrier",
+				"value": "14",
 				"synonyms": [
+					"Great Barrier",
 					"Great Barrier Library"
 				]
 			}, {
-				"value": "Grey Lynn",
+				"value": "15",
 				"synonyms": [
+					"Grey Lynn",
 					"Grey Lynn Library"
 				]
 			}, {
-				"value": "Helensville",
+				"value": "16",
 				"synonyms": [
+					"Helensville",
 					"Helensville Library"
 				]
 			}, {
-				"value": "Highland Park",
+				"value": "17",
 				"synonyms": [
+					"Highland Park",
 					"Highland Park Library"
 				]
 			}, {
-				"value": "Howick",
+				"value": "18",
 				"synonyms": [
+					"Howick",
 					"Howick Library"
 				]
 			}, {
-				"value": "Kumeu",
+				"value": "19",
 				"synonyms": [
+					"Kumeu",
 					"Kumeu Library"
 				]
 			}, {
-				"value": "Mahurangi East",
+				"value": "20",
 				"synonyms": [
+					"Mahurangi East",
 					"Mahurangi East Library"
 				]
 			}, {
-				"value": "Mangere Bridge",
+				"value": "21",
 				"synonyms": [
+					"Mangere Bridge",
 					"Mangere Bridge Library"
 				]
 			}, {
-				"value": "Mangere East",
+				"value": "22",
 				"synonyms": [
+					"Mangere East",
 					"Mangere East Library"
 				]
 			}, {
-				"value": "Mangere Town",
+				"value": "23",
 				"synonyms": [
+					"Mangere Town",
 					"Mangere Town Library"
 				]
 			}, {
-				"value": "Manukau",
+				"value": "24",
 				"synonyms": [
+					"Manukau",
 					"Manukau Library",
 					"Manukau research center"
 				]
 			}, {
-				"value": "Manurewa",
+				"value": "25",
 				"synonyms": [
+					"Manurewa",
 					"Manurewa Library"
 				]
 			}, {
-				"value": "Mt Albert",
+				"value": "26",
 				"synonyms": [
+					"Mt Albert",
 					"Mt Albert Library",
 					"St Lukes",
 					"St Lukes Library"
 				]
 			}, {
-				"value": "Mt Roskill",
+				"value": "27",
 				"synonyms": [
+					"Mt Roskill",
 					"Mt Roskill Library",
 					"Roskill library"
 				]
 			}, {
-				"value": "New Lynn",
+				"value": "28",
 				"synonyms": [
+					"New Lynn",
 					"New Lynn Library"
 				]
 			}, {
-				"value": "Northcote",
+				"value": "29",
 				"synonyms": [
+					"Northcote",
 					"Northcote Library"
 				]
 			}, {
-				"value": "Onehunga",
+				"value": "30",
 				"synonyms": [
+					"Onehunga",
 					"Onehunga Library"
 				]
 			}, {
-				"value": "Orewa",
+				"value": "31",
 				"synonyms": [
+					"Orewa",
 					"Orewa Library"
 				]
 			}, {
-				"value": "Otahuhu",
+				"value": "32",
 				"synonyms": [
+					"Otahuhu",
 					"Otahuhu Library"
 				]
 			}, {
-				"value": "Otara",
+				"value": "33",
 				"synonyms": [
+					"Otara",
 					"Otara Library"
 				]
 			}, {
-				"value": "Pakuranga",
+				"value": "34",
 				"synonyms": [
+					"Pakuranga",
 					"Pakuranga Library"
 				]
 			}, {
-				"value": "Panmure",
+				"value": "35",
 				"synonyms": [
+					"Panmure",
 					"Panmure Library"
 				]
 			}, {
-				"value": "Papatoetoe",
+				"value": "36",
 				"synonyms": [
+					"Papatoetoe",
 					"Papatoetoe Library"
 				]
 			}, {
-				"value": "Papakura",
+				"value": "37",
 				"synonyms": [
+					"Papakura",
 					"Papakura Library"
 				]
 			}, {
-				"value": "Parnell",
+				"value": "38",
 				"synonyms": [
+					"Parnell",
 					"Parnell Library"
 				]
 			}, {
-				"value": "Ponsonby",
+				"value": "39",
 				"synonyms": [
+					"Ponsonby",
 					"Leys Institute",
 					"Leys Institute Library",
 					"Ponsonby Library",
 					"Leys Institue Library Ponsonby"
 				]
 			}, {
-				"value": "Pt Chevalier",
+				"value": "40",
 				"synonyms": [
+					"Pt Chevalier",
 					"Pt Chevalier Library"
 				]
 			}, {
-				"value": "Pukekohe",
+				"value": "41",
 				"synonyms": [
+					"Pukekohe",
 					"Pukekohe Library"
 				]
 			}, {
-				"value": "Ranui",
+				"value": "42",
 				"synonyms": [
+					"Ranui",
 					"Ranui Library"
 				]
 			}, {
-				"value": "Remuera",
+				"value": "43",
 				"synonyms": [
+					"Remuera",
 					"Remuera Library"
 				]
 			}, {
-				"value": "St Heliers",
+				"value": "44",
 				"synonyms": [
+					"St Heliers",
 					"St Heliers Library"
 				]
 			}, {
-				"value": "Takapuna",
+				"value": "45",
 				"synonyms": [
+					"Takapuna",
 					"Takapuna Library"
 				]
 			}, {
-				"value": "Te Atatu Peninsula",
+				"value": "46",
 				"synonyms": [
+					"Te Atatu Peninsula",
 					"Te Atatu Peninsula Library"
 				]
 			}, {
-				"value": "Te Manawa",
+				"value": "47",
 				"synonyms": [
+					"Te Manawa",
 					"Massey",
 					"Massey Library",
 					"Te Manawa Library"
 				]
 			}, {
-				"value": "Titirangi",
+				"value": "48",
 				"synonyms": [
+					"Titirangi",
 					"Titirangi Library"
 				]
 			}, {
-				"value": "Tupu",
+				"value": "49",
 				"synonyms": [
+					"Tupu",
 					"Tupu Library"
 				]
 			}, {
-				"value": "Waiheke",
+				"value": "50",
 				"synonyms": [
+					"Waiheke",
 					"Waiheke Library",
 					"Waiheke Island"
 				]
 			}, {
-				"value": "Waitakere Central",
+				"value": "51",
 				"synonyms": [
+					"Waitakere Central",
 					"Henderson",
 					"Henderson Library",
 					"Waitakere Central Library"
 				]
 			}, {
-				"value": "Waiuku",
+				"value": "52",
 				"synonyms": [
+					"Waiuku",
 					"Waiuku Library"
 				]
 			}, {
-				"value": "Warkworth",
+				"value": "53",
 				"synonyms": [
+					"Warkworth",
 					"Warkworth Library"
 				]
 			}, {
-				"value": "Wellsford",
+				"value": "54",
 				"synonyms": [
+					"Wellsford",
 					"Wellsford Library"
 				]
 			}, {
-				"value": "Whangaparaoa",
+				"value": "55",
 				"synonyms": [
+					"Whangaparaoa",
 					"Whangaparaoa Library"
 				]
 			}

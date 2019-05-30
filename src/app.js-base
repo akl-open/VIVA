@@ -1,4 +1,4 @@
-
+'use strict';
 
 // ------------------------------------------------------------------
 // APP INITIALIZATION
@@ -29,30 +29,12 @@ app.use(
 app.setHandler({
     LAUNCH() {
         return this.toIntent('greetingIntent');
-		},
-		
-	eventsAtLibraryIntent(){
-		var input = this.$inputs.sitename.key;
-		if(input == ""){
-			let speech = "Sure, what library would you like me to check";
-
-			this.followUpState('libraryState')
-				.ask(speech, this.t('anythingelse.speech'));
-		}
-		
-		libraryEventsList(input)
-		this.ask("nothing On. this is a test", this.t('anythingelse.speech'));
-
-	},
+    },
 
 	greetingIntent() {
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
-	infoAccountDetailsIntent() {
-		this.ask(this.t('info.accountdetails'), this.t('anythingelse.speech'));
-	},
-	
 	infoBookReturnsIntent() {
 		this.ask(this.t('info.returns'), this.t('anythingelse.speech'));
 	},
@@ -67,14 +49,6 @@ app.setHandler({
 
 	infoCardOldIntent() {
 		this.ask(this.t('info.oldlibrarycard'), this.t('anythingelse.speech'));
-	},
-
-	infoKidsEvents() {
-		this.ask(this.t('info.kidsEvents'), this.t('anythingelse.speech'));
-	},
-
-	infoKidsEventBooking() {
-		this.ask(this.t('infoKidsEventBooking'), this.t('anythingelse.speech'));
 	},
 
 	infoFreeWiFi() {
@@ -118,11 +92,7 @@ app.setHandler({
 	},
 
 	infoUpdateDetails() {
-		this.ask(this.t('info.updatedetails'), this.t('anythingelse.speech'));
-	},
-	
-	infoWhenOpenNoSite() {
-		this.ask(this.t('Please ask again with a library name eg Botany Library'), this.t('anythingelse.speech'));
+		this.ask(this.t('info.updatedetails'));
 	},
 
 	siteOpensIntent() {
@@ -133,11 +103,11 @@ app.setHandler({
 	// this.tell(this.$inputs.sitename.key + ' is open at blah');
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
-		console.log('from sites open start ', speech, this.$data);
+		console.log('from sites open start ', speech);
 		
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
-			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
 			console.log('siteOpensIntent site found in googledoc: ', siteobj);
 
@@ -145,10 +115,10 @@ app.setHandler({
 			
 			console.log('from sites open ', speech);
 			speech = openHoursHelper(dayRequest, siteobj);
-	}
+		}
 		catch (e) {
-			console.log ('siteOpenIntent', e);
-			speech = 'Well, looks like I could not find that library, can you try again please?';
+			console.log (e, 'siteOpenIntent');
+			speech = 'Well, looks like I couldn\'t find that library, can you try again please?';
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
@@ -167,15 +137,16 @@ app.setHandler({
 
 	*/
 	whenSiteOpenIntent() {
-		let speech = 'Hmm, that doesn\'t ring a bell';
+		let speech = 'Hmm, ' + this.$inputs.sitename.key + ' doesn\'t ring a bell';
 
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 
-			console.log('whenSiteOpenIntent site requested: ', this.$inputs, ' ----------------------');
+console.log('whenSiteOpenIntent site requested: ' + this.$inputs.sitename.key + ' ----------------------');
+//console.log('whenSietOpenIntent site lookup: ' + this.$cms.OPENCLOSE.find(this.$inputs.sitename.key);
 
 
-			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.site === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
 
 			speech = openHoursHelper(dayRequest, siteobj);
@@ -189,7 +160,7 @@ app.setHandler({
 	},
 
 	nearestLibraryIntent(){
-		let speech = "Sure, what suburb are you in?";
+		let speech = "Sure, what surburb are you in?";
 
 
 		this.followUpState('locationState')
@@ -202,59 +173,41 @@ app.setHandler({
 		suburbIntent() {
 
 			 try{
-					var libraryList = this.$cms.suburbSearch;
+					var libraryList = this.$cms.bob;
 					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
 					
 					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
 					
 					if(library != ""){
-					
+						
 						let speech = "Your nearest library is " + library;
-						this.ask(this.t(speech), this.t('anythingelse.speech'));
+
+						this.ask(speech, this.t('anythingelse.speech'));
 					}
 					else{
-							this.ask("Sorry I cant find a nearby library is there anything else I can help you with?");
+
+						this.ask("Sorry we I cant find a nearby library is there anything else I can help you with?");
 					}
 					
 				}
 			 catch (e) {
-				
-				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------')
-			}
-
-		},
-	},
-
-	libraryState: {
-
-		libraryIntent() {
-
-			 try{
-					var lib = libraryEventsList(this.$inputs.sitename.key)
-					
-					console.log("library intent: "+ lib + " input: "+ this.$inputs.sitename.key);
-					
-					if(lib != undefined){
-						
-						//let speech = "Your nearest library is " + lib;
-
-						//this.ask(speech, this.t('anythingelse.speech'));
-						
-					}
-					else{
-
-						this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
-					}
-					
-				}
-			 catch (e) {
-				console.log('library intent had something go wrong \n', e, '--------------------------------------------');
+				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------');
 			}
 	
 		},
-	},
+},
+
 
 	
+
+// default intents start here
+	helpIntent() {
+		console.log('helpIntent invoked');
+		let helpSpeech = 'Here I would offer some useful help speech\
+				maybe try whatever you said slower or something';
+		this.ask(this.t(helpSpeech));
+	},
+
 
 // default intents start here
 	cancelIntent() {
@@ -265,8 +218,10 @@ app.setHandler({
 
 	defaultHelpIntent() {
 		console.log('helpIntent invoked');
-		this.ask(this.t('info.help'), this.t('anythingelse.speech'));
+		let helpSpeech = 'Hmm, could you maybe try whatever you said slower or something';
+		this.ask(this.t(helpSpeech));
 	},
+
 
 	END() {
 		console.log('endInvoked');
@@ -397,7 +352,7 @@ function openHoursHelper(dayRequest, siteobj) {
 		}
 	}
 	else {
-		returnSpeech = "I'm not sure that site exists, can you try again please";
+		returnSpeech = "I'm not sure that site exists";
 		console.log("openHoursHelper site is undefined ", siteobj);
 	}
 	// Seems something in the backend doesn't automatically escape out colons... or something.
@@ -422,19 +377,5 @@ function getNearestLibrary(obj, input) {
 	}
   return result;
 }
-
-//used to get a list of events at the requested library
-//@param obj: An object of jey value pairs that is a copy of the Google sheet
-	function libraryEventsList(library)	{
-		var result = "";
-
-		//var wAndR = this.$cms.WiggleAndRhyme.find(o => o.id === library);
-		//var rhymetime = this.$cms.RhymeTime.find(o => o.id === library);
-		//var storytime = this.$cms.StoryTime.find(o => o.id === library);
-
-		//console.log("wriggleAndRhyme: "+wAndR)
-		console.log("TEST ******* "+library);
-		return result
-	}
 
 module.exports.app = app;
