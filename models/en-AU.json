@@ -13,6 +13,20 @@
 				"what can i do"
 			]
 		}, {
+			"name": "eventsAtLibraryIntent",
+			"phrases": [
+				"what events are at {sitename}",
+				"events at {sitename}",
+				"whats happening at {sitename}",
+				"What do you have at {sitename}"
+			],
+
+			"inputs": [{
+				"name": "sitename",
+				"type": "siteType"
+			}
+		]
+		},{
 			"name": "infoAccountDetailsIntent",
 			"phrases": [
 				"what books do I have out",

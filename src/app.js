@@ -29,7 +29,12 @@ app.use(
 app.setHandler({
     LAUNCH() {
         return this.toIntent('greetingIntent');
-    },
+		},
+		
+	eventsAtLibraryIntent(){
+
+
+	},
 
 	greetingIntent() {
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
@@ -376,6 +381,15 @@ function getNearestLibrary(obj, input) {
     }
 	}
   return result;
+}
+
+libraryEventsList(library){
+
+	var wAndR = this.$cms.OPENCLOSE.find(o => o.site === library);
+	var rhymetime = this.$cms.OPENCLOSE.find(o => o.site === library);
+	var storytime = this.$cms.OPENCLOSE.find(o => o.site === library);
+
+
 }
 
 module.exports.app = app;
