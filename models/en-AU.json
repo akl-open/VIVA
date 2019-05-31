@@ -302,6 +302,16 @@
 		}
 	],
 	"inputTypes": [{
+		"name": "eventType",
+		"dialogflow": {
+			"automatedExpansion": true
+		},
+		"values": [{
+			"value": "1",
+			"synonyms": [
+				"Wriggle and rhyme"
+			]
+		},
 		"name": "siteType",
 		"dialogflow": {
 			"automatedExpansion": true

@@ -203,6 +203,53 @@ app.setHandler({
 		},
 	},
 
+/*
+	eventLibraryPrompt() {
+	// user has asked when an event is on but hasn't provided a library
+	// ask them to give a library
+		console.log('eventLibraryPrompt says hello');
+		let speech = 'Can you ask again with the library you would like to go to';
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	}
+	
+	eventNowIntent() {
+	// user is asking about a specific event at a specific library but hasn't stated a time
+	// we assume that they mean now or tomorrow
+	// @param this.$inputs.sitename.key the site id requested
+	// @param this.$inputs.event.key the event requested
+
+		console.log('eventNowIntent says hello');
+		let speech = 'I am looking that up, might take a while';
+		
+		try {
+			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
+			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
+			console.log('siteOpensIntent site found in googledoc: ', siteobj);
+
+			var dayRequest = new Date();
+			
+			console.log('from sites open ', speech);
+			speech = openHoursHelper(dayRequest, siteobj);
+		}
+		catch (e) {
+			console.log ('siteOpenIntent', e);
+			speech = 'Well, looks like I could not find that library, can you try again please?';
+		}
+		
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	}
+	
+	
+	eventAtTimeIntent() {
+	// user has asked for a specific event at a specific library and has stated a time
+	// bonus: check if site is not closed; for now we just give the time
+		console.log('eventAtTimeIntent says hello ', this.$data, '-----------');
+		
+
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	},
+*/
 	
 
 // default intents start here
