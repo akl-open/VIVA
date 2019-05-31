@@ -33,16 +33,11 @@ app.setHandler({
 		
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
-		if(input == ""){
-			let speech = "Sure, what library would you like me to check";
+		var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == 5);
+		var rTimeObj = this.$cms.rhymeTime.find(o => o.id == 5);
+		var sTimeObj = this.$cms.storyTime.find(o => o.id == 5);
 
-			this.followUpState('libraryState')
-				.ask(speech, this.t('anythingelse.speech'));
-		}
-		
-		libraryEventsList(input)
-		this.ask("nothing On. this is a test", this.t('anythingelse.speech'));
-
+		var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj);
 	},
 
 	greetingIntent() {
@@ -230,21 +225,21 @@ app.setHandler({
 		libraryIntent() {
 
 			 try{
-					var lib = libraryEventsList(this.$inputs.sitename.key)
+				 	// var input = this.$inputs.sitename.key
+					// var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id === input);
+					// var rTimeObj = this.$cms.rhymeTime.find(o => o.id === input);
+					// var sTimeObj = this.$cms.storyTime.find(o => o.id === input);
+					// var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj)
 					
-					console.log("library intent: "+ lib + " input: "+ this.$inputs.sitename.key);
+					// console.log("library list: "+ lib + " input: "+ this.$inputs.sitename.key);
 					
-					if(lib != undefined){
+					// if(lib != undefined){
 						
-						//let speech = "Your nearest library is " + lib;
+					// }
+					// else{
 
-						//this.ask(speech, this.t('anythingelse.speech'));
-						
-					}
-					else{
-
-						this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
-					}
+					// 	this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
+					// }
 					
 				}
 			 catch (e) {
@@ -291,9 +286,6 @@ app.setHandler({
 	},
 	
 });
-
-
-
 
 /*
 	parseISOString
@@ -420,20 +412,32 @@ function getNearestLibrary(obj, input) {
 			}				
     }
 	}
+	console.log("getNearestLibraryResult: "+result);
   return result;
 }
 
 //used to get a list of events at the requested library
 //@param obj: An object of jey value pairs that is a copy of the Google sheet
-	function libraryEventsList(library)	{
+	function libraryEventsList(wAndR, rTime, sTime)	{
 		var result = "";
 
-		//var wAndR = this.$cms.WiggleAndRhyme.find(o => o.id === library);
-		//var rhymetime = this.$cms.RhymeTime.find(o => o.id === library);
-		//var storytime = this.$cms.StoryTime.find(o => o.id === library);
+		for (var val in wAndR) 
+		{
+			if (wAndR[val] != ''){
+				
+				if(wAndR != 'id'){
+					result = result+" "+wAndR[val];
+				}
 
-		//console.log("wriggleAndRhyme: "+wAndR)
-		console.log("TEST ******* "+library);
+			}
+					
+		}
+
+
+		//console.log(wAndR)
+		//console.log(rTime);
+		//console.log(sTime);
+		console.log("*****************"+ result);
 		return result
 	}
 
