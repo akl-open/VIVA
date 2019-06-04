@@ -29,7 +29,16 @@ app.use(
 app.setHandler({
     LAUNCH() {
         return this.toIntent('greetingIntent');
-    },
+		},
+		
+	// eventsAtLibraryIntent(){
+	// 	var input = this.$inputs.sitename.key;
+	// 	var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == 5);
+	// 	var rTimeObj = this.$cms.rhymeTime.find(o => o.id == 5);
+	// 	var sTimeObj = this.$cms.storyTime.find(o => o.id == 5);
+
+	// 	var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj);
+	// },
 
 	greetingIntent() {
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
@@ -53,6 +62,35 @@ app.setHandler({
 
 	infoCardOldIntent() {
 		this.ask(this.t('info.oldlibrarycard'), this.t('anythingelse.speech'));
+	},
+
+	infoEventDescriptionIntent()
+	{
+		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.value);
+		var input = this.$inputs.eventName.value;
+	
+		switch (input) {
+			case "1":
+				this.ask(this.t('info.eventRhymeTime'), this.t('anythingelse.speech'));
+				break;
+			case "2":
+				this.ask(this.t('info.eventStoryTime'), this.t('anythingelse.speech'));
+				break;
+			case "3":
+				this.ask(this.t('info.eventWriggleAndRhyme'), this.t('anythingelse.speech'));
+				break;
+			default:
+			 	this.ask("Sorry I cant help with that event yet, is there anythin else I can help you with")
+		}	
+
+	},
+
+	infoKidsEvents() {
+		this.ask(this.t('info.kidsEvents'), this.t('anythingelse.speech'));
+	},
+
+	infoKidsEventBooking() {
+		this.ask(this.t('info.kidsEventBooking'), this.t('anythingelse.speech'));
 	},
 
 	infoFreeWiFi() {
@@ -203,6 +241,35 @@ app.setHandler({
 		},
 	},
 
+	libraryState: {
+
+		libraryIntent() {
+
+			 try{
+				 	// var input = this.$inputs.sitename.key
+					// var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id === input);
+					// var rTimeObj = this.$cms.rhymeTime.find(o => o.id === input);
+					// var sTimeObj = this.$cms.storyTime.find(o => o.id === input);
+					// var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj)
+					
+					// console.log("library list: "+ lib + " input: "+ this.$inputs.sitename.key);
+					
+					// if(lib != undefined){
+						
+					// }
+					// else{
+
+					// 	this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
+					// }
+					
+				}
+			 catch (e) {
+				console.log('library intent had something go wrong \n', e, '--------------------------------------------');
+			}
+	
+		},
+	},
+
 	
 
 // default intents start here
@@ -240,9 +307,6 @@ app.setHandler({
 	},
 	
 });
-
-
-
 
 /*
 	parseISOString
@@ -369,7 +433,30 @@ function getNearestLibrary(obj, input) {
 			}				
     }
 	}
+	console.log("getNearestLibraryResult: "+result);
   return result;
 }
+
+//used to get a list of events at the requested library
+//@param obj: An object of jey value pairs that is a copy of the Google sheet
+	// function libraryEventsList(wAndR, rTime, sTime)	{
+	// 	var result = "";
+
+	// 	for (var val in wAndR) 
+	// 	{
+	// 		if (wAndR[val] != ''){
+
+	// 			result = result+" "+wAndR[val];
+	// 		}
+					
+	// 	}
+
+
+		//console.log(wAndR)
+		//console.log(rTime);
+		//console.log(sTime);
+	// 	console.log("*****************"+ result);
+	// 	return result
+	// }
 
 module.exports.app = app;
