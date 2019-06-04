@@ -1,7 +1,6 @@
 {
 	"invocation": "auckland test",
-	"intents": [
-		{
+	"intents": [{
 			"name": "defaultHelpIntent",
 			"alexa": {
 				"name": "AMAZON.HelpIntent"
@@ -93,7 +92,7 @@
 				"Can I bring my own device",
 				"Does the library have wefe",
 				"Does the library have wifi"
-				
+
 			]
 		}, {
 			"name": "infoFreeComputers",
@@ -238,7 +237,7 @@
 				"join the library",
 				"how to become a member"
 			]
-		},{
+		}, {
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
@@ -278,17 +277,77 @@
 			]
 		}, {
 			"name": "whenSiteOpenIntent",
-				"phrases": [
-					"is {sitename} open {whenDate}",
-					"what time is {sitename} open {whenDate}",
-					"tell me if {sitename} is open {whenDate}",
-					"what are {sitename} hours {whenDate}",
-					"On {whenDate} is {sitename} open",
-					"can I borrow books from {sitename} {whenDate}",
-					"{sitename} {whenDate}",
-					"{sitename} library {whenDate}"
-				],
+			"phrases": [
+				"is {sitename} open {whenDate}",
+				"what time is {sitename} open {whenDate}",
+				"tell me if {sitename} is open {whenDate}",
+				"what are {sitename} hours {whenDate}",
+				"On {whenDate} is {sitename} open",
+				"can I borrow books from {sitename} {whenDate}",
+				"{sitename} {whenDate}",
+				"{sitename} library {whenDate}"
+			],
 			"inputs": [{
+					"name": "sitename",
+					"type": "siteType"
+				}, {
+					"name": "whenDate",
+					"type": {
+						"alexa": "AMAZON.DATE",
+						"dialogflow": "@sys.date"
+					}
+				}
+			]
+		}, {
+			"name": "eventNoSiteNowPrompt",
+			"phrases": [
+				"is there a {eventname} on",
+				"when is {eventname}",
+				"what time is the next {eventname}",
+				"I want to go to {eventname}",
+				"when is {eventname}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}
+			]
+		}, {
+			"name": "eventBySiteNowIntent",
+			"phrases": [
+				"is there a {eventname} on at {sitename}",
+				"when is {eventname} at {sitename}",
+				"what time is the next {eventname}",
+				"does {sitename} have {eventname}",
+				"at {sitename} when is {eventname}",
+				"can I go to {eventname} at {sitename}",
+				"{sitename} {eventname}",
+				"{eventname} {sitename}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}, {
+					"name": "sitename",
+					"type": "siteType"
+				}
+			]
+		}, {
+			"name": "eventBySiteAtTimeIntent",
+			"phrases": [
+				"{whenDate} is there a {eventname} on at {sitename}",
+				"on {whenDate} is {eventname} at {sitename}",
+				"what time is the next {eventname} {whenDate} at {sitename}",
+				"does {sitename} have {eventname} {whenDate}",
+				"at {sitename} when is {eventname} {whenDate}",
+				"can I go to {eventname} at {sitename} {whenDate}",
+				"{sitename} {eventname} {whenDate}",
+				"{eventname} {sitename} {whenDate}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}, {
 					"name": "sitename",
 					"type": "siteType"
 				}, {
@@ -301,375 +360,392 @@
 			]
 		}
 	],
-	"inputTypes": [{
-		"name": "eventType",
-		"dialogflow": {
-			"automatedExpansion": true
-		},
-		"values": [{
-			"value": "1",
-			"synonyms": [
-				"Wriggle and rhyme"
+	"inputTypes": [
+		{
+			"name": "eventType",
+			"dialogflow": {
+				"automatedExpansion": true
+			},
+			"values": [
+				{
+					"value": "1",
+					"synonyms": [
+						"rhyme time",
+						"rhymetime"
+					]
+				}, {
+					"value": "2",
+					"synonyms": [
+						"story time",
+						"story"
+					]
+				}, {
+					"value": "3",
+					"synonyms": [
+						"Wriggle and rhyme",
+						"Wriggle"
+					]
+				}
 			]
-		},
-		"name": "siteType",
-		"dialogflow": {
-			"automatedExpansion": true
-		},
-		"values": [{
-				"value": "1",
-				"synonyms": [
-					"Albany",
-					"Albany Library"
-				]
-			}, {
-				"value": "2",
-				"synonyms": [
-					"Avondale",
-					"Avondale Library",
-					"Avon dale"
-				]
-			}, {
-				"value": "3",
-				"synonyms": [
-					"Birkenhead",
-					"Birkenhead Library"
-				]
-			}, {
-				"value": "4",
-				"synonyms": [
-					"Blockhouse Bay",
-					"Blockhouse Bay Library"
-				]
-			}, {
-				"value": "5",
-				"synonyms": [
-					"Botany",
-					"Botany Library"
-				]
-			}, {
-				"value": "6",
-				"synonyms": [
-					"Central",
-					"Auckland",
-					"CBD",
-					"Auckland Central Library",
-					"Central Library",
-					"Lorne Street Library"
-				]			
-			}, {
-				"value": "7",
-				"synonyms": [
-					"Clendon",
-					"Clendon Library",
-					"Te Matariki",
-					"Te Matariki Clendon Library"
-				]			
-			}, {
-				"value": "8",
-				"synonyms": [
-					"Devonport",
-					"Devonport Library"
-				]			
-			}, {
-				"value": "9",
-				"synonyms": [
-					"East Coast Bays",
-					"East Coast Bays Library"
-				]			
-			}, {
-				"value": "10",
-				"synonyms": [
-					"Epsom",
-					"Epsom Library"
-				]
-			}, {
-				"value": "11",
-				"synonyms": [
-					"Glen Eden",
-					"Glen Eden Library"
-				]
-			}, {
-				"value": "12",
-				"synonyms": [
-					"Glen Innes",
-					"Glen Innes Library",
-					"G I"
-				]
-			}, {
-				"value": "13",
-				"synonyms": [
-					"Glenfield",
-					"Glenfield Library"
-				]
-			}, {
-				"value": "14",
-				"synonyms": [
-					"Great Barrier",
-					"Great Barrier Library"
-				]
-			}, {
-				"value": "15",
-				"synonyms": [
-					"Grey Lynn",
-					"Grey Lynn Library"
-				]
-			}, {
-				"value": "16",
-				"synonyms": [
-					"Helensville",
-					"Helensville Library"
-				]
-			}, {
-				"value": "17",
-				"synonyms": [
-					"Highland Park",
-					"Highland Park Library"
-				]
-			}, {
-				"value": "18",
-				"synonyms": [
-					"Howick",
-					"Howick Library"
-				]
-			}, {
-				"value": "19",
-				"synonyms": [
-					"Kumeu",
-					"Kumeu Library"
-				]
-			}, {
-				"value": "20",
-				"synonyms": [
-					"Mahurangi East",
-					"Mahurangi East Library"
-				]
-			}, {
-				"value": "21",
-				"synonyms": [
-					"Mangere Bridge",
-					"Mangere Bridge Library"
-				]
-			}, {
-				"value": "22",
-				"synonyms": [
-					"Mangere East",
-					"Mangere East Library"
-				]
-			}, {
-				"value": "23",
-				"synonyms": [
-					"Mangere Town",
-					"Mangere Town Library"
-				]
-			}, {
-				"value": "24",
-				"synonyms": [
-					"Manukau",
-					"Manukau Library",
-					"Manukau research center"
-				]
-			}, {
-				"value": "25",
-				"synonyms": [
-					"Manurewa",
-					"Manurewa Library"
-				]
-			}, {
-				"value": "26",
-				"synonyms": [
-					"Mt Albert",
-					"Mt Albert Library",
-					"St Lukes",
-					"St Lukes Library"
-				]
-			}, {
-				"value": "27",
-				"synonyms": [
-					"Mt Roskill",
-					"Mt Roskill Library",
-					"Roskill library"
-				]
-			}, {
-				"value": "28",
-				"synonyms": [
-					"New Lynn",
-					"New Lynn Library"
-				]
-			}, {
-				"value": "29",
-				"synonyms": [
-					"Northcote",
-					"Northcote Library"
-				]
-			}, {
-				"value": "30",
-				"synonyms": [
-					"Onehunga",
-					"Onehunga Library"
-				]
-			}, {
-				"value": "31",
-				"synonyms": [
-					"Orewa",
-					"Orewa Library"
-				]
-			}, {
-				"value": "32",
-				"synonyms": [
-					"Otahuhu",
-					"Otahuhu Library"
-				]
-			}, {
-				"value": "33",
-				"synonyms": [
-					"Otara",
-					"Otara Library"
-				]
-			}, {
-				"value": "34",
-				"synonyms": [
-					"Pakuranga",
-					"Pakuranga Library"
-				]
-			}, {
-				"value": "35",
-				"synonyms": [
-					"Panmure",
-					"Panmure Library"
-				]
-			}, {
-				"value": "36",
-				"synonyms": [
-					"Papatoetoe",
-					"Papatoetoe Library"
-				]
-			}, {
-				"value": "37",
-				"synonyms": [
-					"Papakura",
-					"Papakura Library"
-				]
-			}, {
-				"value": "38",
-				"synonyms": [
-					"Parnell",
-					"Parnell Library"
-				]
-			}, {
-				"value": "39",
-				"synonyms": [
-					"Ponsonby",
-					"Leys Institute",
-					"Leys Institute Library",
-					"Ponsonby Library",
-					"Leys Institue Library Ponsonby"
-				]
-			}, {
-				"value": "40",
-				"synonyms": [
-					"Pt Chevalier",
-					"Pt Chevalier Library"
-				]
-			}, {
-				"value": "41",
-				"synonyms": [
-					"Pukekohe",
-					"Pukekohe Library"
-				]
-			}, {
-				"value": "42",
-				"synonyms": [
-					"Ranui",
-					"Ranui Library"
-				]
-			}, {
-				"value": "43",
-				"synonyms": [
-					"Remuera",
-					"Remuera Library"
-				]
-			}, {
-				"value": "44",
-				"synonyms": [
-					"St Heliers",
-					"St Heliers Library"
-				]
-			}, {
-				"value": "45",
-				"synonyms": [
-					"Takapuna",
-					"Takapuna Library"
-				]
-			}, {
-				"value": "46",
-				"synonyms": [
-					"Te Atatu Peninsula",
-					"Te Atatu Peninsula Library"
-				]
-			}, {
-				"value": "47",
-				"synonyms": [
-					"Te Manawa",
-					"Massey",
-					"Massey Library",
-					"Te Manawa Library"
-				]
-			}, {
-				"value": "48",
-				"synonyms": [
-					"Titirangi",
-					"Titirangi Library"
-				]
-			}, {
-				"value": "49",
-				"synonyms": [
-					"Tupu",
-					"Tupu Library"
-				]
-			}, {
-				"value": "50",
-				"synonyms": [
-					"Waiheke",
-					"Waiheke Library",
-					"Waiheke Island"
-				]
-			}, {
-				"value": "51",
-				"synonyms": [
-					"Waitakere Central",
-					"Henderson",
-					"Henderson Library",
-					"Waitakere Central Library"
-				]
-			}, {
-				"value": "52",
-				"synonyms": [
-					"Waiuku",
-					"Waiuku Library"
-				]
-			}, {
-				"value": "53",
-				"synonyms": [
-					"Warkworth",
-					"Warkworth Library"
-				]
-			}, {
-				"value": "54",
-				"synonyms": [
-					"Wellsford",
-					"Wellsford Library"
-				]
-			}, {
-				"value": "55",
-				"synonyms": [
-					"Whangaparaoa",
-					"Whangaparaoa Library"
-				]
-			}
-		]
-	}
-],
+		}, {
+			"name": "siteType",
+			"dialogflow": {
+				"automatedExpansion": true
+			},
+			"values": [{
+					"value": "1",
+					"synonyms": [
+						"Albany",
+						"Albany Library"
+					]
+				}, {
+					"value": "2",
+					"synonyms": [
+						"Avondale",
+						"Avondale Library",
+						"Avon dale"
+					]
+				}, {
+					"value": "3",
+					"synonyms": [
+						"Birkenhead",
+						"Birkenhead Library"
+					]
+				}, {
+					"value": "4",
+					"synonyms": [
+						"Blockhouse Bay",
+						"Blockhouse Bay Library"
+					]
+				}, {
+					"value": "5",
+					"synonyms": [
+						"Botany",
+						"Botany Library"
+					]
+				}, {
+					"value": "6",
+					"synonyms": [
+						"Central",
+						"Auckland",
+						"CBD",
+						"Auckland Central Library",
+						"Central Library",
+						"Lorne Street Library"
+					]
+				}, {
+					"value": "7",
+					"synonyms": [
+						"Clendon",
+						"Clendon Library",
+						"Te Matariki",
+						"Te Matariki Clendon Library"
+					]
+				}, {
+					"value": "8",
+					"synonyms": [
+						"Devonport",
+						"Devonport Library"
+					]
+				}, {
+					"value": "9",
+					"synonyms": [
+						"East Coast Bays",
+						"East Coast Bays Library"
+					]
+				}, {
+					"value": "10",
+					"synonyms": [
+						"Epsom",
+						"Epsom Library"
+					]
+				}, {
+					"value": "11",
+					"synonyms": [
+						"Glen Eden",
+						"Glen Eden Library"
+					]
+				}, {
+					"value": "12",
+					"synonyms": [
+						"Glen Innes",
+						"Glen Innes Library",
+						"G I"
+					]
+				}, {
+					"value": "13",
+					"synonyms": [
+						"Glenfield",
+						"Glenfield Library"
+					]
+				}, {
+					"value": "14",
+					"synonyms": [
+						"Great Barrier",
+						"Great Barrier Library"
+					]
+				}, {
+					"value": "15",
+					"synonyms": [
+						"Grey Lynn",
+						"Grey Lynn Library"
+					]
+				}, {
+					"value": "16",
+					"synonyms": [
+						"Helensville",
+						"Helensville Library"
+					]
+				}, {
+					"value": "17",
+					"synonyms": [
+						"Highland Park",
+						"Highland Park Library"
+					]
+				}, {
+					"value": "18",
+					"synonyms": [
+						"Howick",
+						"Howick Library"
+					]
+				}, {
+					"value": "19",
+					"synonyms": [
+						"Kumeu",
+						"Kumeu Library"
+					]
+				}, {
+					"value": "20",
+					"synonyms": [
+						"Mahurangi East",
+						"Mahurangi East Library"
+					]
+				}, {
+					"value": "21",
+					"synonyms": [
+						"Mangere Bridge",
+						"Mangere Bridge Library"
+					]
+				}, {
+					"value": "22",
+					"synonyms": [
+						"Mangere East",
+						"Mangere East Library"
+					]
+				}, {
+					"value": "23",
+					"synonyms": [
+						"Mangere Town",
+						"Mangere Town Library"
+					]
+				}, {
+					"value": "24",
+					"synonyms": [
+						"Manukau",
+						"Manukau Library",
+						"Manukau research center"
+					]
+				}, {
+					"value": "25",
+					"synonyms": [
+						"Manurewa",
+						"Manurewa Library"
+					]
+				}, {
+					"value": "26",
+					"synonyms": [
+						"Mt Albert",
+						"Mt Albert Library",
+						"St Lukes",
+						"St Lukes Library"
+					]
+				}, {
+					"value": "27",
+					"synonyms": [
+						"Mt Roskill",
+						"Mt Roskill Library",
+						"Roskill library"
+					]
+				}, {
+					"value": "28",
+					"synonyms": [
+						"New Lynn",
+						"New Lynn Library"
+					]
+				}, {
+					"value": "29",
+					"synonyms": [
+						"Northcote",
+						"Northcote Library"
+					]
+				}, {
+					"value": "30",
+					"synonyms": [
+						"Onehunga",
+						"Onehunga Library"
+					]
+				}, {
+					"value": "31",
+					"synonyms": [
+						"Orewa",
+						"Orewa Library"
+					]
+				}, {
+					"value": "32",
+					"synonyms": [
+						"Otahuhu",
+						"Otahuhu Library"
+					]
+				}, {
+					"value": "33",
+					"synonyms": [
+						"Otara",
+						"Otara Library"
+					]
+				}, {
+					"value": "34",
+					"synonyms": [
+						"Pakuranga",
+						"Pakuranga Library"
+					]
+				}, {
+					"value": "35",
+					"synonyms": [
+						"Panmure",
+						"Panmure Library"
+					]
+				}, {
+					"value": "36",
+					"synonyms": [
+						"Papatoetoe",
+						"Papatoetoe Library"
+					]
+				}, {
+					"value": "37",
+					"synonyms": [
+						"Papakura",
+						"Papakura Library"
+					]
+				}, {
+					"value": "38",
+					"synonyms": [
+						"Parnell",
+						"Parnell Library"
+					]
+				}, {
+					"value": "39",
+					"synonyms": [
+						"Ponsonby",
+						"Leys Institute",
+						"Leys Institute Library",
+						"Ponsonby Library",
+						"Leys Institue Library Ponsonby"
+					]
+				}, {
+					"value": "40",
+					"synonyms": [
+						"Pt Chevalier",
+						"Pt Chevalier Library"
+					]
+				}, {
+					"value": "41",
+					"synonyms": [
+						"Pukekohe",
+						"Pukekohe Library"
+					]
+				}, {
+					"value": "42",
+					"synonyms": [
+						"Ranui",
+						"Ranui Library"
+					]
+				}, {
+					"value": "43",
+					"synonyms": [
+						"Remuera",
+						"Remuera Library"
+					]
+				}, {
+					"value": "44",
+					"synonyms": [
+						"St Heliers",
+						"St Heliers Library"
+					]
+				}, {
+					"value": "45",
+					"synonyms": [
+						"Takapuna",
+						"Takapuna Library"
+					]
+				}, {
+					"value": "46",
+					"synonyms": [
+						"Te Atatu Peninsula",
+						"Te Atatu Peninsula Library"
+					]
+				}, {
+					"value": "47",
+					"synonyms": [
+						"Te Manawa",
+						"Massey",
+						"Massey Library",
+						"Te Manawa Library"
+					]
+				}, {
+					"value": "48",
+					"synonyms": [
+						"Titirangi",
+						"Titirangi Library"
+					]
+				}, {
+					"value": "49",
+					"synonyms": [
+						"Tupu",
+						"Tupu Library"
+					]
+				}, {
+					"value": "50",
+					"synonyms": [
+						"Waiheke",
+						"Waiheke Library",
+						"Waiheke Island"
+					]
+				}, {
+					"value": "51",
+					"synonyms": [
+						"Waitakere Central",
+						"Henderson",
+						"Henderson Library",
+						"Waitakere Central Library"
+					]
+				}, {
+					"value": "52",
+					"synonyms": [
+						"Waiuku",
+						"Waiuku Library"
+					]
+				}, {
+					"value": "53",
+					"synonyms": [
+						"Warkworth",
+						"Warkworth Library"
+					]
+				}, {
+					"value": "54",
+					"synonyms": [
+						"Wellsford",
+						"Wellsford Library"
+					]
+				}, {
+					"value": "55",
+					"synonyms": [
+						"Whangaparaoa",
+						"Whangaparaoa Library"
+					]
+				}
+			]
+		}
+	],
 	"alexa": {
 		"interactionModel": {
 			"languageModel": {
