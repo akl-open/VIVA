@@ -64,12 +64,33 @@ app.setHandler({
 		this.ask(this.t('info.oldlibrarycard'), this.t('anythingelse.speech'));
 	},
 
+	infoEventDescriptionIntent()
+	{
+		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.value);
+		var input = this.$inputs.eventName.value;
+	
+		switch (input) {
+			case "1":
+				this.ask(this.t('info.eventRhymeTime'), this.t('anythingelse.speech'));
+				break;
+			case "2":
+				this.ask(this.t('info.eventStoryTime'), this.t('anythingelse.speech'));
+				break;
+			case "3":
+				this.ask(this.t('info.eventWriggleAndRhyme'), this.t('anythingelse.speech'));
+				break;
+			default:
+			 	this.ask("Sorry I cant help with that event yet, is there anythin else I can help you with")
+		}	
+
+	},
+
 	infoKidsEvents() {
 		this.ask(this.t('info.kidsEvents'), this.t('anythingelse.speech'));
 	},
 
 	infoKidsEventBooking() {
-		this.ask(this.t('infoKidsEventBooking'), this.t('anythingelse.speech'));
+		this.ask(this.t('info.kidsEventBooking'), this.t('anythingelse.speech'));
 	},
 
 	infoFreeWiFi() {
