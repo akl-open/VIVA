@@ -247,21 +247,22 @@ app.setHandler({
 
 		},
 	},
-
+/*
 	eventNoSiteNowPrompt() {
 	// user has asked when an event is on but hasn't provided a library
 	// ask them to give a library
 		console.log('eventLibraryPrompt says hello');
 		let speech = 'Can you ask again with the library you would like to go to';
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
-	}
+	},
+	
 	
 	eventBySiteNowIntent() {
 	// user is asking about a specific event at a specific library but hasn't stated a time
 	// we assume that they mean now or tomorrow
 	// @param this.$inputs.sitename.key the site id requested
 	// @param this.$inputs.event.key the event requested
-/*
+
 
 		console.log('eventNowIntent says hello');
 		let speech = 'I am looking that up, might take a while';
