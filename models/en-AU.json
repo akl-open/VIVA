@@ -10,7 +10,8 @@
 				"help",
 				"help me",
 				"can you help me",
-				"what can i do"
+				"what can i do",
+				"what can you do"
 			]
 		}, {
 			"name": "eventsAtLibraryIntent",
