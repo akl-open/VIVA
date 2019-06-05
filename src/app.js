@@ -203,30 +203,75 @@ app.setHandler({
 		},
 	},
 
+/*
+	eventNoSiteNowPrompt() {
+	// user has asked when an event is on but hasn't provided a library
+	// ask them to give a library
+		console.log('eventLibraryPrompt says hello');
+		let speech = 'Can you ask again with the library you would like to go to';
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	}
+	
+	eventBySiteNowIntent() {
+	// user is asking about a specific event at a specific library but hasn't stated a time
+	// we assume that they mean now or tomorrow
+	// @param this.$inputs.sitename.key the site id requested
+	// @param this.$inputs.event.key the event requested
+
+		console.log('eventNowIntent says hello');
+		let speech = 'I am looking that up, might take a while';
+		
+		try {
+			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
+			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
+			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
+			console.log('siteOpensIntent site found in googledoc: ', siteobj);
+
+			var dayRequest = new Date();
+			
+			console.log('from sites open ', speech);
+			speech = openHoursHelper(dayRequest, siteobj);
+		}
+		catch (e) {
+			console.log ('siteOpenIntent', e);
+			speech = 'Well, looks like I could not find that library, can you try again please?';
+		}
+		
+		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	}
+*/	
 
 	eventBySiteAtTimeIntent() {
 	// user has asked for a specific event at a specific library and has stated a time
-		console.log('eventBySiteAtTimeIntent says hello \ninputs: ', this.$inputs, ' \ndata: ', this.$data, '-----------');
+	//	console.log('eventBySiteAtTimeIntent says hello \ninputs: ', this.$inputs, ' \ndata: ', this.$data, '-----------');
 		
-		var eventsobj;
-
-		switch (this.$inputs.eventname.key) {
-			case '1':
-				eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === this.$inputs.sitename.key);
-				break;
-			case '2':
-				eventsobj = this.$cms.rhymeTime.find(o => o.id === this.$inputs.sitename.key);
-				break;
-			case '3':
-				eventsobj = this.$cms.storyTime.find(o => o.id === this.$inputs.sitename.key);
-				break;				
+		
+		try {
+			var dayRequest = parseISOString(this.$inputs.whenDate.key);
+			var eventsname;
+			var eventsobj;
+			
+			switch (this.$inputs.eventname.key) {
+				case '1':
+					eventsname = 'Wriggle and Rhyme';
+					eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === this.$inputs.sitename.key);
+					break;
+				case '2':
+					eventsname = 'Rhyme Time';
+					eventsobj = this.$cms.rhymeTime.find(o => o.id === this.$inputs.sitename.key);
+					break;
+				case '3':
+					eventsname = 'Story Time';
+					eventsobj = this.$cms.storyTime.find(o => o.id === this.$inputs.sitename.key);
+					break;				
+			}
 		}
-		
-		console.log(eventsobj);
-		var dayRequest = parseISOString(this.$inputs.whenDate.key);
+		catch (e) {
+			console.log('eventBySiteAtTimeIntent went wrong\n', e, '--------------------------------');
+		}
 
-		console.log('to helper: \n date ', dayRequest, '\n eventsobj ', eventsobj);
-		let speech = 'temporary speech just because';
+		console.log('to helper: \n date ', dayRequest, '\n eventsname ', eventsname, '\n eventsobj ', eventsobj);
+		let speech = openHoursHelper(dayRequest, eventsobj, eventsname);
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
@@ -290,23 +335,32 @@ console.log('parseISOString from to ', s, b);
 	openHoursHelper
 		Gives the open hours for each day of the week.
 		If is a site is on extended closure then it will provide the dates instead.
-	@param siteHours is a JSON array, one site open close times lifted from googledoc
+	@param eventInfo string name of event requested (optional)
+	@param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
 	@param day is a Date, the day the hours are requested for
 	@return speech, string containing some formatted speech
 */
-function openHoursHelper(dayRequest, siteobj) {
+function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
 	var returnSpeech = 'openHoursHelper speech not assigned';
 
-	console.log('openHoursHelper ', dayRequest, siteobj);//, eventname);
+	console.log('openHoursHelper ', dayRequest, siteobj, eventInfo);
+	
 	if (siteobj !== undefined) {
 		//check site isn't on 'extended close'
-		if (siteobj.extendedclose === '') {
+		if (siteobj.extendedclose === undefined || siteobj.extendedclose === '') {
 
 			// set speech based on day of week, closed all day or open hours
 			switch (dayRequest.getDay()) {
 			  case 0:
-				if (siteobj.sundayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.sunday !== '') {
+					returnSpeech = siteobj.sunday;
+				}
+				else if (eventInfo !== undefined && siteobj.sunday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Sunday.';
+				}
+				else 
+					if (eventInfo === undefined && siteobj.sundayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Sunday.';
 				}
 				else {
@@ -314,15 +368,27 @@ function openHoursHelper(dayRequest, siteobj) {
 				}
 				break;
 			  case 1:
-				if (siteobj.mondayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Monday.';
+				if (eventInfo !== undefined && siteobj.monday !== '') {
+					returnSpeech = siteobj.monday;
 				}
+				else if (eventInfo !== undefined && siteobj.monday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Monday.';
+				}
+				else if (eventInfo === undefined && siteobj.mondayopen.match(/[Cc]lose/)) {
+					returnSpeech = siteobj.site + ' is closed all day Monday.';
+					}
 				else {
 					returnSpeech = "On Monday " + siteobj.site + " opens at " + siteobj.mondayopen + " and closes at " + siteobj.mondayclose;
 				}
 				break;
 			  case 2:
-				if (siteobj.tuesdayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.tuesday !== '') {
+					returnSpeech = siteobj.monday;
+				}
+				else if (eventInfo !== undefined && siteobj.tuesday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Tuesday.';
+				}
+				else if (eventInfo === undefined && siteobj.tuesdayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Tuesday.';
 				}
 				else {
@@ -330,7 +396,13 @@ function openHoursHelper(dayRequest, siteobj) {
 				}
 				break;
 			  case 3:
-				if (siteobj.wednesdayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.wednesday !== '') {
+					returnSpeech = siteobj.monday;
+				}
+				else if (eventInfo !== undefined && siteobj.wednesday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Wednesday.';
+				}
+				else if (eventInfo === undefined && siteobj.wednesdayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Wednesday.';
 				}
 				else {
@@ -338,7 +410,13 @@ function openHoursHelper(dayRequest, siteobj) {
 				}
 				break;
 			  case 4:
-				if (siteobj.thursdayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.thursday !== '') {
+					returnSpeech = siteobj.thursday;
+				}
+				else if (eventInfo !== undefined && siteobj.thursday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Thursday.';
+				}
+				else if (eventInfo === undefined && siteobj.thursdayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Thursday.';
 				}
 				else {
@@ -346,7 +424,13 @@ function openHoursHelper(dayRequest, siteobj) {
 				}
 				break;
 			  case 5:
-				if (siteobj.fridayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.friday !== '') {
+					returnSpeech = siteobj.friday;
+				}
+				else if (eventInfo !== undefined && siteobj.friday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Friday.';
+				}
+				else if (eventInfo === undefined && siteobj.fridayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Friday.';
 				}
 				else {
@@ -354,7 +438,13 @@ function openHoursHelper(dayRequest, siteobj) {
 				}
 				break;
 			  case 6:
-				if (siteobj.saturdayopen.match(/[Cc]lose/)) {
+				if (eventInfo !== undefined && siteobj.saturday !== '') {
+					returnSpeech = siteobj.friday;
+				}
+				else if (eventInfo !== undefined && siteobj.saturday === '') {
+					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Saturday.';
+				}
+				else if (eventInfo === undefined && siteobj.saturdayopen.match(/[Cc]lose/)) {
 					returnSpeech = siteobj.site + ' is closed all day Saturday.';
 				}
 				else {
@@ -378,7 +468,7 @@ function openHoursHelper(dayRequest, siteobj) {
 	//returnSpeech.replace(/:/g, ".");
 	//doesn't appear to be doing anything, would be good to make work
 
-	//console.log("helper is trying to return returnSpeech ", returnSpeech.toString() + '------------------------');
+	console.log("helper is trying to return returnSpeech ", returnSpeech.toString() + '------------------------');
 	return returnSpeech;
 }
 
