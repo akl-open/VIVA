@@ -31,14 +31,21 @@ app.setHandler({
         return this.toIntent('greetingIntent');
 		},
 		
-	// eventsAtLibraryIntent(){
-	// 	var input = this.$inputs.sitename.key;
-	// 	var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == 5);
-	// 	var rTimeObj = this.$cms.rhymeTime.find(o => o.id == 5);
-	// 	var sTimeObj = this.$cms.storyTime.find(o => o.id == 5);
+	eventsAtLibraryIntent(){
+		var input = this.$inputs.sitename.key;
+		console.log("###########################: "+input);
+		if(input != undefined){
+			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
+			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
+			var sTimeObj = this.$cms.storyTime.find(o => o.id == input);
 
-	// 	var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj);
-	// },
+			var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj);
+			this.ask(lib,this.t('anythingelse.speech'));
+		}
+		else{
+			this.toIntent('infoWhenOpenNoSite');
+		}
+	},
 
 	greetingIntent() {
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
@@ -241,36 +248,6 @@ app.setHandler({
 		},
 	},
 
-	libraryState: {
-
-		libraryIntent() {
-
-			 try{
-				 	// var input = this.$inputs.sitename.key
-					// var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id === input);
-					// var rTimeObj = this.$cms.rhymeTime.find(o => o.id === input);
-					// var sTimeObj = this.$cms.storyTime.find(o => o.id === input);
-					// var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj)
-					
-					// console.log("library list: "+ lib + " input: "+ this.$inputs.sitename.key);
-					
-					// if(lib != undefined){
-						
-					// }
-					// else{
-
-					// 	this.ask("Sorry I cant find any events at that library, is there anything else I can help you with?");
-					// }
-					
-				}
-			 catch (e) {
-				console.log('library intent had something go wrong \n', e, '--------------------------------------------');
-			}
-	
-		},
-	},
-
-	
 
 // default intents start here
 	cancelIntent() {
@@ -439,24 +416,54 @@ function getNearestLibrary(obj, input) {
 
 //used to get a list of events at the requested library
 //@param obj: An object of jey value pairs that is a copy of the Google sheet
-	// function libraryEventsList(wAndR, rTime, sTime)	{
-	// 	var result = "";
+	function libraryEventsList(wAndR, rTime, sTime)	{
+		var wriggleAndRhyme="";
+		var rhymeTime="";
+		var storyTime="";
+		var result ="";
 
-	// 	for (var val in wAndR) 
-	// 	{
-	// 		if (wAndR[val] != ''){
+		console.log("libraryEventsList:WandR: "+ JSON.stringify(wAndR));
+		console.log("libraryEventsList:RTime: "+ JSON.stringify(rTime));
+		console.log("libraryEventsList:STime: "+ JSON.stringify(sTime));
 
-	// 			result = result+" "+wAndR[val];
-	// 		}
-					
-	// 	}
+		for (var val in wAndR) 
+		{
+			if (wAndR[val] != '' && val != 'id'&& val != 'site'){
 
+				wriggleAndRhyme = wriggleAndRhyme+" "+wAndR[val]+",";
+			}		
+		}
 
-		//console.log(wAndR)
-		//console.log(rTime);
-		//console.log(sTime);
-	// 	console.log("*****************"+ result);
-	// 	return result
-	// }
+		for (var val in rTime) 
+		{
+			if (rTime[val] != '' && val != 'id'&& val != 'site'){
+
+				rhymeTime = rhymeTime+" "+rTime[val]+",";
+			}		
+		}
+
+		for (var val in sTime) 
+		{
+			if (sTime[val] != '' && val != 'id'&& val != 'site'){
+
+				storyTime = storyTime+" "+sTime[val]+",";
+			}		
+		}
+
+		if(rhymeTime != ''){
+			result = result + " Rhyme time is on " + rhymeTime;
+		}
+		if(storyTime != ''){
+			result = result +"  Story time is on " + storyTime;
+		}
+		if(wriggleAndRhyme != ''){
+			result = result + " Wriggle and Rhyme is on " + wriggleAndRhyme;
+		}
+		
+
+	
+		console.log("libraryEventsList: Final Result :"+ result);
+		return result;
+	}
 
 module.exports.app = app;
