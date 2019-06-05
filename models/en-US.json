@@ -1,7 +1,6 @@
 {
 	"invocation": "auckland test",
-	"intents": [
-		{
+	"intents": [{
 			"name": "defaultHelpIntent",
 			"alexa": {
 				"name": "AMAZON.HelpIntent"
@@ -139,7 +138,7 @@
 				"Can I bring my own device",
 				"Does the library have wefe",
 				"Does the library have wifi"
-				
+
 			]
 		}, {
 			"name": "infoFreeComputers",
@@ -297,7 +296,7 @@
 				"how to become a member",
 				"How do I join the library"
 			]
-		},{
+		}, {
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
@@ -337,17 +336,77 @@
 			]
 		}, {
 			"name": "whenSiteOpenIntent",
-				"phrases": [
-					"is {sitename} open {whenDate}",
-					"what time is {sitename} open {whenDate}",
-					"tell me if {sitename} is open {whenDate}",
-					"what are {sitename} hours {whenDate}",
-					"On {whenDate} is {sitename} open",
-					"can I borrow books from {sitename} {whenDate}",
-					"{sitename} {whenDate}",
-					"{sitename} library {whenDate}"
-				],
+			"phrases": [
+				"is {sitename} open {whenDate}",
+				"what time is {sitename} open {whenDate}",
+				"tell me if {sitename} is open {whenDate}",
+				"what are {sitename} hours {whenDate}",
+				"On {whenDate} is {sitename} open",
+				"can I borrow books from {sitename} {whenDate}",
+				"{sitename} {whenDate}",
+				"{sitename} library {whenDate}"
+			],
 			"inputs": [{
+					"name": "sitename",
+					"type": "siteType"
+				}, {
+					"name": "whenDate",
+					"type": {
+						"alexa": "AMAZON.DATE",
+						"dialogflow": "@sys.date"
+					}
+				}
+			]
+		}, {
+			"name": "eventNoSiteNowPrompt",
+			"phrases": [
+				"is there a {eventname} on",
+				"when is {eventname}",
+				"what time is the next {eventname}",
+				"I want to go to {eventname}",
+				"when is {eventname}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}
+			]
+		}, {
+			"name": "eventBySiteNowIntent",
+			"phrases": [
+				"is there a {eventname} on at {sitename}",
+				"when is {eventname} at {sitename}",
+				"what time is the next {eventname}",
+				"does {sitename} have {eventname}",
+				"at {sitename} when is {eventname}",
+				"can I go to {eventname} at {sitename}",
+				"{sitename} {eventname}",
+				"{eventname} {sitename}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}, {
+					"name": "sitename",
+					"type": "siteType"
+				}
+			]
+		}, {
+			"name": "eventBySiteAtTimeIntent",
+			"phrases": [
+				"{whenDate} is there a {eventname} on at {sitename}",
+				"on {whenDate} is {eventname} at {sitename}",
+				"what time is the next {eventname} {whenDate} at {sitename}",
+				"does {sitename} have {eventname} {whenDate}",
+				"at {sitename} when is {eventname} {whenDate}",
+				"can I go to {eventname} at {sitename} {whenDate}",
+				"{sitename} {eventname} {whenDate}",
+				"{eventname} {sitename} {whenDate}"
+			],
+			"inputs": [{
+					"name": "eventname",
+					"type": "eventType"
+				}, {
 					"name": "sitename",
 					"type": "siteType"
 				}, {
