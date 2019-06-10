@@ -10,6 +10,7 @@ const { GoogleAssistant } = require('jovo-platform-googleassistant');
 const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
 const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
+const requestPromise = require('request-promise-native');
 
 const app = new App();
 
@@ -175,6 +176,10 @@ app.setHandler({
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	},
+
+	myTestIntent(){
+		connectToSierra();
 	},
 
 
@@ -532,7 +537,9 @@ function getNearestLibrary(obj, input) {
 }
 
 //used to get a list of events at the requested library
-//@param obj: An object of jey value pairs that is a copy of the Google sheet
+//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
+//@param rTime: An object of of the selected row from the rhymetime google sheet
+//@param sTime: An object of of the selected row from the storytime google sheet
 	function libraryEventsList(wAndR, rTime, sTime)	{
 		var wriggleAndRhyme="";
 		var rhymeTime="";
@@ -581,6 +588,28 @@ function getNearestLibrary(obj, input) {
 	
 		console.log("libraryEventsList: Final Result :"+ result);
 		return result;
+	}
+
+	async function connectToSierra(){
+		// const options = {
+		// 	uri: '',
+		// 	json: true
+		// };
+		let options = {
+			method: 'GET',
+			uri: 'https://api.com',
+			json: true,
+			headers: {
+					'X-Api-Key': '',
+					'Content-Type': 'Application/json'
+				}
+		}
+	
+
+		
+		const data = await requestPromise(options);
+		
+		console.log("Sierrra result " +JSON.stringify(data))
 	}
 
 module.exports.app = app;
