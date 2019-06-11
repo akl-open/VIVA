@@ -10,6 +10,7 @@ const { GoogleAssistant } = require('jovo-platform-googleassistant');
 const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
 const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
+const requestPromise = require('request-promise-native');
 
 const app = new App();
 
@@ -175,6 +176,13 @@ app.setHandler({
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
+	},
+
+	bookAvaliabilityIntent(){
+		var tel = connectToSierra();
+        console.log("test 2 : "+ tel);
+        this.ask("done");
+		
 	},
 
 
@@ -514,7 +522,9 @@ function getNearestLibrary(obj, input) {
 }
 
 //used to get a list of events at the requested library
-//@param obj: An object of jey value pairs that is a copy of the Google sheet
+//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
+//@param rTime: An object of of the selected row from the rhymetime google sheet
+//@param sTime: An object of of the selected row from the storytime google sheet
 	function libraryEventsList(wAndR, rTime, sTime)	{
 		var wriggleAndRhyme="";
 		var rhymeTime="";
@@ -564,5 +574,25 @@ function getNearestLibrary(obj, input) {
 		console.log("libraryEventsList: Final Result :"+ result);
 		return result;
 	}
+
+	async function connectToSierra(){
+		const options = {
+				method:'POST',
+				uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
+				headers: {
+						'Authorization': 'Basic Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA='
+				},
+				body:{
+						'grant_type':'client_credentials'
+				},
+				json: true // Automatically parses the JSON string in the response,
+		};
+
+		const data = await requestPromise(options);
+		const token = data.access_token;
+		console.log(data);
+		return token;
+	}
+
 
 module.exports.app = app;

@@ -9,7 +9,9 @@
     "jovo-framework": "^2.2.6",
     "jovo-platform-alexa": "^2.2.8",
     "jovo-platform-googleassistant": "^2.2.6",
-    "jovo-plugin-debugger": "^2.2.5"
+    "jovo-plugin-debugger": "^2.2.5",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
