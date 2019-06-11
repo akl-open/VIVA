@@ -179,8 +179,12 @@ app.setHandler({
 	},
 
 	bookAvaliabilityIntent(){
+		var keys;
 		var tel = connectToSierra();
-        console.log("test 2 : "+ tel);
+		tel.then(function(value) {
+			console.log("test 2 : "+value);
+			keys = value;
+		})
         this.ask("done");
 		
 	},
@@ -608,7 +612,7 @@ function getNearestLibrary(obj, input) {
 
 		const data = await requestPromise(options);
 		const token = data.access_token;
-		console.log(data);
+
 		return token;
 	}
 
