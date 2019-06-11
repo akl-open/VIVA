@@ -502,7 +502,7 @@ function getNearestLibrary(obj, input) {
   var result = "";
 	for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-			if(key == input){
+			if(key.toLowerCase() == input.toLowerCase()){
 				result = obj[key];
 			}				
     }
