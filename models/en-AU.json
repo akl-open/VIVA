@@ -12,6 +12,20 @@
 				"what can i do"
 			]
 		}, {
+			"name": "eventsAtLibraryIntent",	
+			"phrases": [	
+				"what events are at {sitename}",	
+				"events at {sitename}",	
+				"whats happening at {sitename}",	
+				"What do you have at {sitename}"	
+			],	
+
+ 			"inputs": [{	
+				"name": "sitename",	
+				"type": "siteType"	
+			}	
+		]	
+		},{
 			"name": "infoAccountDetailsIntent",
 			"phrases": [
 				"what books do I have out",
@@ -79,6 +93,37 @@
 				"I have an old library card how do I get a new one"
 			]
 		}, {
+			"name": "infoEventDescriptionIntent",	
+			"phrases": [	
+				"What is {eventName}",	
+				"What happends at {eventName}",	
+				"describe {eventName}",	
+				"tell me about {eventName}"	
+			],	
+			"inputs": [{	
+				"name": "eventName",	
+				"type": "eventType"	
+				}	
+			]	
+		}, {	
+			"name": "infoKidsEvents",	
+			"phrases": [	
+				"What events are avaliable at the library",	
+				"What events are avaliable for kids under five",	
+				"What events are avaliable for children under five",	
+				"Childrens events at the library",	
+				"what is there to do at the library for children"				      	
+			]	
+		},{	
+			"name": "infoKidsEventBooking",	
+			"phrases": [	
+				"do I need to make a booking",	
+				"how much does it cost",	
+				"How much do the events cost",	
+				"do I need to book in advance",	
+				"how much in advance do I need to book"	
+			]	
+		},{
 			"name": "infoFreeWiFi",
 			"phrases": [
 				"Is there free Wi Fi I can use in the library",

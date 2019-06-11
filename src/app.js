@@ -259,26 +259,28 @@ app.setHandler({
 		var eventsobj;
 		
 		// no date requested, assume today
-		if (dayRequest !== undefined)
+		if (dayRequest !== undefined && dayRequest !== '') {
 			dayRequest = parseISOString(dayRequest);
-		else
+		}
+		else {
 			dayRequest = new Date();
+			}
 		
 		if (eventsname !== undefined) {			
 			try {
 				if (sitename !== undefined) {
 					switch (eventsname) {
 						case '1':
-							eventsname = 'Wriggle and Rhyme';
-							eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === sitename);
-							break;
-						case '2':
 							eventsname = 'Rhyme Time';
 							eventsobj = this.$cms.rhymeTime.find(o => o.id === sitename);
 							break;
-						case '3':
+						case '2':
 							eventsname = 'Story Time';
 							eventsobj = this.$cms.storyTime.find(o => o.id === sitename);
+							break;
+						case '3':
+							eventsname = 'Wriggle and Rhyme';
+							eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === sitename);
 							break;
 					}
 					
@@ -365,7 +367,7 @@ console.log('parseISOString from to ', s, b);
 */
 function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
-	var returnSpeech = 'openHoursHelper speech not assigned';
+	var returnSpeech = '';
 
 	console.log('openHoursHelper ', dayRequest, siteobj, eventInfo);
 	
