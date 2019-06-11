@@ -12,6 +12,31 @@
 				"what can i do"
 			]
 		}, {
+			"name": "eventsAtLibraryIntent",	
+			"phrases": [	
+				"what events are at {sitename}",	
+				"events at {sitename}",	
+				"whats happening at {sitename}",	
+				"What do you have at {sitename}",
+				"Is there an event at {sitename}",
+				"Does {sitename} have events",
+				"Does {sitename} have events on the weekend",
+				"What events does {sitename} have for kids",
+				"what event is happening at {sitename}",
+				"is there something for my kids to do at {sitename}",
+				"what events does {sitename} have for kids",
+				"what are the dates and times for events at {sitename}",
+				"tell me the days that events are on at {sitename}",
+				"tell me the times of events at {sitename}",
+				"tell me the days and times for library events at {sitename} during the weekend"
+			],	
+
+ 			"inputs": [{	
+				"name": "sitename",	
+				"type": "siteType"	
+			}	
+		]	
+		},{
 			"name": "infoAccountDetailsIntent",
 			"phrases": [
 				"what books do I have out",
@@ -79,6 +104,46 @@
 				"I have an old library card how do I get a new one"
 			]
 		}, {
+			"name": "infoEventDescriptionIntent",	
+			"phrases": [	
+				"What is {eventName}",	
+				"What happens at {eventName}",	
+				"describe {eventName}",	
+				"tell me about {eventName}",
+				"information about {eventName}",
+				"{eventName} information",
+				"{eventName} description",
+				"{eventName}"
+			],	
+			"inputs": [{
+				"name": "eventName",	
+				"type": "eventType"	
+				}	
+			]	
+		}, {	
+			"name": "infoKidsEvents",	
+			"phrases": [	
+				"What events are available at the library",	
+				"What events are available for kids under five",	
+				"What events are available for children under five",	
+				"Childrens events at the library",	
+				"what is there to do at the library for children",
+				"bored kids",
+				"my kids need something to do",
+				"family events",
+				"things for my family to go to",
+				"family things at the library"
+			]	
+		},{	
+			"name": "infoKidsEventBooking",	
+			"phrases": [	
+				"do I need to make a booking",	
+				"how much does it cost to go to an event",	
+				"How much do the events cost",	
+				"do I need to book in advance",	
+				"how much in advance do I need to book"
+			]	
+		},{
 			"name": "infoFreeWiFi",
 			"phrases": [
 				"Is there free Wi Fi I can use in the library",
@@ -92,7 +157,6 @@
 				"Can I bring my own device",
 				"Does the library have wefe",
 				"Does the library have wifi"
-
 			]
 		}, {
 			"name": "infoFreeComputers",
