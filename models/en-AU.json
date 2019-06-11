@@ -1,6 +1,12 @@
 {
 	"invocation": "auckland test",
 	"intents": [{
+		"name": "bookAvaliabilityIntent",
+		"phrases": [
+			"do you have {book title}",
+			"is {book title} avaliable"			
+			]
+		},{
 			"name": "defaultHelpIntent",
 			"alexa": {
 				"name": "AMAZON.HelpIntent"

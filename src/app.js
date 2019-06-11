@@ -178,8 +178,11 @@ app.setHandler({
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
-	myTestIntent(){
-		connectToSierra();
+	bookAvaliabilityIntent(){
+		var tel = connectToSierra();
+        console.log("test 2 : "+ tel);
+        this.ask("done");
+		
 	},
 
 
@@ -591,25 +594,23 @@ function getNearestLibrary(obj, input) {
 	}
 
 	async function connectToSierra(){
-		// const options = {
-		// 	uri: '',
-		// 	json: true
-		// };
-		let options = {
-			method: 'GET',
-			uri: 'https://api.com',
-			json: true,
-			headers: {
-					'X-Api-Key': '',
-					'Content-Type': 'Application/json'
-				}
-		}
-	
+		const options = {
+				method:'POST',
+				uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
+				headers: {
+						'Authorization': 'Basic Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA='
+				},
+				body:{
+						'grant_type':'client_credentials'
+				},
+				json: true // Automatically parses the JSON string in the response,
+		};
 
-		
 		const data = await requestPromise(options);
-		
-		console.log("Sierrra result " +JSON.stringify(data))
+		const token = data.access_token;
+		console.log(data);
+		return token;
 	}
+
 
 module.exports.app = app;
