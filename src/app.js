@@ -35,7 +35,7 @@ app.setHandler({
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
 		console.log("###########################: "+input);
-		if(input != undefined){
+		if(input != undefined && input != ""){
 			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
 			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
 			var sTimeObj = this.$cms.storyTime.find(o => o.id == input);
