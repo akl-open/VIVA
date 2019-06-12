@@ -3,8 +3,16 @@
 	"intents": [{
 		"name": "bookAvaliabilityIntent",
 		"phrases": [
-			"do you have {book title}",
-			"is {book title} avaliable"			
+			"do you have {bookTitle}",
+			"is {bookTitle} avaliable"			
+			],
+			"inputs": [{
+					"name": "bookTitle",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+				}
 			]
 		},{
 			"name": "defaultHelpIntent",
