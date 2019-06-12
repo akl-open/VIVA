@@ -278,9 +278,9 @@ app.setHandler({
 			dayRequest = new Date();
 			}
 		
-		if (eventsname !== undefined) {			
+		if (eventsname !== undefined && eventsname !== "") {			
 			try {
-				if (sitename !== undefined) {
+				if (sitename !== undefined && sitename !== "") {
 					switch (eventsname) {
 						case '1':
 							eventsname = 'Rhyme Time';
