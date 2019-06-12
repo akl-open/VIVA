@@ -15,23 +15,22 @@
 				"help",
 				"help me",
 				"can you help me",
-				"what can i do",
-				"what can you do"
+				"what can i do"
 			]
 		}, {
-			"name": "eventsAtLibraryIntent",
-			"phrases": [
-				"what events are at {sitename}",
-				"events at {sitename}",
-				"whats happening at {sitename}",
-				"What do you have at {sitename}"
-			],
+			"name": "eventsAtLibraryIntent",	
+			"phrases": [	
+				"what events are at {sitename}",	
+				"events at {sitename}",	
+				"whats happening at {sitename}",	
+				"What do you have at {sitename}"	
+			],	
 
-			"inputs": [{
-				"name": "sitename",
-				"type": "siteType"
-			}
-		]
+ 			"inputs": [{	
+				"name": "sitename",	
+				"type": "siteType"	
+			}	
+		]	
 		},{
 			"name": "infoAccountDetailsIntent",
 			"phrases": [
@@ -100,36 +99,36 @@
 				"I have an old library card how do I get a new one"
 			]
 		}, {
-			"name": "infoEventDescriptionIntent",
-			"phrases": [
-				"What is {eventName}",
-				"What happends at {eventName}",
-				"describe {eventName}",
-				"tell me about {eventName}"
-			],
-			"inputs": [{
-				"name": "eventName",
-				"type": "eventType"
-				}
-			]
-		}, {
-			"name": "infoKidsEvents",
-			"phrases": [
-				"What events are avaliable at the library",
-				"What events are avaliable for kids under five",
-				"What events are avaliable for children under five",
-				"Childrens events at the library",
-				"what is there to do at the library for children"				
-			]
-		},{
-			"name": "infoKidsEventBooking",
-			"phrases": [
-				"do I need to make a booking",
-				"how much does it cost",
-				"How much do the events cost",
-				"do I need to book in advance",
-				"how much in advance do I need to book"
-			]
+			"name": "infoEventDescriptionIntent",	
+			"phrases": [	
+				"What is {eventName}",	
+				"What happends at {eventName}",	
+				"describe {eventName}",	
+				"tell me about {eventName}"	
+			],	
+			"inputs": [{	
+				"name": "eventName",	
+				"type": "eventType"	
+				}	
+			]	
+		}, {	
+			"name": "infoKidsEvents",	
+			"phrases": [	
+				"What events are avaliable at the library",	
+				"What events are avaliable for kids under five",	
+				"What events are avaliable for children under five",	
+				"Childrens events at the library",	
+				"what is there to do at the library for children"				      	
+			]	
+		},{	
+			"name": "infoKidsEventBooking",	
+			"phrases": [	
+				"do I need to make a booking",	
+				"how much does it cost",	
+				"How much do the events cost",	
+				"do I need to book in advance",	
+				"how much in advance do I need to book"	
+			]	
 		},{
 			"name": "infoFreeWiFi",
 			"phrases": [
@@ -263,19 +262,7 @@
 				"Can I update my library account on line",
 				"What do I need to do to update my library account details"
 			]
-		},{
-			"name": "libraryIntent",
-			"phrases": [
-				"My library is {sitename}",
-				"{sitename} library",
-				"i live near {sitename}"
-			],
-			"inputs": [{
-					"name": "sitename",                                                                                                                                                                                                                                                                                                                                                                                                                           
-					"type": "siteType"
-				}
-			]
-		},{
+		}, {
 			"name": "infoWhenOpenNoSite",
 			"phrases": [
 				"when is the library open",
@@ -299,8 +286,7 @@
 				"How do I get my child a library card",
 				"How do i become a member",
 				"join the library",
-				"how to become a member",
-				"How do I join the library"
+				"how to become a member"
 			]
 		}, {
 			"name": "siteOpensIntent",
@@ -330,14 +316,17 @@
 		}, {
 			"name": "suburbIntent",
 			"phrases": [
-				"i live in {sitename}",
-				"{sitename}",
-				"my suburb is {sitename}",
-				"i live near {sitename}"
+				"i live in {suburbName}",
+				"{suburbName}",
+				"my suburb is {suburbName}",
+				"i live near {suburbName}"
 			],
 			"inputs": [{
-					"name": "sitename",
-					"type": "siteType"
+					"name": "suburbName",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
 				}
 			]
 		}, {
@@ -361,40 +350,6 @@
 						"alexa": "AMAZON.DATE",
 						"dialogflow": "@sys.date"
 					}
-				}
-			]
-		}, {
-			"name": "eventNoSiteNowPrompt",
-			"phrases": [
-				"is there a {eventname} on",
-				"when is {eventname}",
-				"what time is the next {eventname}",
-				"I want to go to {eventname}",
-				"when is {eventname}"
-			],
-			"inputs": [{
-					"name": "eventname",
-					"type": "eventType"
-				}
-			]
-		}, {
-			"name": "eventBySiteNowIntent",
-			"phrases": [
-				"is there a {eventname} on at {sitename}",
-				"when is {eventname} at {sitename}",
-				"what time is the next {eventname}",
-				"does {sitename} have {eventname}",
-				"at {sitename} when is {eventname}",
-				"can I go to {eventname} at {sitename}",
-				"{sitename} {eventname}",
-				"{eventname} {sitename}"
-			],
-			"inputs": [{
-					"name": "eventname",
-					"type": "eventType"
-				}, {
-					"name": "sitename",
-					"type": "siteType"
 				}
 			]
 		}, {

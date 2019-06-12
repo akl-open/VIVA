@@ -88,7 +88,7 @@ app.setHandler({
 				this.ask(this.t('info.eventWriggleAndRhyme'), this.t('anythingelse.speech'));
 				break;
 			default:
-			 	this.ask("Sorry I cant help with that event yet, is there anythin else I can help you with")
+			 	this.ask("Sorry I cant help with that event yet, is there anything else I can help you with")
 		}	
 
 	},
@@ -238,9 +238,9 @@ app.setHandler({
 
 			 try{
 					var libraryList = this.$cms.suburbSearch;
-					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
+					var library = getNearestLibrary( libraryList, this.$inputs.suburbName.key);
 					
-					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
+					console.log("suburb intent: "+ library + " input: "+ this.$inputs.suburbName.key);
 					
 					if(library != ""){
 					
@@ -259,78 +259,60 @@ app.setHandler({
 
 		},
 	},
-/*
-	eventNoSiteNowPrompt() {
-	// user has asked when an event is on but hasn't provided a library
-	// ask them to give a library
-		console.log('eventLibraryPrompt says hello');
-		let speech = 'Can you ask again with the library you would like to go to';
-		this.ask(this.t(speech), this.t('anythingelse.speech'));
-	},
-	
-	
-	eventBySiteNowIntent() {
-	// user is asking about a specific event at a specific library but hasn't stated a time
-	// we assume that they mean now or tomorrow
-	// @param this.$inputs.sitename.key the site id requested
-	// @param this.$inputs.event.key the event requested
-
-
-		console.log('eventNowIntent says hello');
-		let speech = 'I am looking that up, might take a while';
-		
-		try {
-			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
-			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
-			console.log('siteOpensIntent site requested: ' + this.$inputs.sitename.key + '----------------------');
-			console.log('siteOpensIntent site found in googledoc: ', siteobj);
-
-			var dayRequest = new Date();
-			
-			console.log('from sites open ', speech);
-			speech = openHoursHelper(dayRequest, siteobj);
-		}
-		catch (e) {
-			console.log ('siteOpenIntent', e);
-			speech = 'Well, looks like I could not find that library, can you try again please?';
-		}
-		
-		this.ask(this.t(speech), this.t('anythingelse.speech'));
-	}
-*/	
 
 	eventBySiteAtTimeIntent() {
-	// user has asked for a specific event at a specific library and has stated a time
+	// user has asked for a specific event at a specific library at a time
 	//	console.log('eventBySiteAtTimeIntent says hello \ninputs: ', this.$inputs, ' \ndata: ', this.$data, '-----------');
 		
+
+		var dayRequest = this.$inputs.whenDate.key;
+		var sitename = this.$inputs.sitename.key;
+		var eventsname = this.$inputs.eventname.key;
+		var eventsobj;
 		
-		try {
-			var dayRequest = parseISOString(this.$inputs.whenDate.key);
-			var eventsname;
-			var eventsobj;
-			
-			switch (this.$inputs.eventname.key) {
-				case '1':
-					eventsname = 'Wriggle and Rhyme';
-					eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === this.$inputs.sitename.key);
-					break;
-				case '2':
-					eventsname = 'Rhyme Time';
-					eventsobj = this.$cms.rhymeTime.find(o => o.id === this.$inputs.sitename.key);
-					break;
-				case '3':
-					eventsname = 'Story Time';
-					eventsobj = this.$cms.storyTime.find(o => o.id === this.$inputs.sitename.key);
-					break;				
+		// no date requested, assume today
+		if (dayRequest !== undefined && dayRequest !== '') {
+			dayRequest = parseISOString(dayRequest);
+		}
+		else {
+			dayRequest = new Date();
+			}
+		
+		if (eventsname !== undefined) {			
+			try {
+				if (sitename !== undefined) {
+					switch (eventsname) {
+						case '1':
+							eventsname = 'Rhyme Time';
+							eventsobj = this.$cms.rhymeTime.find(o => o.id === sitename);
+							break;
+						case '2':
+							eventsname = 'Story Time';
+							eventsobj = this.$cms.storyTime.find(o => o.id === sitename);
+							break;
+						case '3':
+							eventsname = 'Wriggle and Rhyme';
+							eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === sitename);
+							break;
+					}
+					
+					let speech = openHoursHelper(dayRequest, eventsobj, eventsname);
+					this.ask(this.t(speech), this.t('anythingelse.speech'));
+				}
+				
+				// no site requested, ask for a site
+				else
+					this.toIntent('infoWhenOpenNoSite');
+			}
+			catch (e) {
+				console.log('eventBySiteAtTimeIntent went wrong\n', e, '--------------------------------');
 			}
 		}
-		catch (e) {
-			console.log('eventBySiteAtTimeIntent went wrong\n', e, '--------------------------------');
+		// no event requested, ask to specify
+		else {
+			console.log('eventBySiteAtTimeIntent no event requested ----------------');
+			this.ask(this.t('I do need to know the event name to look up the times'), this.t('anythingelse.speech'));
 		}
-
-		console.log('to helper: \n date ', dayRequest, '\n eventsname ', eventsname, '\n eventsobj ', eventsobj);
-		let speech = openHoursHelper(dayRequest, eventsobj, eventsname);
-		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
 // default intents start here
@@ -397,7 +379,7 @@ console.log('parseISOString from to ', s, b);
 */
 function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
-	var returnSpeech = 'openHoursHelper speech not assigned';
+	var returnSpeech = '';
 
 	console.log('openHoursHelper ', dayRequest, siteobj, eventInfo);
 	
@@ -534,7 +516,7 @@ function getNearestLibrary(obj, input) {
   var result = "";
 	for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-			if(key == input){
+			if(key.toLowerCase() == input.toLowerCase()){
 				result = obj[key];
 			}				
     }
