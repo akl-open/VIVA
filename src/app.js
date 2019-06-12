@@ -234,9 +234,9 @@ app.setHandler({
 
 			 try{
 					var libraryList = this.$cms.suburbSearch;
-					var library = getNearestLibrary( libraryList, this.$inputs.sitename.key);
+					var library = getNearestLibrary( libraryList, this.$inputs.suburbName.key);
 					
-					console.log("suburb intent: "+ library + " input: "+ this.$inputs.sitename.key);
+					console.log("suburb intent: "+ library + " input: "+ this.$inputs.suburbName.key);
 					
 					if(library != ""){
 					

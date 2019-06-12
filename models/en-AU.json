@@ -316,14 +316,17 @@
 		}, {
 			"name": "suburbIntent",
 			"phrases": [
-				"i live in {sitename}",
-				"{sitename}",
-				"my suburb is {sitename}",
-				"i live near {sitename}"
+				"i live in {suburbName}",
+				"{suburbName}",
+				"my suburb is {suburbName}",
+				"i live near {suburbName}"
 			],
 			"inputs": [{
-					"name": "sitename",
-					"type": "siteType"
+					"name": "suburbName",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
 				}
 			]
 		}, {
