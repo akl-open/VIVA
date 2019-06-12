@@ -35,7 +35,7 @@ app.setHandler({
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
 		console.log("###########################: "+input);
-		if(input != undefined){
+		if(input != undefined && input != ""){
 			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
 			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
 			var sTimeObj = this.$cms.storyTime.find(o => o.id == input);
@@ -179,8 +179,12 @@ app.setHandler({
 	},
 
 	bookAvaliabilityIntent(){
+		var keys;
 		var tel = connectToSierra();
-        console.log("test 2 : "+ tel);
+		tel.then(function(value) {
+			console.log("test 2 : "+value);
+			keys = value;
+		})
         this.ask("done");
 		
 	},
@@ -274,9 +278,9 @@ app.setHandler({
 			dayRequest = new Date();
 			}
 		
-		if (eventsname !== undefined) {			
+		if (eventsname !== undefined && eventsname !== "") {			
 			try {
-				if (sitename !== undefined) {
+				if (sitename !== undefined && sitename !== "") {
 					switch (eventsname) {
 						case '1':
 							eventsname = 'Rhyme Time';
@@ -590,7 +594,7 @@ function getNearestLibrary(obj, input) {
 
 		const data = await requestPromise(options);
 		const token = data.access_token;
-		console.log(data);
+
 		return token;
 	}
 
