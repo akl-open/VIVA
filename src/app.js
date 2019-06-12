@@ -74,8 +74,8 @@ app.setHandler({
 
 	infoEventDescriptionIntent()
 	{
-		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.value);
-		var input = this.$inputs.eventName.value;
+		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.key);
+		var input = this.$inputs.eventName.key;
 	
 		switch (input) {
 			case "1":
