@@ -1,7 +1,7 @@
 {
 	"invocation": "auckland test",
 	"intents": [{
-		"name": "bookAvaliabilityIntent",
+		"name": "bookAvalibilityIntent",
 		"phrases": [
 			"do you have {bookTitle}",
 			"is {bookTitle} avaliable",

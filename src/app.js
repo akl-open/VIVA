@@ -11,6 +11,7 @@ const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
 const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
 const requestPromise = require('request-promise-native');
+const APIKey = "Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA="
 var token;
 
 const app = new App();
@@ -35,7 +36,7 @@ app.setHandler({
 		
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
-		console.log("###########################: "+input);
+		console.log("eventsAtLibraryIntent:" +input);
 		if(input != undefined && input != ""){
 			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
 			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
@@ -50,14 +51,16 @@ app.setHandler({
 	},
 
 	async greetingIntent() {
+		//authenticate with Sierrra and get a promise of a token
 		var code = connectToSierra();
 
+		//get the token fromt he promise and assign it to the token variable
 		code.then(function(value) {		
 			token = value;
 				console.log("greetingIntent tokenkey" + token);
 			});
 
-
+			//Welcome speach
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
@@ -187,22 +190,14 @@ app.setHandler({
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
-	bookAvaliabilityIntent(){
-		//var keys;
+	async bookAvalibilityIntent(){
 		var input = this.$inputs.bookTitle.value;
-		var output;
-		//var sierraCode = connectToSierra();
+		var output;		
+		
+		//console.log("bookAvaliabilityIntent tokenkey " + token);
+		output = await getitemsByTitle(token, input);
 
-		// sierraCode.then(function(value) {		
-		// 	keys = value;
-		// 	console.log("bookAvaliabilityIntent tokenkey 1 " + keys);
-		// 	//var items = getitemsByTitle()
-		// });
-		//keys =  await sierraCode.then(result => result.data); //access_token	
-		
-		console.log("bookAvaliabilityIntent tokenkey " + token);
-		
-		this.ask("done");
+		this.ask("done" + this.t('info.requestItem'));
 		
 	},
 
@@ -601,7 +596,7 @@ function getNearestLibrary(obj, input) {
 				method:'POST',
 				uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
 				headers: {
-						'Authorization': 'Basic Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA='
+						'Authorization': 'Basic '+APIKey
 				},
 				body:{
 						'grant_type':'client_credentials'
@@ -616,9 +611,36 @@ function getNearestLibrary(obj, input) {
 		return token;
 	}
 
-	async function getitemsByTitle(){
+	async function getitemsByTitle(token, input){
+		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&index=Title&text="+input);
+		console.log("getitemsByTitle" + url);
+
+		const options = {
+			method:'GET',
+			uri: url,
+			headers: {
+					'Authorization': 'Bearer '+token,
+					'Content-Type':'application/json;charset=UTF-8'
+			},
+			json: true // Automatically parses the JSON string in the response,
+		};
+
+		const promData = await requestPromise(options);
+		let data = promData; 
+
+		//console.log("getitemsByTitle" + JSON.stringify(data));
+
+		let result = cleanSearchResponse(data);
 
 	}
+	//parse and format response from sierrra
+	function cleanSearchResponse(data){
+		console.log("cleanSearchResponse" + JSON.stringify(data));
 
+		const parsed = JSON.parse(data);
+		let test = parsed.entries;
+		console.log("_____________________________ "+test);		
+
+	}
 
 module.exports.app = app;
