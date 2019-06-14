@@ -11,6 +11,7 @@ const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
 const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
 const requestPromise = require('request-promise-native');
+var token;
 
 const app = new App();
 
@@ -48,7 +49,15 @@ app.setHandler({
 		}
 	},
 
-	greetingIntent() {
+	async greetingIntent() {
+		var code = connectToSierra();
+
+		code.then(function(value) {		
+			token = value;
+				console.log("greetingIntent tokenkey" + token);
+			});
+
+
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
@@ -179,13 +188,21 @@ app.setHandler({
 	},
 
 	bookAvaliabilityIntent(){
-		var keys;
-		var tel = connectToSierra();
-		tel.then(function(value) {
-			console.log("test 2 : "+value);
-			keys = value;
-		})
-        this.ask("done");
+		//var keys;
+		var input = this.$inputs.bookTitle.value;
+		var output;
+		//var sierraCode = connectToSierra();
+
+		// sierraCode.then(function(value) {		
+		// 	keys = value;
+		// 	console.log("bookAvaliabilityIntent tokenkey 1 " + keys);
+		// 	//var items = getitemsByTitle()
+		// });
+		//keys =  await sierraCode.then(result => result.data); //access_token	
+		
+		console.log("bookAvaliabilityIntent tokenkey " + token);
+		
+		this.ask("done");
 		
 	},
 
@@ -593,9 +610,14 @@ function getNearestLibrary(obj, input) {
 		};
 
 		const data = await requestPromise(options);
+		 
 		const token = data.access_token;
 
 		return token;
+	}
+
+	async function getitemsByTitle(){
+
 	}
 
 
