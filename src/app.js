@@ -31,7 +31,7 @@ app.setHandler({
     LAUNCH() {
         return this.toIntent('greetingIntent');
 		},
-		
+
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
 		console.log("###########################: "+input);
@@ -188,7 +188,18 @@ app.setHandler({
         this.ask("done");
 		
 	},
-
+	
+	bookPurchaseIntent() {
+	// customer is suggesting the library to buy a book
+		console.log('bookPurchaseIntent was called '  + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+		this.ask(this.t('info.suggestPurchase'), this.t('anythingelse.speech'));
+	},
+	
+	bookRequestIntent() {
+	// customer has requested a specific title
+		console.log('bookRequestIntent I was called!!! Happy days! ' + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+		this.ask(this.t('info.requestItem'), this.t('anythingelse.speech'));
+	},
 
 	/*
 	if sitename.key missing "is the library open" <implies now>
@@ -315,6 +326,7 @@ app.setHandler({
 		}
 	},
 
+	
 // default intents start here
 	cancelIntent() {
 		console.log('cancelIntent invoked');

@@ -1,10 +1,45 @@
 {
 	"invocation": "auckland test",
 	"intents": [{
+		"name": "defaultHelpIntent",
+		"alexa": {
+			"name": "AMAZON.HelpIntent"
+		},
+		"phrases": [
+			"help",
+			"help me",
+			"can you help me",
+			"what can i do"
+		]
+		}, {
 		"name": "bookAvaliabilityIntent",
 		"phrases": [
-			"do you have {bookTitle}",
-			"is {bookTitle} avaliable"			
+			"do you have {bookTitle} by {authorName}",
+			"is {bookTitle} available",
+			"I want to borrow {bookTitle}",
+			"{bookTitle}",
+			"does the library have {bookTitle}",
+			"has the library purchased {bookTitle}",
+			"does {bookTitle} exist"
+			],
+			"inputs": [{
+					"name": "bookTitle",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+				}	
+			]
+		},{
+		"name": "bookPurchaseIntent",
+		"phrases": [
+			"The library should buy {bookTitle}",
+			"why doesnt the library have {bookTitle}",
+			"request to purchase {bookTitle}",
+			"suggestion to purchase {bookTitle}",
+			"can the library buy {bookTitle}",
+			"purchase {bookTitle}",
+			"the library should buy {bookTitle} for me"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -15,17 +50,25 @@
 				}
 			]
 		},{
-			"name": "defaultHelpIntent",
-			"alexa": {
-				"name": "AMAZON.HelpIntent"
-			},
-			"phrases": [
-				"help",
-				"help me",
-				"can you help me",
-				"what can i do"
+		"name": "bookRequestIntent",
+		"phrases": [
+			"request {bookTitle}",
+			"reserve for {bookTitle}",
+			"put {bookTitle} on hold for me",
+			"hold {bookTitle} for me",
+			"place a hold on {bookTitle}",
+			"can I request {bookTitle}",
+			"can you keep {bookTitle} for me"
+			],
+			"inputs": [{
+					"name": "bookTitle",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+				}
 			]
-		}, {
+		},{
 			"name": "eventsAtLibraryIntent",	
 			"phrases": [	
 				"what events are at {sitename}",	
@@ -37,7 +80,7 @@
  			"inputs": [{	
 				"name": "sitename",	
 				"type": "siteType"	
-			}	
+			}
 		]	
 		},{
 			"name": "infoAccountDetailsIntent",
@@ -297,6 +340,7 @@
 				"how to become a member"
 			]
 		}, {
+
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
@@ -327,7 +371,10 @@
 				"i live in {suburbName}",
 				"{suburbName}",
 				"my suburb is {suburbName}",
-				"i live near {suburbName}"
+				"i live near {suburbName}",
+				"I am in {suburbName}",
+				"Im at {suburbName}",
+				"close to {suburbName}"
 			],
 			"inputs": [{
 					"name": "suburbName",
