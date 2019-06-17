@@ -189,6 +189,289 @@ app.setHandler({
 		
 	},
 	
+	bookListingIntent() {
+	// punter has asked to hear a list of titles. Step through list 3 at a time
+	// until one is picked, list ends or user cancels
+	
+		var speech = "Listing titles";
+		this.$session.$data.loopCounter = 0;
+		this.$session.$data.listofbooks = [
+    {
+        "id": "1009149",
+        "title": "The dark side of the sun",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "2268615",
+        "title": "Bill Pratney : never say die",
+        "author": "Robinson, Jim, 1967- author."
+      }
+,{
+        "id": "2591196",
+        "title": "I shall wear midnight [large print]",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "2696748",
+        "title": "A blink of the screen : collected shorter fiction",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "2702609",
+        "title": "Snuff [large print]",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "2797998",
+        "title": "Dodger's guide to London",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "2616860",
+        "title": "A hat full of sky [large print]",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "2775499"
+      }
+,{
+        "id": "2945296"
+      }
+,{
+        "id": "2994583",
+        "title": "Good omens [compact disc]",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "3058661",
+        "title": "Made in reality",
+        "author": "Pratt, Stephanie, 1986- author."
+      }
+,{
+        "id": "3059126",
+        "title": "The long Utopia [compact disc]",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "3272080"
+      }
+,{
+        "id": "3375661",
+        "title": "Prāthamika śāḷāmāṃ mātr̥vandanā evam dhvajavandanā",
+        "author": ""
+      }
+,{
+        "id": "1002786",
+        "title": "Mort",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1002954",
+        "title": "Wyrd sisters",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1003030",
+        "title": "Pyramids : the book of going forth",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1003046",
+        "title": "Sourcery",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1003535",
+        "title": "Good omens : the nice and accurate prophecies of Agnes Nutter, a witch : a novel",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1003612",
+        "title": "Wings",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1003655",
+        "title": "Moving pictures",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1004756",
+        "title": "Small gods",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1004955",
+        "title": "The carpet people",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1005138",
+        "title": "Only you can save mankind",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1005299",
+        "title": "Lords and ladies",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1005768",
+        "title": "Johnny and the dead",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1006242",
+        "title": "Men at arms",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1012003",
+        "title": "Equal rites",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1012361",
+        "title": "Hogfather",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1015525",
+        "title": "The last continent",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1017179",
+        "title": "Carpe jugulum",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1019513",
+        "title": "The fifth elephant",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1021880",
+        "title": "The truth",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1023825",
+        "title": "Thief of time",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1024769",
+        "title": "The colour of magic",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1025512",
+        "title": "The amazing Maurice and his educated rodents",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1026127",
+        "title": "The last hero : a Discworld fable",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1029247",
+        "title": "Night Watch",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1030241",
+        "title": "Monstrous regiment",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1035786",
+        "title": "A hat full of sky : a story of Discworld",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1037295",
+        "title": "Going postal",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1064586",
+        "title": "Truckers",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1080236",
+        "title": "Johnny and the bomb",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1091494",
+        "title": "The first Discworld novels : The colour of magic & The light fantastic.",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1110011",
+        "title": "The wee free men",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1168988",
+        "title": "Guards! guards!",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1179922",
+        "title": "The light fantastic",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1181273",
+        "title": "Witches abroad",
+        "author": "Pratchett, Terry, author."
+      }
+,{
+        "id": "1196273",
+        "title": "The Bromeliad trilogy",
+        "author": "Pratchett, Terry."
+      }
+,{
+        "id": "1220660",
+        "title": "Punishment in a perfect society : the New Zealand penal system, 1840-1939",
+        "author": "Pratt, John, 1949-"
+      }
+	  ];
+	  
+console.log('bookListingIntent ' + JSON.stringify(this.$session.$data.listofbooks) + ' -------------------');
+		this.followUpState('listingState')
+			.ask(speech, this.t('anythingelse.speech'));
+	},
+
+	listingState: {
+
+		iHaveTitlesIntent() {
+//console.log('iHaveTitlesIntent ' + JSON.stringify(this.$session.$data.listofbooks) + ' -------------------');
+console.log('iHaveTitlesIntent loopcounter ' + this.$session.$data.loopCounter + ' -------------------');
+
+			var speech = '';
+			var key = this.$session.$data.loopCounter;
+
+			console.log(key + ' -> ' + JSON.stringify(this.$session.$data.listofbooks[key]) + '------------------------');
+			this.ask(this.t('hello is the one you want ' + this.$session.$data.listofbooks[key].title), this.t('anythingelse.speech'));			
+			this.$session.$data.loopCounter = parseInt(key) + 1;
+		},
+		
+		yesIntent() {
+			// do thing
+		},
+		
+		noIntent() {
+			// do the no thing
+		},
+	},
+
+	
+	
 	bookPurchaseIntent() {
 	// customer is suggesting the library to buy a book
 		console.log('bookPurchaseIntent was called '  + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');

@@ -31,6 +31,16 @@
 				}	
 			]
 		},{
+		"name": "bookListingIntent",
+		"phrases": [
+			"I am a bookListingIntent test"
+			]
+		},{		
+		"name": "iHaveTitlesIntent",
+		"phrases": [
+			"I am a iHaveTitlesIntent test"
+			]
+		},{
 		"name": "bookPurchaseIntent",
 		"phrases": [
 			"The library should buy {bookTitle}",
