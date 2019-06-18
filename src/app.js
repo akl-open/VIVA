@@ -197,6 +197,8 @@ app.setHandler({
 		//console.log("bookAvaliabilityIntent tokenkey " + token);
 		output = await getitemsByTitle(token, input);
 
+		this.$session.$data.listofbooks = output;
+
 		this.ask("done" + this.t('info.requestItem'));
 		
 	},
