@@ -729,7 +729,8 @@ function getNearestLibrary(obj, input) {
 	}
 
 	async function getitemsByTitle(token, input){
-		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&index=Title&text="+input);
+//		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&index=Title&text="+input);
+		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&text="+input);
 		console.log("getitemsByTitle" + url);
 
 		const options = {
@@ -760,8 +761,8 @@ function getNearestLibrary(obj, input) {
 		let cleanList = [];
 
 		for(i=0; i < rawList.length; i++){
-			//Exclude items with a relevance of less than 1.7
-			if(parseFloat(rawList[i].relevance) < 1.7){console.log("*** Relevance "+rawList[i].relevance); continue;}
+			//Exclude items with a relevance of less than 1.0
+			if(parseFloat(rawList[i].relevance) < 1.0){console.log("*** Relevance "+rawList[i].relevance); continue;}
 			//Exclude items that are suppressed
 			if(rawList[i].bib.suppressed == true) {console.log("*** Supressed "+rawList[i].bib.suppressed); continue;}
 			//Exclude items that are deleted

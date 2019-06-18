@@ -21,7 +21,12 @@
 			"I want to borrow {bookTitle}",
 			"does the library have {bookTitle}",
 			"has the library purchased {bookTitle}",
-			"does {bookTitle} exist"
+			"does {bookTitle} exist",
+			"get me the book {bookTitle}",
+			"get {bookTitle}",
+			"Im looking for the book called {bookTitle}",
+			"find the book {bookTitle}",
+			"find me the book called {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -497,7 +502,11 @@
 						"sure",
 						"pick that",
 						"that one",
-						"ok"
+						"ok",
+						"select",
+						"yes I want that one",
+						"choose that",
+						"select this book"
 					]
 				}, {
 					"value": "no",
@@ -505,7 +514,8 @@
 						"no",
 						"nope",
 						"not that one",
-						"next"
+						"next",
+						"continue"
 					]
 				}, {
 					"value": "cancel",
