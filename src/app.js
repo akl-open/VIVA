@@ -632,15 +632,38 @@ function getNearestLibrary(obj, input) {
 
 		let result = cleanSearchResponse(data);
 
+		return result;
+
 	}
 	//parse and format response from sierrra
 	function cleanSearchResponse(data){
-		console.log("cleanSearchResponse" + JSON.stringify(data));
 
-		const parsed = JSON.parse(data);
-		let test = parsed.entries;
-		console.log("_____________________________ "+test);		
+		let rawList = data.entries;
+		
+		let cleanList = [];
 
+		for(i=0; i < rawList.length; i++){
+			//Exclude items with a relevance of less than 1.7
+			if(parseFloat(rawList[i].relevance) < 1.7){console.log("*** Relevance "+rawList[i].relevance); continue;}
+			//Exclude items that are suppressed
+			if(rawList[i].bib.suppressed == true) {console.log("*** Supressed "+rawList[i].bib.suppressed); continue;}
+			//Exclude items that are deleted
+			if(rawList[i].bib.deleted == true) {console.log("*** Deleted "+rawList[i].bib.deleted); continue;}
+			//Exclude items that are not books
+			if(rawList[i].bib.materialType.code != "a  ") {console.log("*** material code "+rawList[i].bib.materialType.code); continue;}
+			//Exclude items that are not in english
+			if(rawList[i].bib.lang.code != "eng") {console.log("***5 "+rawList[i].bib.lang.code); continue;}
+
+			let title = rawList[i].bib.title.toString().replace(/:/g,"-");
+			let returnItem = {id:rawList[i].bib.id, title:title, author:rawList[i].bib.author};
+
+			cleanList.push(returnItem);
+
+		}
+		
+		console.log("cleanSearchResponse "+JSON.stringify(cleanList));
+
+		return cleanList;
 	}
 
 module.exports.app = app;
