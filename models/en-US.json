@@ -19,7 +19,6 @@
 			"do you have {bookTitle}",
 			"is {bookTitle} available",
 			"I want to borrow {bookTitle}",
-			"{bookTitle}",
 			"does the library have {bookTitle}",
 			"has the library purchased {bookTitle}",
 			"does {bookTitle} exist"
@@ -392,7 +391,6 @@
 			"name": "suburbIntent",
 			"phrases": [
 				"i live in {suburbName}",
-				"{suburbName}",
 				"my suburb is {suburbName}",
 				"i live near {suburbName}",
 				"I am in {suburbName}",
