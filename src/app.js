@@ -11,6 +11,8 @@ const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
 const { GoogleSheetsCMS } = require('jovo-cms-googlesheets');
 const requestPromise = require('request-promise-native');
+const APIKey = "Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA="
+var token;
 
 const app = new App();
 
@@ -34,7 +36,7 @@ app.setHandler({
 		
 	eventsAtLibraryIntent(){
 		var input = this.$inputs.sitename.key;
-		console.log("###########################: "+input);
+		console.log("eventsAtLibraryIntent:" +input);
 		if(input != undefined && input != ""){
 			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
 			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
@@ -48,7 +50,17 @@ app.setHandler({
 		}
 	},
 
-	greetingIntent() {
+	async greetingIntent() {
+		//authenticate with Sierrra and get a promise of a token
+		var code = connectToSierra();
+
+		//get the token fromt he promise and assign it to the token variable
+		code.then(function(value) {		
+			token = value;
+				console.log("greetingIntent tokenkey" + token);
+			});
+
+			//Welcome speach
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
@@ -74,8 +86,8 @@ app.setHandler({
 
 	infoEventDescriptionIntent()
 	{
-		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.value);
-		var input = this.$inputs.eventName.value;
+		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.key);
+		var input = this.$inputs.eventName.key;
 	
 		switch (input) {
 			case "1":
@@ -178,14 +190,16 @@ app.setHandler({
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
-	bookAvaliabilityIntent(){
-		var keys;
-		var tel = connectToSierra();
-		tel.then(function(value) {
-			console.log("test 2 : "+value);
-			keys = value;
-		})
-        this.ask("done");
+	async bookAvalibilityIntent(){
+		var input = this.$inputs.bookTitle.value;
+		var output;		
+		
+		//console.log("bookAvaliabilityIntent tokenkey " + token);
+		output = await getitemsByTitle(token, input);
+
+		this.$session.$data.listofbooks = output;
+
+		this.ask("done" + this.t('info.requestItem'));
 		
 	},
 
@@ -584,7 +598,7 @@ function getNearestLibrary(obj, input) {
 				method:'POST',
 				uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
 				headers: {
-						'Authorization': 'Basic Lzg1TDZodGF2QVBmbXRPU3o5MnFCK21ySWpoVTprTzM3ME8xUjVoQUs2ZlA='
+						'Authorization': 'Basic '+APIKey
 				},
 				body:{
 						'grant_type':'client_credentials'
@@ -593,10 +607,65 @@ function getNearestLibrary(obj, input) {
 		};
 
 		const data = await requestPromise(options);
+		 
 		const token = data.access_token;
 
 		return token;
 	}
 
+	async function getitemsByTitle(token, input){
+		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&index=Title&text="+input);
+		console.log("getitemsByTitle" + url);
+
+		const options = {
+			method:'GET',
+			uri: url,
+			headers: {
+					'Authorization': 'Bearer '+token,
+					'Content-Type':'application/json;charset=UTF-8'
+			},
+			json: true // Automatically parses the JSON string in the response,
+		};
+
+		const promData = await requestPromise(options);
+		let data = promData; 
+
+		//console.log("getitemsByTitle" + JSON.stringify(data));
+
+		let result = cleanSearchResponse(data);
+
+		return result;
+
+	}
+	//parse and format response from sierrra
+	function cleanSearchResponse(data){
+
+		let rawList = data.entries;
+		
+		let cleanList = [];
+
+		for(i=0; i < rawList.length; i++){
+			//Exclude items with a relevance of less than 1.7
+			if(parseFloat(rawList[i].relevance) < 1.7){console.log("*** Relevance "+rawList[i].relevance); continue;}
+			//Exclude items that are suppressed
+			if(rawList[i].bib.suppressed == true) {console.log("*** Supressed "+rawList[i].bib.suppressed); continue;}
+			//Exclude items that are deleted
+			if(rawList[i].bib.deleted == true) {console.log("*** Deleted "+rawList[i].bib.deleted); continue;}
+			//Exclude items that are not books
+			if(rawList[i].bib.materialType.code != "a  ") {console.log("*** material code "+rawList[i].bib.materialType.code); continue;}
+			//Exclude items that are not in english
+			if(rawList[i].bib.lang.code != "eng") {console.log("***5 "+rawList[i].bib.lang.code); continue;}
+
+			let title = rawList[i].bib.title.toString().replace(/:/g,"-");
+			let returnItem = {id:rawList[i].bib.id, title:title, author:rawList[i].bib.author};
+
+			cleanList.push(returnItem);
+
+		}
+		
+		console.log("cleanSearchResponse "+JSON.stringify(cleanList));
+
+		return cleanList;
+	}
 
 module.exports.app = app;

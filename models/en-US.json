@@ -1,10 +1,13 @@
 {
 	"invocation": "auckland test",
 	"intents": [{
-		"name": "bookAvaliabilityIntent",
+		"name": "bookAvalibilityIntent",
 		"phrases": [
 			"do you have {bookTitle}",
-			"is {bookTitle} avaliable"			
+			"is {bookTitle} avaliable",
+			"look up {bookTitle}",
+			"Have you got {bookTitle}",
+			"is {bookTitle} at the library"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -23,7 +26,8 @@
 				"help",
 				"help me",
 				"can you help me",
-				"what can i do"
+				"what can i do",
+				"what can you do"
 			]
 		}, {
 			"name": "eventsAtLibraryIntent",	
