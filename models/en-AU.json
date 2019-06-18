@@ -9,7 +9,9 @@
 			"help",
 			"help me",
 			"can you help me",
-			"what can i do"
+			"what can i do",
+			"what can you do",
+			"options"
 		]
 		}, {
 		"name": "bookAvaliabilityIntent",
@@ -28,17 +30,27 @@
 						"alexa": "AMAZON.SearchQuery",
 						"dialogflow": "@sys.any"
 					}
-				}	
+				}
 			]
 		},{
 		"name": "bookListingIntent",
 		"phrases": [
 			"I am a bookListingIntent test"
 			]
-		},{		
-		"name": "iHaveTitlesIntent",
+		},{
+		"name": "listingTitlesIntent",
 		"phrases": [
-			"I am a iHaveTitlesIntent test"
+			"I am a listingTitlesIntent test"
+			]
+		},{
+		"name": "confirmIntent",
+		"phrases": [
+			"{pick}"
+			],
+			"inputs": [{
+					"name": "pick",
+					"type": "confirmType"
+				}
 			]
 		},{
 		"name": "bookPurchaseIntent",
@@ -68,7 +80,8 @@
 			"hold {bookTitle} for me",
 			"place a hold on {bookTitle}",
 			"can I request {bookTitle}",
-			"can you keep {bookTitle} for me"
+			"can you keep {bookTitle} for me",
+			"I would like {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -469,6 +482,40 @@
 					"synonyms": [
 						"Wriggle and rhyme",
 						"Wriggle"
+					]
+				}
+			]
+		}, {
+			"name": "confirmType",
+			"dialogflow": {
+				"automatedExpansion": true
+			},
+			"values": [
+				{
+					"value": "yes",
+					"synonyms": [
+						"yes",
+						"yes please",
+						"sure",
+						"pick that",
+						"that one",
+						"ok"
+					]
+				}, {
+					"value": "no",
+					"synonyms": [
+						"no",
+						"nope",
+						"not that one",
+						"next"
+					]
+				}, {
+					"value": "cancel",
+					"synonyms": [
+						"cancel",
+						"stop",
+						"halt",
+						"end"
 					]
 				}
 			]

@@ -190,10 +190,11 @@ app.setHandler({
 	},
 	
 	bookListingIntent() {
-	// punter has asked to hear a list of titles. Step through list 3 at a time
+	// helper function for testing
 	// until one is picked, list ends or user cancels
 	
 		var speech = "Listing titles";
+			
 		this.$session.$data.loopCounter = 0;
 		this.$session.$data.listofbooks = [
     {
@@ -217,270 +218,86 @@ app.setHandler({
         "author": "Pratchett, Terry."
       }
 ,{
-        "id": "2702609",
-        "title": "Snuff [large print]",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "2797998",
-        "title": "Dodger's guide to London",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "2616860",
-        "title": "A hat full of sky [large print]",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "2775499"
-      }
-,{
-        "id": "2945296"
-      }
-,{
-        "id": "2994583",
-        "title": "Good omens [compact disc]",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "3058661",
-        "title": "Made in reality",
-        "author": "Pratt, Stephanie, 1986- author."
-      }
-,{
-        "id": "3059126",
-        "title": "The long Utopia [compact disc]",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "3272080"
-      }
-,{
-        "id": "3375661",
-        "title": "Prāthamika śāḷāmāṃ mātr̥vandanā evam dhvajavandanā",
-        "author": ""
-      }
-,{
-        "id": "1002786",
-        "title": "Mort",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1002954",
-        "title": "Wyrd sisters",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1003030",
-        "title": "Pyramids : the book of going forth",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1003046",
-        "title": "Sourcery",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1003535",
-        "title": "Good omens : the nice and accurate prophecies of Agnes Nutter, a witch : a novel",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1003612",
-        "title": "Wings",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1003655",
-        "title": "Moving pictures",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1004756",
-        "title": "Small gods",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1004955",
-        "title": "The carpet people",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1005138",
-        "title": "Only you can save mankind",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1005299",
-        "title": "Lords and ladies",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1005768",
-        "title": "Johnny and the dead",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1006242",
-        "title": "Men at arms",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1012003",
-        "title": "Equal rites",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1012361",
-        "title": "Hogfather",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1015525",
-        "title": "The last continent",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1017179",
-        "title": "Carpe jugulum",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1019513",
-        "title": "The fifth elephant",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1021880",
-        "title": "The truth",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1023825",
-        "title": "Thief of time",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1024769",
-        "title": "The colour of magic",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1025512",
-        "title": "The amazing Maurice and his educated rodents",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1026127",
-        "title": "The last hero : a Discworld fable",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1029247",
-        "title": "Night Watch",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1030241",
-        "title": "Monstrous regiment",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1035786",
-        "title": "A hat full of sky : a story of Discworld",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1037295",
-        "title": "Going postal",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1064586",
-        "title": "Truckers",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1080236",
-        "title": "Johnny and the bomb",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1091494",
-        "title": "The first Discworld novels : The colour of magic & The light fantastic.",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1110011",
-        "title": "The wee free men",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1168988",
-        "title": "Guards! guards!",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1179922",
-        "title": "The light fantastic",
-        "author": "Pratchett, Terry."
-      }
-,{
-        "id": "1181273",
-        "title": "Witches abroad",
-        "author": "Pratchett, Terry, author."
-      }
-,{
-        "id": "1196273",
-        "title": "The Bromeliad trilogy",
-        "author": "Pratchett, Terry."
-      }
-,{
         "id": "1220660",
         "title": "Punishment in a perfect society : the New Zealand penal system, 1840-1939",
         "author": "Pratt, John, 1949-"
-      }
-	  ];
+}
+];
 	  
-console.log('bookListingIntent ' + JSON.stringify(this.$session.$data.listofbooks) + ' -------------------');
 		this.followUpState('listingState')
 			.ask(speech, this.t('anythingelse.speech'));
 	},
 
 	listingState: {
 
-		iHaveTitlesIntent() {
-//console.log('iHaveTitlesIntent ' + JSON.stringify(this.$session.$data.listofbooks) + ' -------------------');
-console.log('iHaveTitlesIntent loopcounter ' + this.$session.$data.loopCounter + ' -------------------');
+		listingTitlesIntent() {
+			// output the next title in the list
 
-			var speech = '';
-			var key = this.$session.$data.loopCounter;
+console.log('listingTitlesIntent loopCounter ' + this.$session.$data.loopCounter + '-------------------');
+console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks));
 
-			console.log(key + ' -> ' + JSON.stringify(this.$session.$data.listofbooks[key]) + '------------------------');
-			this.ask(this.t('hello is the one you want ' + this.$session.$data.listofbooks[key].title), this.t('anythingelse.speech'));			
-			this.$session.$data.loopCounter = parseInt(key) + 1;
+			let speech = '';
+			let showing = this.$session.$data.loopCounter;
+			
+			if (showing < this.$session.$data.listofbooks.length) {
+				let title = this.$session.$data.listofbooks[this.$session.$data.loopCounter];
+				this.ask(this.t('Is the one you want ' + title.title + ' by ' + title.author), this.t('anythingelse.speech'));			
+			}
+			// none of the titles listed are picked, suggest we buy it
+			else {
+				this.removeState();
+				this.toIntent('bookPurchaseIntent');
+			}
 		},
 		
-		yesIntent() {
-			// do thing
-		},
-		
-		noIntent() {
-			// do the no thing
+		confirmIntent() {
+			// iterates through the list returned from API
+			// if a book is picked it will be set as the session array this.$session.$data.listofbooks
+			let choice = this.$inputs.pick.value;
+			let counter = this.$session.$data.loopCounter;
+			let title = this.$session.$data.listofbooks[counter];
+			
+			console.log('confirmIntent ' + choice + ' ' + counter + ' which is ' + title + '------------------------');
+
+			if (choice !== undefined && choice != '') {				
+				switch (choice) {
+					case 'yes':
+						this.$session.$data.listofbooks = this.$session.$data.listofbooks[counter];
+						this.$session.$data.loopCounter = 0;
+						this.removeState();
+						this.toIntent('bookRequestIntent');
+//						this.ask(this.t('You picked ' + JSON.stringify(this.$session.$data.listofbooks)), this.t('anythingelse.speech'));
+						break;
+					case 'no':
+		console.log('choice was no ------------'+choice);
+						this.$session.$data.loopCounter = parseInt(counter) + 1;
+						this.toIntent('listingTitlesIntent');
+						break;
+					case 'cancel':
+						this.removeState();
+						this.$session.$data.loopCounter = 0;
+						this.$session.$data.listofbooks = '';
+						this.ask(this.t('Ok no worries, I will forget all about it.'), this.t('anythingelse.speech'));
+						break;
+					default:
+						this.toIntent('Unhandled');
+				}
+			}
 		},
 	},
 
 	
-	
 	bookPurchaseIntent() {
 	// customer is suggesting the library to buy a book
-		console.log('bookPurchaseIntent was called '  + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+	console.log('bookPurchaseIntent was called '  + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
 		this.ask(this.t('info.suggestPurchase'), this.t('anythingelse.speech'));
 	},
 	
 	bookRequestIntent() {
-	// customer has requested a specific title
-		console.log('bookRequestIntent I was called!!! Happy days! ' + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+	// customer wants info on how to request a specific title
+	//	console.log('bookRequestIntent I was called!!! Happy days! ' + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+//		console.log('bookRequestIntent might have been called by bookListingIntent ' + JSON.stringify(this.$session.$data.listofbooks));
+
 		this.ask(this.t('info.requestItem'), this.t('anythingelse.speech'));
 	},
 
