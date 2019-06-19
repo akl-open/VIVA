@@ -22,7 +22,8 @@ module.exports = {
 		GoogleSheetsCMS: {
 			spreadsheetId: '1BaykMM3IY0bAfpaYT2QiPc0shaGkGJzsu14pDL8b4LI',
 			access: 'public',
-			sheets: [{
+			sheets: [
+				{
 					name: 'OPENCLOSE',
 					type: 'ObjectArray',
 					position: 1,
@@ -32,13 +33,28 @@ module.exports = {
 					type: 'Responses',
 					position: 2,
 				},{
-					name: 'bob',
+					name: 'suburbSearch',
 					type: 'KeyValue',
+					position: 4,
+				},{
+					name: 'wiggleAndRhyme',
+					type: 'ObjectArray',
 					position: 5,
+					range: 'A:I',
+				},{
+					name: 'rhymeTime',
+					type: 'ObjectArray',
+					position: 6,
+					range: 'A:I',
+				},{
+					name: 'storyTime',
+					type: 'ObjectArray',
+					position: 7,
+					range: 'A:I',
 				},
 				
 			],
-			caching: false, 
+			caching: true 
 		}
 	}
 };
