@@ -17,11 +17,11 @@ var token;
 const app = new App();
 
 app.use(
-    new Alexa(),
-    new GoogleAssistant(),
-    new JovoDebugger(),
-    new FileDb(),
-    new GoogleSheetsCMS()
+	new Alexa(),
+	new GoogleAssistant(),
+	new JovoDebugger(),
+	new FileDb(),
+	new GoogleSheetsCMS()
 );
 
 
@@ -30,22 +30,22 @@ app.use(
 // ------------------------------------------------------------------
 
 app.setHandler({
-    LAUNCH() {
-        return this.toIntent('greetingIntent');
-		},
+	LAUNCH() {
+		return this.toIntent('greetingIntent');
+	},
 
-	eventsAtLibraryIntent(){
+	eventsAtLibraryIntent() {
 		var input = this.$inputs.sitename.key;
-		console.log("eventsAtLibraryIntent:" +input);
-		if(input != undefined && input != ""){
+		console.log("eventsAtLibraryIntent:" + input);
+		if (input != undefined && input != "") {
 			var wAndRObj = this.$cms.wiggleAndRhyme.find(o => o.id == input);
 			var rTimeObj = this.$cms.rhymeTime.find(o => o.id == input);
 			var sTimeObj = this.$cms.storyTime.find(o => o.id == input);
 
-			var lib = libraryEventsList(wAndRObj,rTimeObj,sTimeObj);
-			this.ask(lib,this.t('anythingelse.speech'));
+			var lib = libraryEventsList(wAndRObj, rTimeObj, sTimeObj);
+			this.ask(lib, this.t('anythingelse.speech'));
 		}
-		else{
+		else {
 			this.toIntent('infoWhenOpenNoSite');
 		}
 	},
@@ -55,10 +55,10 @@ app.setHandler({
 		var code = connectToSierra();
 
 		//get the token from he promise and assign it to the token variable
-		code.then(function(value) {		
+		code.then(function (value) {
 			token = value;
-				console.log("greetingIntent tokenkey" + token);
-			});
+			console.log("greetingIntent tokenkey" + token);
+		});
 
 		//Welcome speech
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
@@ -67,7 +67,7 @@ app.setHandler({
 	infoAccountDetailsIntent() {
 		this.ask(this.t('info.accountdetails'), this.t('anythingelse.speech'));
 	},
-	
+
 	infoBookReturnsIntent() {
 		this.ask(this.t('info.returns'), this.t('anythingelse.speech'));
 	},
@@ -84,11 +84,10 @@ app.setHandler({
 		this.ask(this.t('info.oldlibrarycard'), this.t('anythingelse.speech'));
 	},
 
-	infoEventDescriptionIntent()
-	{
-		console.log("infoEventDescriptionIntent ************ "+ this.$inputs.eventName.key);
+	infoEventDescriptionIntent() {
+		console.log("infoEventDescriptionIntent ************ " + this.$inputs.eventName.key);
 		var input = this.$inputs.eventName.key;
-	
+
 		switch (input) {
 			case "1":
 				this.ask(this.t('info.eventRhymeTime'), this.t('anythingelse.speech'));
@@ -100,8 +99,8 @@ app.setHandler({
 				this.ask(this.t('info.eventWriggleAndRhyme'), this.t('anythingelse.speech'));
 				break;
 			default:
-			 	this.ask("Sorry I cant help with that event yet, is there anything else I can help you with")
-		}	
+				this.ask("Sorry I cant help with that event yet, is there anything else I can help you with")
+		}
 
 	},
 
@@ -137,7 +136,7 @@ app.setHandler({
 		this.ask(this.t('info.meetingrooms'), this.t('anythingelse.speech'));
 	},
 
-	infoNewMemberIntent(){
+	infoNewMemberIntent() {
 		this.ask(this.t('info.newmember'), this.t('anythingelse.speech'));
 	},
 
@@ -156,19 +155,19 @@ app.setHandler({
 	infoUpdateDetails() {
 		this.ask(this.t('info.updatedetails'), this.t('anythingelse.speech'));
 	},
-	
+
 	infoWhenOpenNoSite() {
 		this.ask(this.t('Please ask again with a library name eg Botany Library'), this.t('anythingelse.speech'));
 	},
 
 	siteOpensIntent() {
-	// we assume that they mean now rather than tomorrow or they would have said so
-	// this should be redundant; if there is no date specified whenSiteOpenIntent() should be able to handle
-	// either by checking for undef'd and sending a new date to openHoursHelper, or a default set in the skill/action
+		// we assume that they mean now rather than tomorrow or they would have said so
+		// this should be redundant; if there is no date specified whenSiteOpenIntent() should be able to handle
+		// either by checking for undef'd and sending a new date to openHoursHelper, or a default set in the skill/action
 
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
 		console.log('from sites open start ', speech, this.$data);
-		
+
 		try {
 			// find this site and get the open/close times from our spreadsheet - if not siteobj is undefined > error
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
@@ -176,27 +175,27 @@ app.setHandler({
 			console.log('siteOpensIntent site found in googledoc: ', siteobj);
 
 			var dayRequest = new Date();
-			
+
 			console.log('from sites open ', speech);
 			speech = openHoursHelper(dayRequest, siteobj);
-	}
+		}
 		catch (e) {
-			console.log ('siteOpenIntent', e);
+			console.log('siteOpenIntent', e);
 			speech = 'Well, looks like I could not find that library, can you try again please?';
 		}
 
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
-	async bookAvaliabilityIntent(){
+	async bookAvaliabilityIntent() {
 		var input = this.$inputs.bookTitle.value;
-		var output;		
-		
+		var output;
+
 		output = await getitemsByTitle(token, input);
 		console.log(JSON.stringify(output));
 
 		this.$session.$data.listofbooks = output;
-		
+
 		//loop counter for listingState
 		this.$session.$data.loopCounter = 0;
 
@@ -204,7 +203,7 @@ app.setHandler({
 		this.followUpState('listingState')
 			.toIntent('listingTitlesIntent');
 	},
-	
+
 	listingState: {
 
 		listingTitlesIntent() {
@@ -213,11 +212,11 @@ app.setHandler({
 
 			let speech = '';
 			let showing = this.$session.$data.loopCounter;
-			
+
 			// present current item
 			if (showing < this.$session.$data.listofbooks.length) {
 				let title = this.$session.$data.listofbooks[this.$session.$data.loopCounter];
-				this.ask(this.t('Is the one you want ' + title.title + ' by ' + title.author), this.t('anythingelse.speech'));			
+				this.ask(this.t('Is the one you want ' + title.title + ' by ' + title.author), this.t('anythingelse.speech'));
 			}
 			// none of the titles listed are picked, suggest we buy it
 			else {
@@ -225,16 +224,16 @@ app.setHandler({
 				this.toIntent('bookPurchaseIntent');
 			}
 		},
-		
+
 		confirmIntent() {
 			// if a book is picked set as the session array this.$session.$data.listofbooks
 			let choice = this.$inputs.pick.value;
 			let counter = this.$session.$data.loopCounter;
 			let title = this.$session.$data.listofbooks[counter];
-			
+
 			console.log('confirmIntent ' + choice + ' ' + counter + ' which is ' + title + '------------------------');
 
-			if (choice !== undefined && choice != '') {				
+			if (choice !== undefined && choice != '') {
 				switch (choice) {
 					case 'yes':
 						this.$session.$data.listofbooks = this.$session.$data.listofbooks[counter];
@@ -259,20 +258,20 @@ app.setHandler({
 		},
 	},
 
-	
+
 	bookPurchaseIntent() {
-	// customer is suggesting the library to buy a book
-	console.log('bookPurchaseIntent was called '  + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
+		// customer is suggesting the library to buy a book
+		console.log('bookPurchaseIntent was called ' + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
 		this.ask(this.t('info.suggestPurchase'), this.t('anythingelse.speech'));
 	},
-	
+
 	bookRequestIntent() {
-	// customer wants info on how to request a specific title
+		// customer wants info on how to request a specific title
 		this.ask(this.t('info.requestItem'), this.t('anythingelse.speech'));
 	},
 
 	whenSiteOpenIntent() {
-	// customer wants to know when a site is open. No time stated means they want to know about 'now'
+		// customer wants to know when a site is open. No time stated means they want to know about 'now'
 		let speech = 'Hmm, that doesn\'t ring a bell';
 
 		try {
@@ -294,7 +293,7 @@ app.setHandler({
 		this.ask(this.t(speech), this.t('anythingelse.speech'));
 	},
 
-	nearestLibraryIntent(){
+	nearestLibraryIntent() {
 		let speech = "Sure, what suburb are you in?";
 
 
@@ -307,24 +306,24 @@ app.setHandler({
 
 		suburbIntent() {
 
-			 try{
-					var libraryList = this.$cms.suburbSearch;
-					var library = getNearestLibrary( libraryList, this.$inputs.suburbName.key);
-					
-					console.log("suburb intent: "+ library + " input: "+ this.$inputs.suburbName.key);
-					
-					if(library != ""){
-					
-						let speech = "Your nearest library is " + library;
-						this.ask(this.t(speech), this.t('anythingelse.speech'));
-					}
-					else{
-							this.ask("Sorry I cant find a nearby library is there anything else I can help you with?");
-					}
-					
+			try {
+				var libraryList = this.$cms.suburbSearch;
+				var library = getNearestLibrary(libraryList, this.$inputs.suburbName.key);
+
+				console.log("suburb intent: " + library + " input: " + this.$inputs.suburbName.key);
+
+				if (library != "") {
+
+					let speech = "Your nearest library is " + library;
+					this.ask(this.t(speech), this.t('anythingelse.speech'));
 				}
-			 catch (e) {
-				
+				else {
+					this.ask("Sorry I cant find a nearby library is there anything else I can help you with?");
+				}
+
+			}
+			catch (e) {
+
 				console.log('suburb intent had something go wrong \n', e, '--------------------------------------------')
 			}
 
@@ -332,22 +331,22 @@ app.setHandler({
 	},
 
 	eventBySiteAtTimeIntent() {
-	// user has asked for a specific event at a specific library at a time	
+		// user has asked for a specific event at a specific library at a time	
 
 		var dayRequest = this.$inputs.whenDate.key;
 		var sitename = this.$inputs.sitename.key;
 		var eventsname = this.$inputs.eventname.key;
 		var eventsobj;
-		
+
 		// no date requested, assume today
 		if (dayRequest !== undefined && dayRequest !== '') {
 			dayRequest = parseISOString(dayRequest);
 		}
 		else {
 			dayRequest = new Date();
-			}
-		
-		if (eventsname !== undefined && eventsname !== "") {			
+		}
+
+		if (eventsname !== undefined && eventsname !== "") {
 			try {
 				if (sitename !== undefined && sitename !== "") {
 					switch (eventsname) {
@@ -364,11 +363,11 @@ app.setHandler({
 							eventsobj = this.$cms.wiggleAndRhyme.find(o => o.id === sitename);
 							break;
 					}
-					
+
 					let speech = openHoursHelper(dayRequest, eventsobj, eventsname);
 					this.ask(this.t(speech), this.t('anythingelse.speech'));
 				}
-				
+
 				// no site requested, ask for a site
 				else
 					this.toIntent('infoWhenOpenNoSite');
@@ -384,8 +383,8 @@ app.setHandler({
 		}
 	},
 
-	
-// default intents start here
+
+	// default intents start here
 	cancelIntent() {
 		console.log('cancelIntent invoked');
 		let cancelSpeech = 'ok, cancelling that';
@@ -402,7 +401,7 @@ app.setHandler({
 		let speech = 'Ok, talk to you later.';
 		this.tell(this.t(speech));
 	},
-	
+
 	fallBackIntent() {
 		console.log('fallBackIntent invoked');
 		let speech = 'Hmm, could you maybe try whatever you said slower or something';
@@ -418,7 +417,7 @@ app.setHandler({
 		console.log('globaly unhandled intent invoked');
 		this.ask(this.t('Oh dear, can you try saying that a little differently'));
 	},
-	
+
 });
 
 /*
@@ -428,7 +427,7 @@ app.setHandler({
 */
 function parseISOString(s) {
 	var b = s.split(/\D+/);
-console.log('parseISOString from to ', s, b);
+	console.log('parseISOString from to ', s, b);
 
 	if (b.length = 3)
 		return new Date(Date.UTC(b[0], --b[1], b[2]));
@@ -448,111 +447,111 @@ function openHoursHelper(dayRequest, siteobj, eventInfo) {
 	var returnSpeech = '';
 
 	console.log('openHoursHelper ', dayRequest, siteobj, eventInfo);
-	
+
 	if (siteobj !== undefined) {
 		//check site isn't on 'extended close'
 		if (siteobj.extendedclose === undefined || siteobj.extendedclose === '') {
 
 			// set speech based on day of week, closed all day or open hours
 			switch (dayRequest.getDay()) {
-			  case 0:
-				if (eventInfo !== undefined && siteobj.sunday !== '') {
-					returnSpeech = siteobj.sunday;
-				}
-				else if (eventInfo !== undefined && siteobj.sunday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Sunday.';
-				}
-				else 
-					if (eventInfo === undefined && siteobj.sundayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Sunday.';
-				}
-				else {
-					returnSpeech = "On Sunday " + siteobj.site + " opens at " + siteobj.sundayopen + " and closes at " + siteobj.sundayclose;
-				}
-				break;
-			  case 1:
-				if (eventInfo !== undefined && siteobj.monday !== '') {
-					returnSpeech = siteobj.monday;
-				}
-				else if (eventInfo !== undefined && siteobj.monday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Monday.';
-				}
-				else if (eventInfo === undefined && siteobj.mondayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Monday.';
+				case 0:
+					if (eventInfo !== undefined && siteobj.sunday !== '') {
+						returnSpeech = siteobj.sunday;
 					}
-				else {
-					returnSpeech = "On Monday " + siteobj.site + " opens at " + siteobj.mondayopen + " and closes at " + siteobj.mondayclose;
-				}
-				break;
-			  case 2:
-				if (eventInfo !== undefined && siteobj.tuesday !== '') {
-					returnSpeech = siteobj.monday;
-				}
-				else if (eventInfo !== undefined && siteobj.tuesday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Tuesday.';
-				}
-				else if (eventInfo === undefined && siteobj.tuesdayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Tuesday.';
-				}
-				else {
-					returnSpeech = "On Tuesday " + siteobj.site + " opens at " + siteobj.tuesdayopen + " and closes at " + siteobj.tuesdayclose;
-				}
-				break;
-			  case 3:
-				if (eventInfo !== undefined && siteobj.wednesday !== '') {
-					returnSpeech = siteobj.monday;
-				}
-				else if (eventInfo !== undefined && siteobj.wednesday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Wednesday.';
-				}
-				else if (eventInfo === undefined && siteobj.wednesdayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Wednesday.';
-				}
-				else {
-					returnSpeech = "On Wednesday " + siteobj.site + " opens at " + siteobj.wednesdayopen + " and closes at " + siteobj.wednesdayclose;
-				}
-				break;
-			  case 4:
-				if (eventInfo !== undefined && siteobj.thursday !== '') {
-					returnSpeech = siteobj.thursday;
-				}
-				else if (eventInfo !== undefined && siteobj.thursday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Thursday.';
-				}
-				else if (eventInfo === undefined && siteobj.thursdayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Thursday.';
-				}
-				else {
-					returnSpeech = "On Thursday " + siteobj.site + " opens at " + siteobj.thursdayopen + " and closes at " + siteobj.thursdayclose;
-				}
-				break;
-			  case 5:
-				if (eventInfo !== undefined && siteobj.friday !== '') {
-					returnSpeech = siteobj.friday;
-				}
-				else if (eventInfo !== undefined && siteobj.friday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Friday.';
-				}
-				else if (eventInfo === undefined && siteobj.fridayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Friday.';
-				}
-				else {
-					returnSpeech = "On Friday " + siteobj.site + " opens at " + siteobj.fridayopen + " and closes at " + siteobj.fridayclose;
-				}
-				break;
-			  case 6:
-				if (eventInfo !== undefined && siteobj.saturday !== '') {
-					returnSpeech = siteobj.friday;
-				}
-				else if (eventInfo !== undefined && siteobj.saturday === '') {
-					returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Saturday.';
-				}
-				else if (eventInfo === undefined && siteobj.saturdayopen.match(/[Cc]lose/)) {
-					returnSpeech = siteobj.site + ' is closed all day Saturday.';
-				}
-				else {
-					returnSpeech = "On Saturday " + siteobj.site + " opens at " + siteobj.saturdayopen + " and closes at " + siteobj.saturdayclose;
-				}
+					else if (eventInfo !== undefined && siteobj.sunday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Sunday.';
+					}
+					else
+						if (eventInfo === undefined && siteobj.sundayopen.match(/[Cc]lose/)) {
+							returnSpeech = siteobj.site + ' is closed all day Sunday.';
+						}
+						else {
+							returnSpeech = "On Sunday " + siteobj.site + " opens at " + siteobj.sundayopen + " and closes at " + siteobj.sundayclose;
+						}
+					break;
+				case 1:
+					if (eventInfo !== undefined && siteobj.monday !== '') {
+						returnSpeech = siteobj.monday;
+					}
+					else if (eventInfo !== undefined && siteobj.monday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Monday.';
+					}
+					else if (eventInfo === undefined && siteobj.mondayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Monday.';
+					}
+					else {
+						returnSpeech = "On Monday " + siteobj.site + " opens at " + siteobj.mondayopen + " and closes at " + siteobj.mondayclose;
+					}
+					break;
+				case 2:
+					if (eventInfo !== undefined && siteobj.tuesday !== '') {
+						returnSpeech = siteobj.monday;
+					}
+					else if (eventInfo !== undefined && siteobj.tuesday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Tuesday.';
+					}
+					else if (eventInfo === undefined && siteobj.tuesdayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Tuesday.';
+					}
+					else {
+						returnSpeech = "On Tuesday " + siteobj.site + " opens at " + siteobj.tuesdayopen + " and closes at " + siteobj.tuesdayclose;
+					}
+					break;
+				case 3:
+					if (eventInfo !== undefined && siteobj.wednesday !== '') {
+						returnSpeech = siteobj.monday;
+					}
+					else if (eventInfo !== undefined && siteobj.wednesday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Wednesday.';
+					}
+					else if (eventInfo === undefined && siteobj.wednesdayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Wednesday.';
+					}
+					else {
+						returnSpeech = "On Wednesday " + siteobj.site + " opens at " + siteobj.wednesdayopen + " and closes at " + siteobj.wednesdayclose;
+					}
+					break;
+				case 4:
+					if (eventInfo !== undefined && siteobj.thursday !== '') {
+						returnSpeech = siteobj.thursday;
+					}
+					else if (eventInfo !== undefined && siteobj.thursday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Thursday.';
+					}
+					else if (eventInfo === undefined && siteobj.thursdayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Thursday.';
+					}
+					else {
+						returnSpeech = "On Thursday " + siteobj.site + " opens at " + siteobj.thursdayopen + " and closes at " + siteobj.thursdayclose;
+					}
+					break;
+				case 5:
+					if (eventInfo !== undefined && siteobj.friday !== '') {
+						returnSpeech = siteobj.friday;
+					}
+					else if (eventInfo !== undefined && siteobj.friday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Friday.';
+					}
+					else if (eventInfo === undefined && siteobj.fridayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Friday.';
+					}
+					else {
+						returnSpeech = "On Friday " + siteobj.site + " opens at " + siteobj.fridayopen + " and closes at " + siteobj.fridayclose;
+					}
+					break;
+				case 6:
+					if (eventInfo !== undefined && siteobj.saturday !== '') {
+						returnSpeech = siteobj.friday;
+					}
+					else if (eventInfo !== undefined && siteobj.saturday === '') {
+						returnSpeech = eventInfo + ' isn\'t on at ' + siteobj.site + ' on a Saturday.';
+					}
+					else if (eventInfo === undefined && siteobj.saturdayopen.match(/[Cc]lose/)) {
+						returnSpeech = siteobj.site + ' is closed all day Saturday.';
+					}
+					else {
+						returnSpeech = "On Saturday " + siteobj.site + " opens at " + siteobj.saturdayopen + " and closes at " + siteobj.saturdayclose;
+					}
 			}
 		}
 		else {
@@ -564,158 +563,155 @@ function openHoursHelper(dayRequest, siteobj, eventInfo) {
 		console.log("openHoursHelper site is undefined ", siteobj);
 	}
 
-	let speech = returnSpeech.toString().replace(/:/g,"-");
-	console.log("helper is trying to return returnSpeech ", speech );
+	let speech = returnSpeech.toString().replace(/:/g, "-");
+	console.log("helper is trying to return returnSpeech ", speech);
 	return speech;
-	}
+}
 
-	//used to get the list of nearest libraries from a key value pair object
-	//@param obj: An object of jey value pairs that is a copy of the Google sheet
-	//@param input: The suburb name as the keyword input by the user 
-	function getNearestLibrary(obj, input) {
+//used to get the list of nearest libraries from a key value pair object
+//@param obj: An object of jey value pairs that is a copy of the Google sheet
+//@param input: The suburb name as the keyword input by the user 
+function getNearestLibrary(obj, input) {
 	var result = "";
-		for (var key in obj) {
-			if (obj.hasOwnProperty(key)) {
-					if(key.toLowerCase() == input.toLowerCase()){
-						result = obj[key];
-					}				
+	for (var key in obj) {
+		if (obj.hasOwnProperty(key)) {
+			if (key.toLowerCase() == input.toLowerCase()) {
+				result = obj[key];
 			}
 		}
-		console.log("getNearestLibraryResult: "+result);
+	}
+	console.log("getNearestLibraryResult: " + result);
 	return result;
+}
+
+//used to get a list of events at the requested library
+//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
+//@param rTime: An object of of the selected row from the rhymetime google sheet
+//@param sTime: An object of of the selected row from the storytime google sheet
+//@return returns a list of event happening at the library.
+function libraryEventsList(wAndR, rTime, sTime) {
+	var wriggleAndRhyme = "";
+	var rhymeTime = "";
+	var storyTime = "";
+	var result = "";
+
+	console.log("libraryEventsList:WandR: " + JSON.stringify(wAndR));
+	console.log("libraryEventsList:RTime: " + JSON.stringify(rTime));
+	console.log("libraryEventsList:STime: " + JSON.stringify(sTime));
+
+	//Create event list for wriggle and Rhyme
+	for (var val in wAndR) {
+		if (wAndR[val] != '' && val != 'id' && val != 'site') {
+
+			wriggleAndRhyme = wriggleAndRhyme + " " + wAndR[val] + ",";
+		}
+	}
+	//Create event list for Rhymetime
+	for (var val in rTime) {
+		if (rTime[val] != '' && val != 'id' && val != 'site') {
+
+			rhymeTime = rhymeTime + " " + rTime[val] + ",";
+		}
+	}
+	//Create event list for Storytime
+	for (var val in sTime) {
+		if (sTime[val] != '' && val != 'id' && val != 'site') {
+
+			storyTime = storyTime + " " + sTime[val] + ",";
+		}
 	}
 
-	//used to get a list of events at the requested library
-	//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
-	//@param rTime: An object of of the selected row from the rhymetime google sheet
-	//@param sTime: An object of of the selected row from the storytime google sheet
-	//@return returns a list of event happening at the library.
-	function libraryEventsList(wAndR, rTime, sTime)	{
-		var wriggleAndRhyme="";
-		var rhymeTime="";
-		var storyTime="";
-		var result ="";
-
-		console.log("libraryEventsList:WandR: "+ JSON.stringify(wAndR));
-		console.log("libraryEventsList:RTime: "+ JSON.stringify(rTime));
-		console.log("libraryEventsList:STime: "+ JSON.stringify(sTime));
-		
-		//Create event list for wriggle and Rhyme
-		for (var val in wAndR) 
-		{
-			if (wAndR[val] != '' && val != 'id'&& val != 'site'){
-
-				wriggleAndRhyme = wriggleAndRhyme+" "+wAndR[val]+",";
-			}		
-		}
-		//Create event list for Rhymetime
-		for (var val in rTime) 
-		{
-			if (rTime[val] != '' && val != 'id'&& val != 'site'){
-
-				rhymeTime = rhymeTime+" "+rTime[val]+",";
-			}		
-		}
-		//Create event list for Storytime
-		for (var val in sTime) 
-		{
-			if (sTime[val] != '' && val != 'id'&& val != 'site'){
-
-				storyTime = storyTime+" "+sTime[val]+",";
-			}		
-		}
-
-		if(rhymeTime != ''){
-			result = result + " Rhyme time is on " + rhymeTime;
-		}
-		if(storyTime != ''){
-			result = result +"  Story time is on " + storyTime;
-		}
-		if(wriggleAndRhyme != ''){
-			result = result + " Wriggle and Rhyme is on " + wriggleAndRhyme;
-		}
-	
-		console.log("libraryEventsList: Final Result :"+ result);
-		return result;
+	if (rhymeTime != '') {
+		result = result + " Rhyme time is on " + rhymeTime;
+	}
+	if (storyTime != '') {
+		result = result + "  Story time is on " + storyTime;
+	}
+	if (wriggleAndRhyme != '') {
+		result = result + " Wriggle and Rhyme is on " + wriggleAndRhyme;
 	}
 
-	//used to Authenticate ourselves witht he Sierra servers
-	//@return: returns a token that is valid for 3600 minutes
-	async function connectToSierra(){
-		const options = {
-				method:'POST',
-				uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
-				headers: {
-						'Authorization': 'Basic '+APIKey
-				},
-				body:{
-						'grant_type':'client_credentials'
-				},
-				json: true // Automatically parses the JSON string in the response,
-		};
+	console.log("libraryEventsList: Final Result :" + result);
+	return result;
+}
 
-		const data = await requestPromise(options);
-		 
-		const token = data.access_token;
+//used to Authenticate ourselves witht he Sierra servers
+//@return: returns a token that is valid for 3600 minutes
+async function connectToSierra() {
+	const options = {
+		method: 'POST',
+		uri: 'https://test.elgar.govt.nz:443/iii/sierra-api/v5/token',
+		headers: {
+			'Authorization': 'Basic ' + APIKey
+		},
+		body: {
+			'grant_type': 'client_credentials'
+		},
+		json: true // Automatically parses the JSON string in the response,
+	};
 
-		return token;
+	const data = await requestPromise(options);
+
+	const token = data.access_token;
+
+	return token;
+}
+
+//used to get a list of events at the requested library
+//@param token: The token that was received form the authentication API
+//@param input: the search keywords that are received from the user
+//@return: a list of items after it is cleaned in order to be presented to the user
+async function getitemsByTitle(token, input) {
+	let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&text=" + input);
+	console.log("getitemsByTitle" + url);
+
+	const options = {
+		method: 'GET',
+		uri: url,
+		headers: {
+			'Authorization': 'Bearer ' + token,
+			'Content-Type': 'application/json;charset=UTF-8'
+		},
+		json: true // Automatically parses the JSON string in the response,
+	};
+
+	const promData = await requestPromise(options);
+	let data = promData;
+
+	let result = cleanSearchResponse(data);
+
+	return result;
+
+}
+//Format the getItems response from sierrra
+//@param data: an array of objects from the sierra response
+//@return: a list of items after it is cleaned in order to be presented to the user
+function cleanSearchResponse(data) {
+
+	let rawList = data.entries;
+
+	let cleanList = [];
+
+	for (i = 0; i < rawList.length; i++) {
+		//Exclude items with a relevance of less than 1.0
+		if (parseFloat(rawList[i].relevance) < 1.0) { continue; }
+		//Exclude items that are suppressed
+		if (rawList[i].bib.suppressed == true) { continue; }
+		//Exclude items that are deleted
+		if (rawList[i].bib.deleted == true) { continue; }
+		//Exclude items that are not books
+		if (rawList[i].bib.materialType.code != "a  ") { continue; }
+		//Exclude items that are not in english
+		if (rawList[i].bib.lang.code != "eng") { continue; }
+
+		let title = rawList[i].bib.title.toString().replace(/:/g, "-");
+		let returnItem = { id: rawList[i].bib.id, title: title, author: rawList[i].bib.author };
+
+		cleanList.push(returnItem);
+
 	}
 
-	//used to get a list of events at the requested library
-	//@param token: The token that was received form the authentication API
-	//@param input: the search keywords that are received from the user
-	//@return: a list of items after it is cleaned in order to be presented to the user
-	async function getitemsByTitle(token, input){
-		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&text="+input);
-		console.log("getitemsByTitle" + url);
-
-		const options = {
-			method:'GET',
-			uri: url,
-			headers: {
-					'Authorization': 'Bearer '+token,
-					'Content-Type':'application/json;charset=UTF-8'
-			},
-			json: true // Automatically parses the JSON string in the response,
-		};
-
-		const promData = await requestPromise(options);
-		let data = promData; 
-
-		let result = cleanSearchResponse(data);
-
-		return result;
-
-	}
-	//Format the getItems response from sierrra
-	//@param data: an array of objects from the sierra response
-	//@return: a list of items after it is cleaned in order to be presented to the user
-	function cleanSearchResponse(data){
-
-		let rawList = data.entries;
-		
-		let cleanList = [];
-
-		for(i=0; i < rawList.length; i++){
-			//Exclude items with a relevance of less than 1.0
-			if(parseFloat(rawList[i].relevance) < 1.0) { continue;}
-			//Exclude items that are suppressed
-			if(rawList[i].bib.suppressed == true) {continue;}
-			//Exclude items that are deleted
-			if(rawList[i].bib.deleted == true) {continue;}
-			//Exclude items that are not books
-			if(rawList[i].bib.materialType.code != "a  ") {continue;}
-			//Exclude items that are not in english
-			if(rawList[i].bib.lang.code != "eng") {continue;}
-
-			let title = rawList[i].bib.title.toString().replace(/:/g,"-");
-			let returnItem = {id:rawList[i].bib.id, title:title, author:rawList[i].bib.author};
-
-			cleanList.push(returnItem);
-
-		}
-
-		return cleanList;
-	}
+	return cleanList;
+}
 
 module.exports.app = app;

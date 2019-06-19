@@ -1,36 +1,39 @@
 {
 	"invocation": "auckland test",
-	"intents": [{
-		"name": "defaultHelpIntent",
-		"alexa": {
-			"name": "AMAZON.HelpIntent"
+	"intents": [
+		{
+			"name": "defaultHelpIntent",
+			"alexa": {
+				"name": "AMAZON.HelpIntent"
+			},
+			"phrases": [
+				"help",
+				"help me",
+				"can you help me",
+				"what can i do",
+				"what can you do",
+				"options"
+			]
 		},
-		"phrases": [
-			"help",
-			"help me",
-			"can you help me",
-			"what can i do",
-			"what can you do",
-			"options"
-		]
-		}, {
-		"name": "bookAvaliabilityIntent",
-		"phrases": [
-			"do you have {bookTitle}",
-			"is {bookTitle} available",
-			"I want to borrow {bookTitle}",
-			"does the library have {bookTitle}",
-			"has the library purchased {bookTitle}",
-			"does {bookTitle} exist",
-			"get me the book {bookTitle}",
-			"get {bookTitle}",
-			"Im looking for the book called {bookTitle}",
-			"find the book {bookTitle}",
-			"find me the book called {bookTitle}",
-			"search for {bookTitle}",
-			"I want {bookTitle}"
+		{
+			"name": "bookAvaliabilityIntent",
+			"phrases": [
+				"do you have {bookTitle}",
+				"is {bookTitle} available",
+				"I want to borrow {bookTitle}",
+				"does the library have {bookTitle}",
+				"has the library purchased {bookTitle}",
+				"does {bookTitle} exist",
+				"get me the book {bookTitle}",
+				"get {bookTitle}",
+				"Im looking for the book called {bookTitle}",
+				"find the book {bookTitle}",
+				"find me the book called {bookTitle}",
+				"search for {bookTitle}",
+				"I want {bookTitle}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "bookTitle",
 					"type": {
 						"alexa": "AMAZON.SearchQuery",
@@ -38,29 +41,32 @@
 					}
 				}
 			]
-		},{
-
-		"name": "confirmIntent",
-		"phrases": [
-			"{pick}"
+		},
+		{
+			"name": "confirmIntent",
+			"phrases": [
+				"{pick}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "pick",
 					"type": "confirmType"
 				}
 			]
-		},{
-		"name": "bookPurchaseIntent",
-		"phrases": [
-			"The library should buy {bookTitle}",
-			"why doesnt the library have {bookTitle}",
-			"request to purchase {bookTitle}",
-			"suggestion to purchase {bookTitle}",
-			"can the library buy {bookTitle}",
-			"purchase {bookTitle}",
-			"the library should buy {bookTitle} for me"
+		},
+		{
+			"name": "bookPurchaseIntent",
+			"phrases": [
+				"The library should buy {bookTitle}",
+				"why doesnt the library have {bookTitle}",
+				"request to purchase {bookTitle}",
+				"suggestion to purchase {bookTitle}",
+				"can the library buy {bookTitle}",
+				"purchase {bookTitle}",
+				"the library should buy {bookTitle} for me"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "bookTitle",
 					"type": {
 						"alexa": "AMAZON.SearchQuery",
@@ -68,19 +74,21 @@
 					}
 				}
 			]
-		},{
-		"name": "bookRequestIntent",
-		"phrases": [
-			"request {bookTitle}",
-			"reserve for {bookTitle}",
-			"put {bookTitle} on hold for me",
-			"hold {bookTitle} for me",
-			"place a hold on {bookTitle}",
-			"can I request {bookTitle}",
-			"can you keep {bookTitle} for me",
-			"I would like {bookTitle}"
+		},
+		{
+			"name": "bookRequestIntent",
+			"phrases": [
+				"request {bookTitle}",
+				"reserve for {bookTitle}",
+				"put {bookTitle} on hold for me",
+				"hold {bookTitle} for me",
+				"place a hold on {bookTitle}",
+				"can I request {bookTitle}",
+				"can you keep {bookTitle} for me",
+				"I would like {bookTitle}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "bookTitle",
 					"type": {
 						"alexa": "AMAZON.SearchQuery",
@@ -88,22 +96,24 @@
 					}
 				}
 			]
-		},{
-			"name": "eventsAtLibraryIntent",	
-			"phrases": [	
-				"what events are at {sitename}",	
-				"events at {sitename}",	
-				"whats happening at {sitename}",	
+		},
+		{
+			"name": "eventsAtLibraryIntent",
+			"phrases": [
+				"what events are at {sitename}",
+				"events at {sitename}",
+				"whats happening at {sitename}",
 				"What do you have at {sitename}",
 				"which events are on at {sitename}"
-			],	
-
- 			"inputs": [{	
-				"name": "sitename",	
-				"type": "siteType"	
-			}
-		]	
-		},{
+			],
+			"inputs": [
+				{
+					"name": "sitename",
+					"type": "siteType"
+				}
+			]
+		},
+		{
 			"name": "infoAccountDetailsIntent",
 			"phrases": [
 				"what books do I have out",
@@ -128,7 +138,8 @@
 				"what is ready to pick up",
 				"remind me when my books are due"
 			]
-		}, {
+		},
+		{
 			"name": "infoBookReturnsIntent",
 			"phrases": [
 				"Where can I return my library books",
@@ -140,7 +151,8 @@
 				"take back my books",
 				"return books"
 			]
-		}, {
+		},
+		{
 			"name": "infoCabHoursIntent",
 			"phrases": [
 				"Is there a C A B at the library",
@@ -148,7 +160,8 @@
 				"Where is there a citizens advice bureau",
 				"Is there a cab at the library"
 			]
-		}, {
+		},
+		{
 			"name": "infoCardLostIntent",
 			"phrases": [
 				"I lost my card",
@@ -159,7 +172,8 @@
 				"lost card",
 				"where can I get a new card"
 			]
-		}, {
+		},
+		{
 			"name": "infoCardOldIntent",
 			"phrases": [
 				"I havent used my library card in a while is it still valid",
@@ -170,40 +184,45 @@
 				"old barcode",
 				"I have an old library card how do I get a new one"
 			]
-		}, {
-			"name": "infoEventDescriptionIntent",	
-			"phrases": [	
-				"What is {eventName}",	
-				"What happens at {eventName}",	
-				"describe {eventName}",	
+		},
+		{
+			"name": "infoEventDescriptionIntent",
+			"phrases": [
+				"What is {eventName}",
+				"What happens at {eventName}",
+				"describe {eventName}",
 				"tell me about {eventName}",
 				"information about {eventName}",
 				"give me information about {eventName}"
-			],	
-			"inputs": [{	
-				"name": "eventName",	
-				"type": "eventType"	
-				}	
-			]	
-		}, {	
-			"name": "infoKidsEvents",	
-			"phrases": [	
-				"What events are available at the library",	
-				"What events are available for kids under five",	
-				"What events are available for children under five",	
-				"Childrens events at the library",	
-				"what is there to do at the library for children"				      	
-			]	
-		},{	
-			"name": "infoKidsEventBooking",	
-			"phrases": [	
-				"do I need to make a booking",	
-				"how much does it cost",	
-				"How much do the events cost",	
-				"do I need to book in advance",	
-				"how much in advance do I need to book"	
-			]	
-		},{
+			],
+			"inputs": [
+				{
+					"name": "eventName",
+					"type": "eventType"
+				}
+			]
+		},
+		{
+			"name": "infoKidsEvents",
+			"phrases": [
+				"What events are available at the library",
+				"What events are available for kids under five",
+				"What events are available for children under five",
+				"Childrens events at the library",
+				"what is there to do at the library for children"
+			]
+		},
+		{
+			"name": "infoKidsEventBooking",
+			"phrases": [
+				"do I need to make a booking",
+				"how much does it cost",
+				"How much do the events cost",
+				"do I need to book in advance",
+				"how much in advance do I need to book"
+			]
+		},
+		{
 			"name": "infoFreeWiFi",
 			"phrases": [
 				"Is there free Wi Fi I can use in the library",
@@ -217,9 +236,9 @@
 				"Can I bring my own device",
 				"Does the library have wefe",
 				"Does the library have wifi"
-
 			]
-		}, {
+		},
+		{
 			"name": "infoFreeComputers",
 			"phrases": [
 				"Can I use the computer for free",
@@ -229,7 +248,8 @@
 				"Does my library offer a free computer",
 				"Are there free computers I can use in the library"
 			]
-		}, {
+		},
+		{
 			"name": "infoItemBorrowLimitIntent",
 			"phrases": [
 				"How many items can I borrow",
@@ -243,7 +263,8 @@
 				"What are the borrowing limits",
 				"what is the borrowing limit"
 			]
-		}, {
+		},
+		{
 			"name": "infoJusticeIntent",
 			"phrases": [
 				"is there a justice of the peace at the libary",
@@ -254,7 +275,8 @@
 				"is there a JP in today",
 				"When will the JP be in the library"
 			]
-		}, {
+		},
+		{
 			"name": "infoLyndaDotComIntent",
 			"phrases": [
 				"Use lynda.com",
@@ -269,7 +291,8 @@
 				"How do I register to use Lynda.com",
 				"Do I need to pay for Lynda.com"
 			]
-		}, {
+		},
+		{
 			"name": "infoMeetingRoomsIntent",
 			"phrases": [
 				"Is there a meeting room I can use at the library",
@@ -284,7 +307,8 @@
 				"Is there a bookable meeting room",
 				"Can I book a meeting room"
 			]
-		}, {
+		},
+		{
 			"name": "infoPrintingIntent",
 			"phrases": [
 				"Can I print",
@@ -296,7 +320,8 @@
 				"a three printing",
 				"is there printing available in the library"
 			]
-		}, {
+		},
+		{
 			"name": "infoPrintingCostIntent",
 			"phrases": [
 				"What does it cost to print",
@@ -313,7 +338,8 @@
 				"how much does it cost to print something",
 				"What it costs to print at libraries"
 			]
-		}, {
+		},
+		{
 			"name": "infoPrintThreeDIntent",
 			"phrases": [
 				"Can I print in three d",
@@ -322,7 +348,8 @@
 				"three d print",
 				"three d printer"
 			]
-		}, {
+		},
+		{
 			"name": "infoUpdateDetails",
 			"phrases": [
 				"I need to update my account details",
@@ -336,7 +363,8 @@
 				"Can I update my library account on line",
 				"What do I need to do to update my library account details"
 			]
-		}, {
+		},
+		{
 			"name": "infoWhenOpenNoSite",
 			"phrases": [
 				"when is the library open",
@@ -345,7 +373,8 @@
 				"what time is the library open",
 				"is the library open"
 			]
-		}, {
+		},
+		{
 			"name": "nearestLibraryIntent",
 			"phrases": [
 				"what is my nearest library",
@@ -353,7 +382,8 @@
 				"What is my local library",
 				"how do i get to my local library"
 			]
-		}, {
+		},
+		{
 			"name": "infoNewMemberIntent",
 			"phrases": [
 				"how do I get a library card",
@@ -362,8 +392,8 @@
 				"join the library",
 				"how to become a member"
 			]
-		}, {
-
+		},
+		{
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
@@ -383,12 +413,14 @@
 				"has {sitename} opened",
 				"has {sitename} closed"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "sitename",
 					"type": "siteType"
 				}
 			]
-		}, {
+		},
+		{
 			"name": "suburbIntent",
 			"phrases": [
 				"i live in {suburbName}",
@@ -398,7 +430,8 @@
 				"Im at {suburbName}",
 				"close to {suburbName}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "suburbName",
 					"type": {
 						"alexa": "AMAZON.SearchQuery",
@@ -406,7 +439,8 @@
 					}
 				}
 			]
-		}, {
+		},
+		{
 			"name": "whenSiteOpenIntent",
 			"phrases": [
 				"is {sitename} open {whenDate}",
@@ -418,10 +452,12 @@
 				"{sitename} {whenDate}",
 				"{sitename} library {whenDate}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "sitename",
 					"type": "siteType"
-				}, {
+				},
+				{
 					"name": "whenDate",
 					"type": {
 						"alexa": "AMAZON.DATE",
@@ -429,7 +465,8 @@
 					}
 				}
 			]
-		}, {
+		},
+		{
 			"name": "eventBySiteAtTimeIntent",
 			"phrases": [
 				"{whenDate} is there a {eventname} on at {sitename}",
@@ -441,13 +478,16 @@
 				"{sitename} {eventname} {whenDate}",
 				"{eventname} {sitename} {whenDate}"
 			],
-			"inputs": [{
+			"inputs": [
+				{
 					"name": "eventname",
 					"type": "eventType"
-				}, {
+				},
+				{
 					"name": "sitename",
 					"type": "siteType"
-				}, {
+				},
+				{
 					"name": "whenDate",
 					"type": {
 						"alexa": "AMAZON.DATE",
@@ -470,13 +510,15 @@
 						"rhyme time",
 						"rhymetime"
 					]
-				}, {
+				},
+				{
 					"value": "2",
 					"synonyms": [
 						"story time",
 						"story"
 					]
-				}, {
+				},
+				{
 					"value": "3",
 					"synonyms": [
 						"Wriggle and rhyme",
@@ -484,7 +526,8 @@
 					]
 				}
 			]
-		}, {
+		},
+		{
 			"name": "confirmType",
 			"dialogflow": {
 				"automatedExpansion": true
@@ -504,7 +547,8 @@
 						"choose that",
 						"select this book"
 					]
-				}, {
+				},
+				{
 					"value": "no",
 					"synonyms": [
 						"no",
@@ -513,7 +557,8 @@
 						"next",
 						"continue"
 					]
-				}, {
+				},
+				{
 					"value": "cancel",
 					"synonyms": [
 						"cancel",
@@ -523,43 +568,50 @@
 					]
 				}
 			]
-		}, {
+		},
+		{
 			"name": "siteType",
 			"dialogflow": {
 				"automatedExpansion": true
 			},
-			"values": [{
+			"values": [
+				{
 					"value": "0",
 					"synonyms": [
 						"Albany",
 						"Albany Library"
 					]
-				}, {
+				},
+				{
 					"value": "1",
 					"synonyms": [
 						"Avondale",
 						"Avondale Library",
 						"Avon dale"
 					]
-				}, {
+				},
+				{
 					"value": "2",
 					"synonyms": [
 						"Birkenhead",
 						"Birkenhead Library"
 					]
-				}, {
+				},
+				{
 					"value": "3",
 					"synonyms": [
 						"Blockhouse Bay",
 						"Blockhouse Bay Library"
 					]
-				}, {
+				},
+				{
 					"value": "4",
 					"synonyms": [
 						"Botany",
 						"Botany Library"
 					]
-				}, {
+				},
+				{
 					"value": "5",
 					"synonyms": [
 						"Central",
@@ -569,7 +621,8 @@
 						"Central Library",
 						"Lorne Street Library"
 					]
-				}, {
+				},
+				{
 					"value": "6",
 					"synonyms": [
 						"Clendon",
@@ -577,117 +630,136 @@
 						"Te Matariki",
 						"Te Matariki Clendon Library"
 					]
-				}, {
+				},
+				{
 					"value": "7",
 					"synonyms": [
 						"Devonport",
 						"Devonport Library"
 					]
-				}, {
+				},
+				{
 					"value": "8",
 					"synonyms": [
 						"East Coast Bays",
 						"East Coast Bays Library"
 					]
-				}, {
+				},
+				{
 					"value": "9",
 					"synonyms": [
 						"Epsom",
 						"Epsom Library"
 					]
-				}, {
+				},
+				{
 					"value": "10",
 					"synonyms": [
 						"Glen Eden",
 						"Glen Eden Library"
 					]
-				}, {
+				},
+				{
 					"value": "11",
 					"synonyms": [
 						"Glen Innes",
 						"Glen Innes Library",
 						"G I"
 					]
-				}, {
+				},
+				{
 					"value": "12",
 					"synonyms": [
 						"Glenfield",
 						"Glenfield Library"
 					]
-				}, {
+				},
+				{
 					"value": "13",
 					"synonyms": [
 						"Great Barrier",
 						"Great Barrier Library"
 					]
-				}, {
+				},
+				{
 					"value": "14",
 					"synonyms": [
 						"Grey Lynn",
 						"Grey Lynn Library"
 					]
-				}, {
+				},
+				{
 					"value": "15",
 					"synonyms": [
 						"Helensville",
 						"Helensville Library"
 					]
-				}, {
+				},
+				{
 					"value": "17",
 					"synonyms": [
 						"Highland Park",
 						"Highland Park Library"
 					]
-				}, {
+				},
+				{
 					"value": "18",
 					"synonyms": [
 						"Howick",
 						"Howick Library"
 					]
-				}, {
+				},
+				{
 					"value": "19",
 					"synonyms": [
 						"Kumeu",
 						"Kumeu Library"
 					]
-				}, {
+				},
+				{
 					"value": "20",
 					"synonyms": [
 						"Mahurangi East",
 						"Mahurangi East Library"
 					]
-				}, {
+				},
+				{
 					"value": "21",
 					"synonyms": [
 						"Mangere Bridge",
 						"Mangere Bridge Library"
 					]
-				}, {
+				},
+				{
 					"value": "22",
 					"synonyms": [
 						"Mangere East",
 						"Mangere East Library"
 					]
-				}, {
+				},
+				{
 					"value": "23",
 					"synonyms": [
 						"Mangere Town",
 						"Mangere Town Library"
 					]
-				}, {
+				},
+				{
 					"value": "24",
 					"synonyms": [
 						"Manukau",
 						"Manukau Library",
 						"Manukau research center"
 					]
-				}, {
+				},
+				{
 					"value": "25",
 					"synonyms": [
 						"Manurewa",
 						"Manurewa Library"
 					]
-				}, {
+				},
+				{
 					"value": "26",
 					"synonyms": [
 						"Mt Albert",
@@ -695,80 +767,93 @@
 						"St Lukes",
 						"St Lukes Library"
 					]
-				}, {
+				},
+				{
 					"value": "27",
 					"synonyms": [
 						"Mt Roskill",
 						"Mt Roskill Library",
 						"Roskill library"
 					]
-				}, {
+				},
+				{
 					"value": "28",
 					"synonyms": [
 						"New Lynn",
 						"New Lynn Library"
 					]
-				}, {
+				},
+				{
 					"value": "29",
 					"synonyms": [
 						"Northcote",
 						"Northcote Library"
 					]
-				}, {
+				},
+				{
 					"value": "30",
 					"synonyms": [
 						"Onehunga",
 						"Onehunga Library"
 					]
-				}, {
+				},
+				{
 					"value": "31",
 					"synonyms": [
 						"Orewa",
 						"Orewa Library"
 					]
-				}, {
+				},
+				{
 					"value": "32",
 					"synonyms": [
 						"Otahuhu",
 						"Otahuhu Library"
 					]
-				}, {
+				},
+				{
 					"value": "33",
 					"synonyms": [
 						"Otara",
 						"Otara Library"
 					]
-				}, {
+				},
+				{
 					"value": "34",
 					"synonyms": [
 						"Pakuranga",
 						"Pakuranga Library"
 					]
-				}, {
+				},
+				{
 					"value": "35",
 					"synonyms": [
 						"Panmure",
 						"Panmure Library"
 					]
-				}, {
+				},
+				{
 					"value": "37",
 					"synonyms": [
 						"Papatoetoe",
 						"Papatoetoe Library"
 					]
-				}, {
+				},
+				{
 					"value": "36",
 					"synonyms": [
 						"Papakura",
 						"Papakura Library"
 					]
-				}, {
+				},
+				{
 					"value": "38",
 					"synonyms": [
 						"Parnell",
 						"Parnell Library"
 					]
-				}, {
+				},
+				{
 					"value": "39",
 					"synonyms": [
 						"Ponsonby",
@@ -777,49 +862,57 @@
 						"Ponsonby Library",
 						"Leys Institue Library Ponsonby"
 					]
-				}, {
+				},
+				{
 					"value": "40",
 					"synonyms": [
 						"Pt Chevalier",
 						"Pt Chevalier Library"
 					]
-				}, {
+				},
+				{
 					"value": "41",
 					"synonyms": [
 						"Pukekohe",
 						"Pukekohe Library"
 					]
-				}, {
+				},
+				{
 					"value": "42",
 					"synonyms": [
 						"Ranui",
 						"Ranui Library"
 					]
-				}, {
+				},
+				{
 					"value": "43",
 					"synonyms": [
 						"Remuera",
 						"Remuera Library"
 					]
-				}, {
+				},
+				{
 					"value": "44",
 					"synonyms": [
 						"St Heliers",
 						"St Heliers Library"
 					]
-				}, {
+				},
+				{
 					"value": "45",
 					"synonyms": [
 						"Takapuna",
 						"Takapuna Library"
 					]
-				}, {
+				},
+				{
 					"value": "46",
 					"synonyms": [
 						"Te Atatu Peninsula",
 						"Te Atatu Peninsula Library"
 					]
-				}, {
+				},
+				{
 					"value": "47",
 					"synonyms": [
 						"Te Manawa",
@@ -827,26 +920,30 @@
 						"Massey Library",
 						"Te Manawa Library"
 					]
-				}, {
+				},
+				{
 					"value": "48",
 					"synonyms": [
 						"Titirangi",
 						"Titirangi Library"
 					]
-				}, {
+				},
+				{
 					"value": "49",
 					"synonyms": [
 						"Tupu",
 						"Tupu Library"
 					]
-				}, {
+				},
+				{
 					"value": "50",
 					"synonyms": [
 						"Waiheke",
 						"Waiheke Library",
 						"Waiheke Island"
 					]
-				}, {
+				},
+				{
 					"value": "16",
 					"synonyms": [
 						"Waitakere Central",
@@ -854,25 +951,29 @@
 						"Henderson Library",
 						"Waitakere Central Library"
 					]
-				}, {
+				},
+				{
 					"value": "51",
 					"synonyms": [
 						"Waiuku",
 						"Waiuku Library"
 					]
-				}, {
+				},
+				{
 					"value": "52",
 					"synonyms": [
 						"Warkworth",
 						"Warkworth Library"
 					]
-				}, {
+				},
+				{
 					"value": "53",
 					"synonyms": [
 						"Wellsford",
 						"Wellsford Library"
 					]
-				}, {
+				},
+				{
 					"value": "54",
 					"synonyms": [
 						"Whangaparaoa",
@@ -885,13 +986,16 @@
 	"alexa": {
 		"interactionModel": {
 			"languageModel": {
-				"intents": [{
+				"intents": [
+					{
 						"name": "AMAZON.CancelIntent",
 						"samples": []
-					}, {
+					},
+					{
 						"name": "AMAZON.FallbackIntent",
 						"samples": []
-					}, {
+					},
+					{
 						"name": "AMAZON.StopIntent",
 						"samples": []
 					}
@@ -900,16 +1004,19 @@
 		}
 	},
 	"dialogflow": {
-		"intents": [{
+		"intents": [
+			{
 				"name": "Default Fallback Intent",
 				"auto": true,
 				"webhookUsed": true,
 				"fallbackIntent": true
-			}, {
+			},
+			{
 				"name": "Default Welcome Intent",
 				"auto": true,
 				"webhookUsed": true,
-				"events": [{
+				"events": [
+					{
 						"name": "WELCOME"
 					}
 				]
