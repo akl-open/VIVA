@@ -57,7 +57,7 @@ app.setHandler({
 		//get the token from he promise and assign it to the token variable
 		code.then(function (value) {
 			token = value;
-			console.log("greetingIntent tokenkey" + token);
+			console.log("greetingIntent tokenkey " + token);
 		});
 
 		//Welcome speech
@@ -204,7 +204,7 @@ app.setHandler({
 		var output;
 
 		output = await getitemsByTitle(token, input);
-		console.log(JSON.stringify(output));
+		console.log("bookAvaliabilityIntent: "+JSON.stringify(output));
 
 		this.$session.$data.listofbooks = output;
 
@@ -396,7 +396,8 @@ app.setHandler({
 	},
 
 	testIntent(){
-		
+		let x = getItemDetails(token,2762030);
+		this.ask("Done");
 	},
 
 
@@ -677,7 +678,7 @@ async function connectToSierra() {
 //@param token: The token that was received form the authentication API
 //@param input: the search keywords that are received from the user
 //@return: a list of items after it is cleaned in order to be presented to the user
-async function getitemsByTitle(token, input) {
+async function getitemsByTitle(key, input) {
 	let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&text=" + input);
 	console.log("getitemsByTitle" + url);
 
@@ -685,7 +686,7 @@ async function getitemsByTitle(token, input) {
 		method: 'GET',
 		uri: url,
 		headers: {
-			'Authorization': 'Bearer ' + token,
+			'Authorization': 'Bearer ' + key,
 			'Content-Type': 'application/json;charset=UTF-8'
 		},
 		json: true // Automatically parses the JSON string in the response,
@@ -730,15 +731,15 @@ function cleanSearchResponse(data) {
 	return cleanList;
 }
 
-async function getItemDetails(token, itemID) {
-	let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/items/" + itemID);
+async function getItemDetails(key, itemID) {
+	let url = encodeURI("https://test.elgar.govt.nz:443/iii/sierra-api/v5/items/?fields=location,status&bibIds=" + itemID);
 	console.log("getItemDetails" + url);
 
 	const options = {
 		method: 'GET',
 		uri: url,
 		headers: {
-			'Authorization': 'Bearer ' + token,
+			'Authorization': 'Bearer ' + key,
 			'Content-Type': 'application/json;charset=UTF-8'
 		},
 		json: true // Automatically parses the JSON string in the response,
@@ -747,12 +748,41 @@ async function getItemDetails(token, itemID) {
 	const promData = await requestPromise(options);
 	let data = promData;
 
-	//console.log("getItemDetails" + JSON.stringify(data));
+	console.log("getItemDetails" + JSON.stringify(data));
 
-	//let result = cleanSearchResponse(data);
+	let result = cleanDetailsResponse(data);
 
-	return result;
+	//return result;
 
 }
+
+function cleanDetailsResponse(data){
+	
+}
+
+// async function getDataFromSierra(key, uri) {
+// 	let url = encodeURI(uri);
+// 	console.log("getDataFromSierra" + url);
+
+// 	const options = {
+// 		method: 'GET',
+// 		uri: url,
+// 		headers: {
+// 			'Authorization': 'Bearer ' + key,
+// 			'Content-Type': 'application/json;charset=UTF-8'
+// 		},
+// 		json: true // Automatically parses the JSON string in the response,
+// 	};
+
+// 	const promData = await requestPromise(options);
+// 	let data = promData.entries;
+
+// 	console.log("getDataFromSierra" + JSON.stringify(data));
+
+// 	//let result = cleanSearchResponse(data);
+
+// 	return data;
+
+// }
 
 module.exports.app = app;
