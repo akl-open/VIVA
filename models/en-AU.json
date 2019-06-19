@@ -467,6 +467,13 @@
 					}
 				}
 			]
+		}, {
+			"name": "testIntent",
+			"phrases": [
+				"test test test",
+				"chickens love to test",
+				"this is a test"				
+			]
 		}
 	],
 	"inputTypes": [
