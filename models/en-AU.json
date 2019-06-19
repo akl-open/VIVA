@@ -27,7 +27,7 @@
 			"Im looking for the book called {bookTitle}",
 			"find the book {bookTitle}",
 			"find me the book called {bookTitle}",
-			"search for {bookTitle}
+			"search for {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -38,16 +38,7 @@
 				}
 			]
 		},{
-		"name": "bookListingIntent",
-		"phrases": [
-			"I am a bookListingIntent test"
-			]
-		},{
-		"name": "listingTitlesIntent",
-		"phrases": [
-			"I am a listingTitlesIntent test"
-			]
-		},{
+
 		"name": "confirmIntent",
 		"phrases": [
 			"{pick}"
