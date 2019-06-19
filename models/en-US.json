@@ -1,13 +1,34 @@
 {
 	"invocation": "auckland test",
 	"intents": [{
-		"name": "bookAvalibilityIntent",
+		"name": "defaultHelpIntent",
+		"alexa": {
+			"name": "AMAZON.HelpIntent"
+		},
+		"phrases": [
+			"help",
+			"help me",
+			"can you help me",
+			"what can i do",
+			"what can you do",
+			"options"
+		]
+		}, {
+		"name": "bookAvaliabilityIntent",
 		"phrases": [
 			"do you have {bookTitle}",
-			"is {bookTitle} avaliable",
-			"look up {bookTitle}",
-			"Have you got {bookTitle}",
-			"is {bookTitle} at the library"
+			"is {bookTitle} available",
+			"I want to borrow {bookTitle}",
+			"does the library have {bookTitle}",
+			"has the library purchased {bookTitle}",
+			"does {bookTitle} exist",
+			"get me the book {bookTitle}",
+			"get {bookTitle}",
+			"Im looking for the book called {bookTitle}",
+			"find the book {bookTitle}",
+			"find me the book called {bookTitle}",
+			"search for {bookTitle}",
+			"I want {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -18,30 +39,69 @@
 				}
 			]
 		},{
-			"name": "defaultHelpIntent",
-			"alexa": {
-				"name": "AMAZON.HelpIntent"
-			},
-			"phrases": [
-				"help",
-				"help me",
-				"can you help me",
-				"what can i do",
-				"what can you do"
+
+		"name": "confirmIntent",
+		"phrases": [
+			"{pick}"
+			],
+			"inputs": [{
+					"name": "pick",
+					"type": "confirmType"
+				}
 			]
-		}, {
+		},{
+		"name": "bookPurchaseIntent",
+		"phrases": [
+			"The library should buy {bookTitle}",
+			"why doesnt the library have {bookTitle}",
+			"request to purchase {bookTitle}",
+			"suggestion to purchase {bookTitle}",
+			"can the library buy {bookTitle}",
+			"purchase {bookTitle}",
+			"the library should buy {bookTitle} for me"
+			],
+			"inputs": [{
+					"name": "bookTitle",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+				}
+			]
+		},{
+		"name": "bookRequestIntent",
+		"phrases": [
+			"request {bookTitle}",
+			"reserve for {bookTitle}",
+			"put {bookTitle} on hold for me",
+			"hold {bookTitle} for me",
+			"place a hold on {bookTitle}",
+			"can I request {bookTitle}",
+			"can you keep {bookTitle} for me",
+			"I would like {bookTitle}"
+			],
+			"inputs": [{
+					"name": "bookTitle",
+					"type": {
+						"alexa": "AMAZON.SearchQuery",
+						"dialogflow": "@sys.any"
+					}
+				}
+			]
+		},{
 			"name": "eventsAtLibraryIntent",	
 			"phrases": [	
 				"what events are at {sitename}",	
 				"events at {sitename}",	
 				"whats happening at {sitename}",	
-				"What do you have at {sitename}"	
+				"What do you have at {sitename}",
+				"which events are on at {sitename}"
 			],	
 
  			"inputs": [{	
 				"name": "sitename",	
 				"type": "siteType"	
-			}	
+			}
 		]	
 		},{
 			"name": "infoAccountDetailsIntent",
@@ -114,9 +174,11 @@
 			"name": "infoEventDescriptionIntent",	
 			"phrases": [	
 				"What is {eventName}",	
-				"What happends at {eventName}",	
+				"What happens at {eventName}",	
 				"describe {eventName}",	
-				"tell me about {eventName}"	
+				"tell me about {eventName}",
+				"information about {eventName}",
+				"give me information about {eventName}"
 			],	
 			"inputs": [{	
 				"name": "eventName",	
@@ -126,9 +188,9 @@
 		}, {	
 			"name": "infoKidsEvents",	
 			"phrases": [	
-				"What events are avaliable at the library",	
-				"What events are avaliable for kids under five",	
-				"What events are avaliable for children under five",	
+				"What events are available at the library",	
+				"What events are available for kids under five",	
+				"What events are available for children under five",	
 				"Childrens events at the library",	
 				"what is there to do at the library for children"				      	
 			]	
@@ -191,6 +253,18 @@
 				"is there a JP service",
 				"is there a JP in today",
 				"When will the JP be in the library"
+			]
+		}, {
+			"name": "infoJokeIntent",
+			"phrases": [
+				"tell me a joke",
+				"tell me something funy",
+				"make me laugh",
+				"whats a good joke",
+				"tell me a library joke",
+				"say something funny",
+				"do you know a joke",
+				"humour me"
 			]
 		}, {
 			"name": "infoLyndaDotComIntent",
@@ -301,6 +375,7 @@
 				"how to become a member"
 			]
 		}, {
+
 			"name": "siteOpensIntent",
 			"phrases": [
 				"when does {sitename} library open",
@@ -329,9 +404,11 @@
 			"name": "suburbIntent",
 			"phrases": [
 				"i live in {suburbName}",
-				"{suburbName}",
 				"my suburb is {suburbName}",
-				"i live near {suburbName}"
+				"i live near {suburbName}",
+				"I am in {suburbName}",
+				"Im at {suburbName}",
+				"close to {suburbName}"
 			],
 			"inputs": [{
 					"name": "suburbName",
@@ -416,6 +493,45 @@
 					"synonyms": [
 						"Wriggle and rhyme",
 						"Wriggle"
+					]
+				}
+			]
+		}, {
+			"name": "confirmType",
+			"dialogflow": {
+				"automatedExpansion": true
+			},
+			"values": [
+				{
+					"value": "yes",
+					"synonyms": [
+						"yes",
+						"yes please",
+						"sure",
+						"pick that",
+						"that one",
+						"ok",
+						"select",
+						"yes I want that one",
+						"choose that",
+						"select this book"
+					]
+				}, {
+					"value": "no",
+					"synonyms": [
+						"no",
+						"nope",
+						"not that one",
+						"next",
+						"continue"
+					]
+				}, {
+					"value": "cancel",
+					"synonyms": [
+						"cancel",
+						"stop",
+						"halt",
+						"end"
 					]
 				}
 			]
