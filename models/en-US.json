@@ -1,5 +1,5 @@
 {
-	"invocation": "auckland test",
+	"invocation": "auckland library",
 	"intents": [{
 		"name": "defaultHelpIntent",
 		"alexa": {
