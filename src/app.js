@@ -668,4 +668,29 @@ function getNearestLibrary(obj, input) {
 		return cleanList;
 	}
 
+	async function getItemDetails(token, itemID){
+		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/items/"+itemID);
+		console.log("getItemDetails" + url);
+
+		const options = {
+			method:'GET',
+			uri: url,
+			headers: {
+					'Authorization': 'Bearer '+token,
+					'Content-Type':'application/json;charset=UTF-8'
+			},
+			json: true // Automatically parses the JSON string in the response,
+		};
+
+		const promData = await requestPromise(options);
+		let data = promData; 
+
+		//console.log("getItemDetails" + JSON.stringify(data));
+
+		//let result = cleanSearchResponse(data);
+
+		return result;
+
+	}
+
 module.exports.app = app;
