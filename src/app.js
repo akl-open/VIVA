@@ -51,16 +51,16 @@ app.setHandler({
 	},
 
 	async greetingIntent() {
-		//authenticate with Sierrra and get a promise of a token
+		//authenticate with Sierra and get a promise of a token
 		var code = connectToSierra();
 
-		//get the token fromt he promise and assign it to the token variable
+		//get the token from he promise and assign it to the token variable
 		code.then(function(value) {		
 			token = value;
 				console.log("greetingIntent tokenkey" + token);
 			});
 
-			//Welcome speach
+		//Welcome speech
 		this.ask(this.t('greeting.speech'), this.t('anythingelse.speech'));
 	},
 
@@ -166,8 +166,6 @@ app.setHandler({
 	// this should be redundant; if there is no date specified whenSiteOpenIntent() should be able to handle
 	// either by checking for undef'd and sending a new date to openHoursHelper, or a default set in the skill/action
 
-	// this.tell(this.$inputs.sitename.key + ' is open at blah');
-
 		let speech = 'I\'m not sure ' + this.$inputs.sitename.key + ' exists';
 		console.log('from sites open start ', speech, this.$data);
 		
@@ -207,55 +205,18 @@ console.log(JSON.stringify(output));
 		//send to listingState
 		this.followUpState('listingState')
 			.toIntent('listingTitlesIntent');
-//			.ask(speech, this.t('anythingelse.speech'));		
 	},
 	
-	bookListingIntent() {
-	// helper function for testing
-	// until one is picked, list ends or user cancels
-	
-		var speech = "Listing titles";
-			
-		this.$session.$data.loopCounter = 0;
-		this.$session.$data.listofbooks = [
-    {
-        "id": "1009149",
-        "title": "The dark side of the sun",
-        "author": "Pratchett, Terry."
-      },{
-        "id": "2268615",
-        "title": "Bill Pratney : never say die",
-        "author": "Robinson, Jim, 1967- author."
-      },{
-        "id": "2591196",
-        "title": "I shall wear midnight [large print]",
-        "author": "Pratchett, Terry."
-      },{
-        "id": "2696748",
-        "title": "A blink of the screen : collected shorter fiction",
-        "author": "Pratchett, Terry."
-      },{
-        "id": "1220660",
-        "title": "Punishment in a perfect society : the New Zealand penal system, 1840-1939",
-        "author": "Pratt, John, 1949-"
-	  }
-	];
-		  
-		this.followUpState('listingState')
-			.ask(speech, this.t('anythingelse.speech'));
-	},
-
 	listingState: {
 
 		listingTitlesIntent() {
-			// output the next title in the list
-
-console.log('listingTitlesIntent loopCounter ' + this.$session.$data.loopCounter + '-------------------');
-console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks));
+			// present the next title in the list from this.$session.$data.listofbooks
+			// loops based on this.$session.$data.loopCounter
 
 			let speech = '';
 			let showing = this.$session.$data.loopCounter;
 			
+			// present current item
 			if (showing < this.$session.$data.listofbooks.length) {
 				let title = this.$session.$data.listofbooks[this.$session.$data.loopCounter];
 				this.ask(this.t('Is the one you want ' + title.title + ' by ' + title.author), this.t('anythingelse.speech'));			
@@ -268,8 +229,7 @@ console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks)
 		},
 		
 		confirmIntent() {
-			// iterates through the list returned from API
-			// if a book is picked it will be set as the session array this.$session.$data.listofbooks
+			// if a book is picked set as the session array this.$session.$data.listofbooks
 			let choice = this.$inputs.pick.value;
 			let counter = this.$session.$data.loopCounter;
 			let title = this.$session.$data.listofbooks[counter];
@@ -283,10 +243,8 @@ console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks)
 						this.$session.$data.loopCounter = 0;
 						this.removeState();
 						this.toIntent('bookRequestIntent');
-//						this.ask(this.t('You picked ' + JSON.stringify(this.$session.$data.listofbooks)), this.t('anythingelse.speech'));
 						break;
 					case 'no':
-		console.log('choice was no ------------'+choice);
 						this.$session.$data.loopCounter = parseInt(counter) + 1;
 						this.toIntent('listingTitlesIntent');
 						break;
