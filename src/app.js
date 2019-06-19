@@ -128,6 +128,18 @@ app.setHandler({
 		this.ask(this.t('info.justicepeace'), this.t('anythingelse.speech'));
 	},
 
+	infoJokeIntent(){
+		//this is an easter egg
+		var jokeList = ["Have you seen the Bruce Willis movie where an entire library gets destroyed? It's called \"Die Hardcover\" ", 
+						"What did the Librarian say to the rapper? \"I like big books and I can not lie\" ", 
+						"What do you do if your pet starts eating your library book? You take the words right out of their mouth."
+					];
+		let response =  jokeList[Math.floor(Math.random()*3)];
+		console.log(response);
+		
+		this.ask(response, this.t('anythingelse.speech'));
+	},
+
 	infoLyndaDotComIntent() {
 		this.ask(this.t('info.lyndadotcom'), this.t('anythingelse.speech'));
 	},

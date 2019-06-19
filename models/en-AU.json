@@ -255,6 +255,18 @@
 				"When will the JP be in the library"
 			]
 		}, {
+			"name": "infoJokeIntent",
+			"phrases": [
+				"tell me a joke",
+				"tell me something funy",
+				"make me laugh",
+				"whats a good joke",
+				"tell me a library joke",
+				"say something funny",
+				"do you know a joke",
+				"humour me"
+			]
+		}, {
 			"name": "infoLyndaDotComIntent",
 			"phrases": [
 				"Use lynda.com",
