@@ -194,20 +194,17 @@ app.setHandler({
 		var input = this.$inputs.bookTitle.value;
 		var output;		
 		
-		//console.log("bookAvaliabilityIntent tokenkey " + token);
 		output = await getitemsByTitle(token, input);
-console.log(JSON.stringify(output));
+		console.log(JSON.stringify(output));
+
 		this.$session.$data.listofbooks = output;
 		
 		//loop counter for listingState
 		this.$session.$data.loopCounter = 0;
 
-//		this.ask("done" + this.t('info.requestItem'));
-
 		//send to listingState
 		this.followUpState('listingState')
-			.toIntent('listingTitlesIntent');
-//			.ask(speech, this.t('anythingelse.speech'));		
+			.toIntent('listingTitlesIntent');		
 	},
 	
 	bookListingIntent() {
@@ -283,7 +280,6 @@ console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks)
 						this.$session.$data.loopCounter = 0;
 						this.removeState();
 						this.toIntent('bookRequestIntent');
-//						this.ask(this.t('You picked ' + JSON.stringify(this.$session.$data.listofbooks)), this.t('anythingelse.speech'));
 						break;
 					case 'no':
 		console.log('choice was no ------------'+choice);
@@ -312,9 +308,6 @@ console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks)
 	
 	bookRequestIntent() {
 	// customer wants info on how to request a specific title
-	//	console.log('bookRequestIntent I was called!!! Happy days! ' + JSON.stringify(this.$inputs.bookTitle) + ' ------------------');
-//		console.log('bookRequestIntent might have been called by bookListingIntent ' + JSON.stringify(this.$session.$data.listofbooks));
-
 		this.ask(this.t('info.requestItem'), this.t('anythingelse.speech'));
 	},
 
@@ -481,9 +474,7 @@ console.log('List of books \n' + JSON.stringify(this.$session.$data.listofbooks)
 });
 
 /*
-	parseISOString
-		takes ISO Date formatted string yyyy-MM-ddThh:mm:ssZ or yyyy-MM-dd
-		converts to a json date object
+	parseISOString:	Takes ISO Date formatted string yyyy-MM-ddThh:mm:ssZ or yyyy-MM-dd converts to a json date object
 	@param s is an ISO formatted date string
 	@return new date set to the content of the string
 */
@@ -498,9 +489,7 @@ console.log('parseISOString from to ', s, b);
 }
 
 /*
-	openHoursHelper
-		Gives the open hours for each day of the week.
-		If is a site is on extended closure then it will provide the dates instead.
+	openHoursHelper: Gives the open hours for each day of the week.	If is a site is on extended closure then it will provide the dates instead.
 	@param eventInfo string name of event requested (optional)
 	@param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
 	@param day is a Date, the day the hours are requested for
@@ -633,31 +622,32 @@ function openHoursHelper(dayRequest, siteobj, eventInfo) {
 	// Seems something in the backend doesn't automatically escape out colons... or something.
 	//returnSpeech.replace(/:/g, ".");
 	//doesn't appear to be doing anything, would be good to make work
-
-	console.log("helper is trying to return returnSpeech ", returnSpeech.toString() + '------------------------');
-	return returnSpeech;
-}
-
-//used to get the list of nearest libraries from a key value pair object
-//@param obj: An object of jey value pairs that is a copy of the Google sheet
-//@param input: The suburb name as the keyword input by the user 
-function getNearestLibrary(obj, input) {
-  var result = "";
-	for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-			if(key.toLowerCase() == input.toLowerCase()){
-				result = obj[key];
-			}				
-    }
+	let speech = returnSpeech.toString().replace(/:/g,"-");
+	console.log("helper is trying to return returnSpeech ", speech );
+	return speech;
 	}
-	console.log("getNearestLibraryResult: "+result);
-  return result;
-}
 
-//used to get a list of events at the requested library
-//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
-//@param rTime: An object of of the selected row from the rhymetime google sheet
-//@param sTime: An object of of the selected row from the storytime google sheet
+	//used to get the list of nearest libraries from a key value pair object
+	//@param obj: An object of jey value pairs that is a copy of the Google sheet
+	//@param input: The suburb name as the keyword input by the user 
+	function getNearestLibrary(obj, input) {
+	var result = "";
+		for (var key in obj) {
+			if (obj.hasOwnProperty(key)) {
+					if(key.toLowerCase() == input.toLowerCase()){
+						result = obj[key];
+					}				
+			}
+		}
+		console.log("getNearestLibraryResult: "+result);
+	return result;
+	}
+
+	//used to get a list of events at the requested library
+	//@param wAndR: An object of of the selected row from the wriggleAndRhyme google sheet
+	//@param rTime: An object of of the selected row from the rhymetime google sheet
+	//@param sTime: An object of of the selected row from the storytime google sheet
+	//@return returns a list of event happening at the library.
 	function libraryEventsList(wAndR, rTime, sTime)	{
 		var wriggleAndRhyme="";
 		var rhymeTime="";
@@ -667,7 +657,8 @@ function getNearestLibrary(obj, input) {
 		console.log("libraryEventsList:WandR: "+ JSON.stringify(wAndR));
 		console.log("libraryEventsList:RTime: "+ JSON.stringify(rTime));
 		console.log("libraryEventsList:STime: "+ JSON.stringify(sTime));
-
+		
+		//Create event list for wriggle and Rhyme
 		for (var val in wAndR) 
 		{
 			if (wAndR[val] != '' && val != 'id'&& val != 'site'){
@@ -675,7 +666,7 @@ function getNearestLibrary(obj, input) {
 				wriggleAndRhyme = wriggleAndRhyme+" "+wAndR[val]+",";
 			}		
 		}
-
+		//Create event list for Rhymetime
 		for (var val in rTime) 
 		{
 			if (rTime[val] != '' && val != 'id'&& val != 'site'){
@@ -683,7 +674,7 @@ function getNearestLibrary(obj, input) {
 				rhymeTime = rhymeTime+" "+rTime[val]+",";
 			}		
 		}
-
+		//Create event list for Storytime
 		for (var val in sTime) 
 		{
 			if (sTime[val] != '' && val != 'id'&& val != 'site'){
@@ -701,13 +692,13 @@ function getNearestLibrary(obj, input) {
 		if(wriggleAndRhyme != ''){
 			result = result + " Wriggle and Rhyme is on " + wriggleAndRhyme;
 		}
-		
-
 	
 		console.log("libraryEventsList: Final Result :"+ result);
 		return result;
 	}
 
+	//used to Authenticate ourselves witht he Sierra servers
+	//@return: returns a token that is valid for 3600 minutes
 	async function connectToSierra(){
 		const options = {
 				method:'POST',
@@ -728,8 +719,11 @@ function getNearestLibrary(obj, input) {
 		return token;
 	}
 
+	//used to get a list of events at the requested library
+	//@param token: The token that was received form the authentication API
+	//@param input: the search keywords that are received from the user
+	//@return: a list of items after it is cleaned in order to be presented to the user
 	async function getitemsByTitle(token, input){
-//		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&index=Title&text="+input);
 		let url = encodeURI("https://test.elgar.govt.nz/iii/sierra-api/v5/bibs/search?limit=50&offset=0&fields=title,author,lang,materialType,deleted,suppressed&text="+input);
 		console.log("getitemsByTitle" + url);
 
@@ -746,14 +740,14 @@ function getNearestLibrary(obj, input) {
 		const promData = await requestPromise(options);
 		let data = promData; 
 
-		//console.log("getitemsByTitle" + JSON.stringify(data));
-
 		let result = cleanSearchResponse(data);
 
 		return result;
 
 	}
-	//parse and format response from sierrra
+	//Format the getItems response from sierrra
+	//@param data: an array of objects from the sierra response
+	//@return: a list of items after it is cleaned in order to be presented to the user
 	function cleanSearchResponse(data){
 
 		let rawList = data.entries;
@@ -762,15 +756,15 @@ function getNearestLibrary(obj, input) {
 
 		for(i=0; i < rawList.length; i++){
 			//Exclude items with a relevance of less than 1.0
-			if(parseFloat(rawList[i].relevance) < 1.0){console.log("*** Relevance "+rawList[i].relevance); continue;}
+			if(parseFloat(rawList[i].relevance) < 1.0) { continue;}
 			//Exclude items that are suppressed
-			if(rawList[i].bib.suppressed == true) {console.log("*** Supressed "+rawList[i].bib.suppressed); continue;}
+			if(rawList[i].bib.suppressed == true) {continue;}
 			//Exclude items that are deleted
-			if(rawList[i].bib.deleted == true) {console.log("*** Deleted "+rawList[i].bib.deleted); continue;}
+			if(rawList[i].bib.deleted == true) {continue;}
 			//Exclude items that are not books
-			if(rawList[i].bib.materialType.code != "a  ") {console.log("*** material code "+rawList[i].bib.materialType.code); continue;}
+			if(rawList[i].bib.materialType.code != "a  ") {continue;}
 			//Exclude items that are not in english
-			if(rawList[i].bib.lang.code != "eng") {console.log("***5 "+rawList[i].bib.lang.code); continue;}
+			if(rawList[i].bib.lang.code != "eng") {continue;}
 
 			let title = rawList[i].bib.title.toString().replace(/:/g,"-");
 			let returnItem = {id:rawList[i].bib.id, title:title, author:rawList[i].bib.author};
@@ -778,8 +772,6 @@ function getNearestLibrary(obj, input) {
 			cleanList.push(returnItem);
 
 		}
-		
-		console.log("cleanSearchResponse "+JSON.stringify(cleanList));
 
 		return cleanList;
 	}

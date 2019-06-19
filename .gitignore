@@ -14,3 +14,5 @@ platforms/googleAction/dialogflow/entities/siteType_entries_en-us\.json
 platforms/googleAction/dialogflow/entities/siteType\.json
 
 platforms/alexaSkill/models/en-US\.json
+
+\.vscode/
