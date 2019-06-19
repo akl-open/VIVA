@@ -271,18 +271,8 @@ app.setHandler({
 		this.ask(this.t('info.requestItem'), this.t('anythingelse.speech'));
 	},
 
-	/*
-	if sitename.key missing "is the library open" <implies now>
-		-> todo library picker - check if site is extended close, then mention that and suggest a near by site?
-	for now we assume that the site is asked for, or is central library
-
-	if whenDate.key undef'd "open time albany library" <implied now>
-		-> giveTime(sitename, now())
-	else
-		set the session var to now() and do the case
-
-	*/
 	whenSiteOpenIntent() {
+	// customer wants to know when a site is open. No time stated means they want to know about 'now'
 		let speech = 'Hmm, that doesn\'t ring a bell';
 
 		try {
@@ -342,9 +332,7 @@ app.setHandler({
 	},
 
 	eventBySiteAtTimeIntent() {
-	// user has asked for a specific event at a specific library at a time
-	//	console.log('eventBySiteAtTimeIntent says hello \ninputs: ', this.$inputs, ' \ndata: ', this.$data, '-----------');
-		
+	// user has asked for a specific event at a specific library at a time	
 
 		var dayRequest = this.$inputs.whenDate.key;
 		var sitename = this.$inputs.sitename.key;
@@ -567,10 +555,6 @@ function openHoursHelper(dayRequest, siteobj, eventInfo) {
 				}
 			}
 		}
-
-		// site is extended closed
-		// to do add a site picker option to find nearby to the site
-		// to do add a reason column
 		else {
 			returnSpeech = siteobj.site + " is closed from " + siteobj.extendedclose + " and opens again on " + siteobj.extendedopen + " due to " + siteobj.extendedreason;
 		}
@@ -579,9 +563,7 @@ function openHoursHelper(dayRequest, siteobj, eventInfo) {
 		returnSpeech = "I'm not sure that site exists, can you try again please";
 		console.log("openHoursHelper site is undefined ", siteobj);
 	}
-	// Seems something in the backend doesn't automatically escape out colons... or something.
-	//returnSpeech.replace(/:/g, ".");
-	//doesn't appear to be doing anything, would be good to make work
+
 	let speech = returnSpeech.toString().replace(/:/g,"-");
 	console.log("helper is trying to return returnSpeech ", speech );
 	return speech;

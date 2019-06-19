@@ -27,7 +27,8 @@
 			"Im looking for the book called {bookTitle}",
 			"find the book {bookTitle}",
 			"find me the book called {bookTitle}",
-			"search for {bookTitle}"
+			"search for {bookTitle}",
+			"I want {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -93,7 +94,8 @@
 				"what events are at {sitename}",	
 				"events at {sitename}",	
 				"whats happening at {sitename}",	
-				"What do you have at {sitename}"	
+				"What do you have at {sitename}",
+				"which events are on at {sitename}"
 			],	
 
  			"inputs": [{	
@@ -172,9 +174,11 @@
 			"name": "infoEventDescriptionIntent",	
 			"phrases": [	
 				"What is {eventName}",	
-				"What happends at {eventName}",	
+				"What happens at {eventName}",	
 				"describe {eventName}",	
-				"tell me about {eventName}"	
+				"tell me about {eventName}",
+				"information about {eventName}",
+				"give me information about {eventName}"
 			],	
 			"inputs": [{	
 				"name": "eventName",	
@@ -184,9 +188,9 @@
 		}, {	
 			"name": "infoKidsEvents",	
 			"phrases": [	
-				"What events are avaliable at the library",	
-				"What events are avaliable for kids under five",	
-				"What events are avaliable for children under five",	
+				"What events are available at the library",	
+				"What events are available for kids under five",	
+				"What events are available for children under five",	
 				"Childrens events at the library",	
 				"what is there to do at the library for children"				      	
 			]	
