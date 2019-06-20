@@ -748,16 +748,32 @@ async function getItemDetails(key, itemID) {
 	const promData = await requestPromise(options);
 	let data = promData;
 
-	console.log("getItemDetails" + JSON.stringify(data));
+	//console.log("getItemDetails" + JSON.stringify(data));
 
-	let result = cleanDetailsResponse(data);
+	let result = cleanDetailsResponse(data.entries);
 
-	//return result;
+	return result;
 
 }
 
 function cleanDetailsResponse(data){
-	
+
+	let rawList = data;
+	let avalibleCount = 0;
+	let libraryList = "";
+
+	for (i = 0; i < rawList.length; i++) {
+		if(rawList[i].status.hasOwnProperty("duedate")) { continue;}
+		if(rawList[i].status.display.toUpperCase() != "AVAILABLE"){ continue;}
+
+		avalibleCount++;
+		libraryList = libraryList + rawList[i].location.name + "\n "
+	}
+
+	var returnObj = {count: avalibleCount, libraryList: libraryList};
+	//console.log(returnObj);
+
+	return returnObj;
 }
 
 // async function getDataFromSierra(key, uri) {
