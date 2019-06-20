@@ -39,7 +39,6 @@
 				}
 			]
 		},{
-
 		"name": "confirmIntent",
 		"phrases": [
 			"{pick}"
@@ -539,6 +538,17 @@
 						"stop",
 						"halt",
 						"end"
+					]
+				}, {
+					"value": "repeat",
+					"synonyms": [
+						"repeat",
+						"say that again",
+						"what was that",
+						"I didnt hear that",
+						"could you say that again",
+						"could you repeat that",
+						"again"
 					]
 				}
 			]

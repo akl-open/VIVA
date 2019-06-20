@@ -223,12 +223,19 @@ app.setHandler({
 			// loops based on this.$session.$data.loopCounter
 
 			let speech = '';
-			let showing = this.$session.$data.loopCounter;
+			let showing = parseInt(this.$session.$data.loopCounter);
+			let reStateHelp = 3; // restate the listing help instructions every this number of times
+			
+			if (showing % reStateHelp == 0) {
+				console.log('mod 3 = 0');
+				speech = 'Say yes to pick this one, next to get the next and to stop listing say cancel. ';
+			}
 
 			// present current item
 			if (showing < this.$session.$data.listofbooks.length) {
 				let title = this.$session.$data.listofbooks[this.$session.$data.loopCounter];
-				this.ask(this.t('Is the one you want ' + title.title + ' by ' + title.author), this.t('anythingelse.speech'));
+				speech = speech + 'Is the one you want ' + title.title + ' by ' + title.author;
+				this.ask(this.t(speech), this.t('anythingelse.speech'));
 			}
 			// none of the titles listed are picked, suggest we buy it
 			else {
@@ -257,6 +264,9 @@ app.setHandler({
 						this.$session.$data.loopCounter = parseInt(counter) + 1;
 						this.toIntent('listingTitlesIntent');
 						break;
+					case 'repeat':
+						this.toIntent('listingTitlesIntent');
+						break;
 					case 'cancel':
 						this.removeState();
 						this.$session.$data.loopCounter = 0;
@@ -267,6 +277,11 @@ app.setHandler({
 						this.toIntent('Unhandled');
 				}
 			}
+		},
+		
+		defaultHelpIntent() {
+			console.log('help meeeee I\'m trapped in a list -------------------');
+			this.ask(this.t('Say yes to pick this one, next to get the next and to stop listing say cancel. '), this.t('Let me know if you want to continue'));
 		},
 	},
 
