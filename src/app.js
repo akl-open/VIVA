@@ -228,7 +228,7 @@ app.setHandler({
 			
 			if (showing % reStateHelp == 0) {
 				console.log('mod 3 = 0');
-				speech = 'Say yes to pick this one, next to get the next and to stop listing say cancel. ';
+				speech = 'To pick this one say yes, to get the next say no, say repeat if you want to hear it again and to stop listing say cancel. ';
 			}
 
 			// present current item
@@ -281,7 +281,7 @@ app.setHandler({
 		
 		defaultHelpIntent() {
 			console.log('help meeeee I\'m trapped in a list -------------------');
-			this.ask(this.t('Say yes to pick this one, next to get the next and to stop listing say cancel. '), this.t('Let me know if you want to continue'));
+			this.ask(this.t('To pick this one say yes, to get the next say no, say repeat if you want to hear it again and to stop listing say cancel. '), this.t('Let me know if you want to continue'));
 		},
 	},
 

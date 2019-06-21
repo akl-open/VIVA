@@ -28,7 +28,10 @@
 			"find the book {bookTitle}",
 			"find me the book called {bookTitle}",
 			"search for {bookTitle}",
-			"I want {bookTitle}"
+			"I want {bookTitle}",
+			"I would like {bookTitle}",
+			"give me information about {bookTitle}",
+			"tell me about {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -77,7 +80,7 @@
 			"place a hold on {bookTitle}",
 			"can I request {bookTitle}",
 			"can you keep {bookTitle} for me",
-			"I would like {bookTitle}"
+			"I want to pick up {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
