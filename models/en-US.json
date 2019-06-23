@@ -28,7 +28,10 @@
 			"find the book {bookTitle}",
 			"find me the book called {bookTitle}",
 			"search for {bookTitle}",
-			"I want {bookTitle}"
+			"I want {bookTitle}",
+			"I would like {bookTitle}",
+			"give me information about {bookTitle}",
+			"tell me about {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -78,7 +81,7 @@
 			"place a hold on {bookTitle}",
 			"can I request {bookTitle}",
 			"can you keep {bookTitle} for me",
-			"I would like {bookTitle}"
+			"I want to pick up {bookTitle}"
 			],
 			"inputs": [{
 					"name": "bookTitle",
@@ -246,7 +249,7 @@
 		}, {
 			"name": "infoJusticeIntent",
 			"phrases": [
-				"is there a justice of the peace at the libary",
+				"is there a justice of the peace at the library",
 				"Where can I find a justice of the peace",
 				"Is there a j p at the library",
 				"Where can I find a j p",
