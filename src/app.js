@@ -204,7 +204,7 @@ app.setHandler({
 		var output;
 
 		output = await getitemsByTitle(token, input);
-		console.log("bookAvaliabilityIntent: "+JSON.stringify(output));
+		console.log("bookAvaliabilityIntent: " + JSON.stringify(output));
 
 		this.$session.$data.listofbooks = output;
 
@@ -395,9 +395,9 @@ app.setHandler({
 		}
 	},
 
-	testIntent(){
-		let x = getItemDetails(token,2762030);
-		this.ask("Done");
+	async testIntent() {
+		let x = await getItemDetails(token, 2762030);
+		this.ask(x.libraryList + " " + x.count);
 	},
 
 
@@ -437,11 +437,10 @@ app.setHandler({
 
 });
 
-/*
-	parseISOString:	Takes ISO Date formatted string yyyy-MM-ddThh:mm:ssZ or yyyy-MM-dd converts to a json date object
-	@param s is an ISO formatted date string
-	@return new date set to the content of the string
-*/
+
+// parseISOString:	Takes ISO Date formatted string yyyy-MM-ddThh:mm:ssZ or yyyy-MM-dd converts to a json date object
+// @param s is an ISO formatted date string
+// @return new date set to the content of the string
 function parseISOString(s) {
 	var b = s.split(/\D+/);
 	console.log('parseISOString from to ', s, b);
@@ -452,13 +451,13 @@ function parseISOString(s) {
 		return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
 }
 
-/*
-	openHoursHelper: Gives the open hours for each day of the week.	If is a site is on extended closure then it will provide the dates instead.
-	@param eventInfo string name of event requested (optional)
-	@param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
-	@param day is a Date, the day the hours are requested for
-	@return speech, string containing some formatted speech
-*/
+
+// openHoursHelper: Gives the open hours for each day of the week.	If is a site is on extended closure then it will provide the dates instead.
+// @param eventInfo string name of event requested (optional)
+// @param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
+// @param day is a Date, the day the hours are requested for
+// @return speech, string containing some formatted speech
+
 function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
 	var returnSpeech = '';
@@ -674,7 +673,7 @@ async function connectToSierra() {
 	return token;
 }
 
-//used to get a list of events at the requested library
+//used to get a list of books from the sierra API
 //@param token: The token that was received form the authentication API
 //@param input: the search keywords that are received from the user
 //@return: a list of items after it is cleaned in order to be presented to the user
@@ -731,6 +730,10 @@ function cleanSearchResponse(data) {
 	return cleanList;
 }
 
+//used to get the detail about avalibility of a particular item
+//@param token: The token that was received form the authentication API
+//@param input: the search keywords that are received from the user(based on the book they selscted)
+//@return: a list of items after it is cleaned in order to be presented to the user
 async function getItemDetails(key, itemID) {
 	let url = encodeURI("https://test.elgar.govt.nz:443/iii/sierra-api/v5/items/?fields=location,status&bibIds=" + itemID);
 	console.log("getItemDetails" + url);
@@ -748,57 +751,32 @@ async function getItemDetails(key, itemID) {
 	const promData = await requestPromise(options);
 	let data = promData;
 
-	//console.log("getItemDetails" + JSON.stringify(data));
-
 	let result = cleanDetailsResponse(data.entries);
 
 	return result;
 
 }
 
-function cleanDetailsResponse(data){
+//Format the getItemDetails response from sierrra
+//@param data: an array of objects from the sierra response
+//@return: a list of items after it is cleaned in order to be presented to the user
+function cleanDetailsResponse(data) {
 
 	let rawList = data;
 	let avalibleCount = 0;
 	let libraryList = "";
 
 	for (i = 0; i < rawList.length; i++) {
-		if(rawList[i].status.hasOwnProperty("duedate")) { continue;}
-		if(rawList[i].status.display.toUpperCase() != "AVAILABLE"){ continue;}
+		if (rawList[i].status.hasOwnProperty("duedate")) { continue; }
+		if (rawList[i].status.display.toUpperCase() != "AVAILABLE") { continue; }
 
 		avalibleCount++;
 		libraryList = libraryList + rawList[i].location.name + "\n "
 	}
 
-	var returnObj = {count: avalibleCount, libraryList: libraryList};
-	//console.log(returnObj);
+	var returnObj = { count: avalibleCount, libraryList: libraryList }
 
 	return returnObj;
 }
-
-// async function getDataFromSierra(key, uri) {
-// 	let url = encodeURI(uri);
-// 	console.log("getDataFromSierra" + url);
-
-// 	const options = {
-// 		method: 'GET',
-// 		uri: url,
-// 		headers: {
-// 			'Authorization': 'Bearer ' + key,
-// 			'Content-Type': 'application/json;charset=UTF-8'
-// 		},
-// 		json: true // Automatically parses the JSON string in the response,
-// 	};
-
-// 	const promData = await requestPromise(options);
-// 	let data = promData.entries;
-
-// 	console.log("getDataFromSierra" + JSON.stringify(data));
-
-// 	//let result = cleanSearchResponse(data);
-
-// 	return data;
-
-// }
 
 module.exports.app = app;
