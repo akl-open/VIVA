@@ -459,13 +459,11 @@ function parseISOString(s) {
 	return returnDate;
 }
 
-
 // openHoursHelper: Gives the open hours for each day of the week.	If is a site is on extended closure then it will provide the dates instead.
 // @param eventInfo string name of event requested (optional)
 // @param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
 // @param day is a Date, the day the hours are requested for
 // @return speech, string containing some formatted speech
-
 function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
 	var returnSpeech = '';
@@ -707,6 +705,7 @@ async function getitemsByTitle(key, input) {
 	return result;
 
 }
+
 //Format the getItems response from sierrra
 //@param data: an array of objects from the sierra response
 //@return: a list of items after it is cleaned in order to be presented to the user
@@ -735,7 +734,7 @@ function cleanSearchResponse(data) {
 
 	}
 
-	return cleanList;
+	return cleanList.slice(0,3);
 }
 
 //used to get the detail about avalibility of a particular item
