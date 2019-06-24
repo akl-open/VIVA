@@ -307,7 +307,9 @@ app.setHandler({
 	},
 
 	nearestLibraryIntent() {
-		let speech = "Sure, what suburb are you in?";
+		//Amazon doesn't allow single slot only entries when using the search query slot type. 
+		//so the user needs to give some form of description before the suburb name
+		let speech = "Sure, what suburb are you in? For example you can say 'I live in Botnay'";
 
 
 		this.followUpState('locationState')
@@ -321,9 +323,9 @@ app.setHandler({
 
 			try {
 				var libraryList = this.$cms.suburbSearch;
-				var library = getNearestLibrary(libraryList, this.$inputs.suburbName.key);
+				var library = getNearestLibrary(libraryList, this.$inputs.suburbName.value);
 
-				console.log("suburb intent: " + library + " input: " + this.$inputs.suburbName.key);
+				console.log("suburb intent: " + library + " input: " + this.$inputs.suburbName.value);
 
 				if (library != "") {
 
