@@ -292,10 +292,8 @@ app.setHandler({
 
 			console.log('whenSiteOpenIntent site requested: ', this.$inputs, ' ----------------------');
 
-
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
-
 			speech = openHoursHelper(dayRequest, siteobj);
 		}
 		// reprompt
@@ -445,13 +443,20 @@ app.setHandler({
 // @param s is an ISO formatted date string
 // @return new date set to the content of the string
 function parseISOString(s) {
+	let returnDate;
 	var b = s.split(/\D+/);
 	console.log('parseISOString from to ', s, b);
 
-	if (b.length = 3)
-		return new Date(Date.UTC(b[0], --b[1], b[2]));
-	else
-		return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+	if (b.length = 3){
+		returnDate = new Date(Date.UTC(b[0], --b[1], b[2]));
+	}
+		
+	else{
+		returnDate = new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+	}		
+	
+	console.log("parseISOString "+returnDate)
+	return returnDate;
 }
 
 
