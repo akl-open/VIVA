@@ -337,7 +337,9 @@
 				"Does the library have a three d printer",
 				"three d printing",
 				"three d print",
-				"three d printer"
+				"three d printer",
+				"I want to do three d printing",
+				"Can I do three d printing"
 			]
 		}, {
 			"name": "infoUpdateDetails",
