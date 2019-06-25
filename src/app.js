@@ -237,7 +237,7 @@ app.setHandler({
 			}
 		},
 
-		confirmIntent() {
+		async confirmIntent() {
 			// if a book is picked set as the session array this.$session.$data.listofbooks
 			let choice = this.$inputs.pick.value;
 			let counter = this.$session.$data.loopCounter;
@@ -251,7 +251,15 @@ app.setHandler({
 						this.$session.$data.listofbooks = this.$session.$data.listofbooks[counter];
 						this.$session.$data.loopCounter = 0;
 						this.removeState();
-						this.toIntent('bookRequestIntent');
+						//this.toIntent('bookRequestIntent');
+						let selected = this.$session.$data.listofbooks;
+						let avaliable = await getItemDetails(token, selected.id);
+						if(avaliable.count > 0)
+						{
+							this.ask("I have found " +avaliable.count+ " copie(s) of "+ selected.title+ 
+							" it(s) currently avaliable at "+avaliable.libraryList);
+						}
+						else this.ask(this.t('info.bookUnavaliable'), this.t('anythingelse.speech'));
 						break;
 					case 'no':
 						this.$session.$data.loopCounter = parseInt(counter) + 1;
@@ -292,10 +300,8 @@ app.setHandler({
 
 			console.log('whenSiteOpenIntent site requested: ', this.$inputs, ' ----------------------');
 
-
 			var siteobj = this.$cms.OPENCLOSE.find(o => o.id === this.$inputs.sitename.key);
 			var dayRequest = parseISOString(this.$inputs.whenDate.key);
-
 			speech = openHoursHelper(dayRequest, siteobj);
 		}
 		// reprompt
@@ -307,7 +313,9 @@ app.setHandler({
 	},
 
 	nearestLibraryIntent() {
-		let speech = "Sure, what suburb are you in?";
+		//Amazon doesn't allow single slot only entries when using the search query slot type. 
+		//so the user needs to give some form of description before the suburb name
+		let speech = "Sure, what suburb are you in? For example you can say 'I live in Botnay'";
 
 
 		this.followUpState('locationState')
@@ -321,9 +329,9 @@ app.setHandler({
 
 			try {
 				var libraryList = this.$cms.suburbSearch;
-				var library = getNearestLibrary(libraryList, this.$inputs.suburbName.key);
+				var library = getNearestLibrary(libraryList, this.$inputs.suburbName.value);
 
-				console.log("suburb intent: " + library + " input: " + this.$inputs.suburbName.key);
+				console.log("suburb intent: " + library + " input: " + this.$inputs.suburbName.value);
 
 				if (library != "") {
 
@@ -443,22 +451,27 @@ app.setHandler({
 // @param s is an ISO formatted date string
 // @return new date set to the content of the string
 function parseISOString(s) {
+	let returnDate;
 	var b = s.split(/\D+/);
 	console.log('parseISOString from to ', s, b);
 
-	if (b.length = 3)
-		return new Date(Date.UTC(b[0], --b[1], b[2]));
-	else
-		return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+	if (b.length = 3){
+		returnDate = new Date(Date.UTC(b[0], --b[1], b[2]));
+	}
+		
+	else{
+		returnDate = new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+	}		
+	
+	console.log("parseISOString "+returnDate)
+	return returnDate;
 }
-
 
 // openHoursHelper: Gives the open hours for each day of the week.	If is a site is on extended closure then it will provide the dates instead.
 // @param eventInfo string name of event requested (optional)
 // @param siteobj is a JSON array, one row of site open times or event times lifted from googledoc
 // @param day is a Date, the day the hours are requested for
 // @return speech, string containing some formatted speech
-
 function openHoursHelper(dayRequest, siteobj, eventInfo) {
 
 	var returnSpeech = '';
@@ -700,6 +713,7 @@ async function getitemsByTitle(key, input) {
 	return result;
 
 }
+
 //Format the getItems response from sierrra
 //@param data: an array of objects from the sierra response
 //@return: a list of items after it is cleaned in order to be presented to the user
@@ -728,7 +742,7 @@ function cleanSearchResponse(data) {
 
 	}
 
-	return cleanList;
+	return cleanList.slice(0,3);
 }
 
 //used to get the detail about avalibility of a particular item
@@ -737,7 +751,7 @@ function cleanSearchResponse(data) {
 //@return: a list of items after it is cleaned in order to be presented to the user
 async function getItemDetails(key, itemID) {
 	let url = encodeURI("https://test.elgar.govt.nz:443/iii/sierra-api/v5/items/?fields=location,status&bibIds=" + itemID);
-	console.log("getItemDetails" + url);
+	console.log("getItemDetails " + url);
 
 	const options = {
 		method: 'GET',
@@ -766,6 +780,7 @@ function cleanDetailsResponse(data) {
 	let rawList = data;
 	let avalibleCount = 0;
 	let libraryList = "";
+	console.log("cleanDetailsResponse "+ JSON.stringify(data));
 
 	for (i = 0; i < rawList.length; i++) {
 		if (rawList[i].status.hasOwnProperty("duedate")) { continue; }
@@ -776,6 +791,8 @@ function cleanDetailsResponse(data) {
 	}
 
 	var returnObj = { count: avalibleCount, libraryList: libraryList }
+
+	console.log("cleanDetailsResponse "+ returnObj.count+" "+ returnObj.libraryList);
 
 	return returnObj;
 }

@@ -195,7 +195,9 @@
 				"What events are available for kids under five",	
 				"What events are available for children under five",	
 				"Childrens events at the library",	
-				"what is there to do at the library for children"				      	
+				"what is there to do at the library for children",
+				"what events are avaliable for preschoolers",
+				"what events are avilable for kindergarden kids"				      	
 			]	
 		},{	
 			"name": "infoKidsEventBooking",	
@@ -335,7 +337,9 @@
 				"Does the library have a three d printer",
 				"three d printing",
 				"three d print",
-				"three d printer"
+				"three d printer",
+				"I want to do three d printing",
+				"Can I do three d printing"
 			]
 		}, {
 			"name": "infoUpdateDetails",
