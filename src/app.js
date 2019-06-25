@@ -237,7 +237,7 @@ app.setHandler({
 			}
 		},
 
-		confirmIntent() {
+		async confirmIntent() {
 			// if a book is picked set as the session array this.$session.$data.listofbooks
 			let choice = this.$inputs.pick.value;
 			let counter = this.$session.$data.loopCounter;
@@ -251,7 +251,15 @@ app.setHandler({
 						this.$session.$data.listofbooks = this.$session.$data.listofbooks[counter];
 						this.$session.$data.loopCounter = 0;
 						this.removeState();
-						this.toIntent('bookRequestIntent');
+						//this.toIntent('bookRequestIntent');
+						let selected = this.$session.$data.listofbooks;
+						let avaliable = await getItemDetails(token, selected.id);
+						if(avaliable.count > 0)
+						{
+							this.ask("I have found " +avaliable.count+ " copie(s) of "+ selected.title+ 
+							" it(s) currently avaliable at "+avaliable.libraryList);
+						}
+						else this.ask(this.t('info.bookUnavaliable'), this.t('anythingelse.speech'));
 						break;
 					case 'no':
 						this.$session.$data.loopCounter = parseInt(counter) + 1;
@@ -743,7 +751,7 @@ function cleanSearchResponse(data) {
 //@return: a list of items after it is cleaned in order to be presented to the user
 async function getItemDetails(key, itemID) {
 	let url = encodeURI("https://test.elgar.govt.nz:443/iii/sierra-api/v5/items/?fields=location,status&bibIds=" + itemID);
-	console.log("getItemDetails" + url);
+	console.log("getItemDetails " + url);
 
 	const options = {
 		method: 'GET',
@@ -772,6 +780,7 @@ function cleanDetailsResponse(data) {
 	let rawList = data;
 	let avalibleCount = 0;
 	let libraryList = "";
+	console.log("cleanDetailsResponse "+ JSON.stringify(data));
 
 	for (i = 0; i < rawList.length; i++) {
 		if (rawList[i].status.hasOwnProperty("duedate")) { continue; }
@@ -782,6 +791,8 @@ function cleanDetailsResponse(data) {
 	}
 
 	var returnObj = { count: avalibleCount, libraryList: libraryList }
+
+	console.log("cleanDetailsResponse "+ returnObj.count+" "+ returnObj.libraryList);
 
 	return returnObj;
 }
